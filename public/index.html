@@ -1,76 +1,125 @@
-const DEFAULT_NAME = "Особняк Лубарианийа";
-const STORAGE_KEY = "lubarianiya-mansion-name";
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101a36">
+  <meta name="description" content="Особняк Лубарианийа — тайны, авторские карты и игра в мафию в готической атмосфере.">
+  <title>Особняк Лубарианийа — дело открыто</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Marck+Script&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+  <header class="site-header">
+    <a class="brand" href="#home" aria-label="На главную">
+      <span class="brand-mark">✧</span>
+      <span><small>закрытое дело № 013</small><strong id="headerMansionName">Особняк Лубарианийа</strong></span>
+    </a>
+    <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="mainNav" aria-label="Открыть меню">☰</button>
+    <nav class="main-nav" id="mainNav">
+      <a href="#story">Предание</a>
+      <a href="#gallery">Галерея</a>
+      <a href="#cipher">Шифр</a>
+      <button class="nav-action" id="editNameTop">Изменить имя</button>
+    </nav>
+  </header>
 
-const headerName = document.querySelector("#headerMansionName");
-const heroName = document.querySelector("#heroMansionName");
-const footerName = document.querySelector("#footerMansionName");
-const nameInput = document.querySelector("#mansionNameInput");
-const nameStatus = document.querySelector("#nameStatus");
+  <main id="home">
+    <section class="hero">
+      <div class="hero-art" role="img" aria-label="Ночной кабинет с таинственными предметами"></div>
+      <div class="hero-shade"></div>
+      <div class="hero-content">
+        <p class="eyebrow"><span></span> приглашение, которое нельзя отклонить <span></span></p>
+        <h1>Добро пожаловать<br>в <em id="heroMansionName">Особняк Лубарианийа</em></h1>
+        <p class="hero-copy">За тяжёлыми шторами скрываются чужие секреты. Каждому гостю есть что рассказать — и что утаить.</p>
+        <div class="hero-buttons">
+          <a class="button button-gold" href="#story">Войти в особняк <span>↗</span></a>
+          <a class="button button-quiet" href="#gallery">Рассмотреть гостей</a>
+        </div>
+        <div class="hero-note"><span class="note-star">✦</span><span>«Некоторые двери открываются<br>лишь после полуночи»</span></div>
+      </div>
+      <div class="hero-index">Ночь I <i>✦</i> Комната без часов</div>
+    </section>
 
-function applyMansionName(name) {
-  const cleanName = name.trim() || DEFAULT_NAME;
-  headerName.textContent = cleanName;
-  heroName.textContent = cleanName;
-  footerName.textContent = cleanName;
-  nameInput.value = cleanName;
-  document.title = `${cleanName} — дело открыто`;
-  return cleanName;
-}
+    <section class="intro section-wrap" id="story">
+      <div class="section-kicker">I — перед началом</div>
+      <div class="intro-grid">
+        <div>
+          <h2>Дом помнит<br><em>каждого.</em></h2>
+          <p class="intro-lead">Вас пригласили на вечер, который должен был закончиться обычным ужином. Но часы остановились, двери заперлись, а среди гостей оказался тот, кому нельзя доверять.</p>
+        </div>
+        <div class="intro-side">
+          <div class="ornament">✧ ───── ♡ ───── ✧</div>
+          <p>Здесь каждый выбирает собственную историю: племянница хозяина, приглашённый профессор, странствующий артист или человек, чьего имени нет в списке.</p>
+          <p class="handwritten">А кем будете вы?</p>
+        </div>
+      </div>
+    </section>
 
-try {
-  applyMansionName(localStorage.getItem(STORAGE_KEY) || DEFAULT_NAME);
-} catch {
-  applyMansionName(DEFAULT_NAME);
-}
+    <section class="gallery-section section-wrap" id="gallery">
+      <div class="section-heading">
+        <div><div class="section-kicker">II — лица и маски</div><h2>Гости <em>особняка</em></h2></div>
+        <p>Открытая история — лишь то,<br>что гость готов рассказать.</p>
+      </div>
+      <div class="guest-grid">
+        <article class="guest-card guest-gold">
+          <div class="guest-image"><img src="/images/golden-guest.jpg" alt="Авторский персонаж на золотом фоне" loading="lazy"><span class="card-number">FIG. 01</span><span class="image-caption">THE SUNLIT GUEST</span></div>
+          <div class="guest-info"><span class="guest-type">Возможный гость</span><h3>Золотая маска</h3><p>«Я прибыл до заката. Клянусь, в коридоре уже горел свет».</p><span class="guest-symbol">✧ ♡ ✧</span></div>
+        </article>
+        <article class="guest-card guest-blue">
+          <div class="guest-image"><img src="/images/blue-guest.jpg" alt="Авторский персонаж на синем фоне" loading="lazy"><span class="card-number">FIG. 02</span><span class="image-caption">THE MIDNIGHT GUEST</span></div>
+          <div class="guest-info"><span class="guest-type">Возможный гость</span><h3>Полуночный гость</h3><p>«У каждого дома есть тень. У этого — собственная память».</p><span class="guest-symbol">✧ ♧ ✧</span></div>
+        </article>
+        <article class="guest-card guest-study">
+          <div class="guest-image"><img src="/images/study-room.jpg" alt="Нарисованный таинственный кабинет с синей подсветкой" loading="lazy"><span class="card-number">FIG. 03</span><span class="image-caption">THE LOCKED STUDY</span></div>
+          <div class="guest-info"><span class="guest-type">Место происшествия</span><h3>Запертый кабинет</h3><p>На столе осталась карта. Чернила ещё не высохли.</p><span class="guest-symbol">✧ ☾ ✧</span></div>
+        </article>
+      </div>
+      <p class="gallery-footnote">Иллюстрации принадлежат хозяйке этого дела. Здесь они — часть истории, а не просто украшение.</p>
+    </section>
 
-document.querySelector("#nameForm").addEventListener("submit", (event) => {
-  event.preventDefault();
-  const cleanName = applyMansionName(nameInput.value);
-  try {
-    localStorage.setItem(STORAGE_KEY, cleanName);
-    nameStatus.textContent = "Название сохранено в этом браузере.";
-  } catch {
-    nameStatus.textContent = "Название изменено до перезагрузки страницы.";
-  }
-});
+    <section class="cipher-section" id="cipher">
+      <div class="cipher-inner">
+        <div class="section-kicker">III — заметка на полях</div>
+        <div class="cipher-layout">
+          <div class="cipher-copy">
+            <h2>Не всякое слово<br><em>прочтёшь сразу.</em></h2>
+            <p>В старых бумагах особняка встречаются знаки, которых нет ни в одном справочнике. Попробуй открыть первую запись.</p>
+            <button class="button button-gold" id="revealCipher">Раскрыть подсказку <span>↗</span></button>
+            <p class="cipher-result" id="cipherResult" hidden>«Смотри туда, где свет не отбрасывает тени».</p>
+          </div>
+          <figure class="cipher-image"><img src="/images/cipher-alphabet.jpg" alt="Авторский алфавит и числовой шифр, написанные от руки" loading="lazy"><figcaption>Фрагмент из личного архива · почерк неизвестен</figcaption></figure>
+        </div>
+        <div class="cipher-stamp">SUB ROSA <span>✦</span> SECRETUM</div>
+      </div>
+    </section>
 
-document.querySelector("#resetName").addEventListener("click", () => {
-  applyMansionName(DEFAULT_NAME);
-  try {
-    localStorage.removeItem(STORAGE_KEY);
-    nameStatus.textContent = "Возвращено название по умолчанию.";
-  } catch {
-    nameStatus.textContent = "Название сброшено до перезагрузки страницы.";
-  }
-});
+    <section class="personalize section-wrap" id="personalize">
+      <div class="personalize-card">
+        <div class="personalize-deco">❦</div>
+        <div class="section-kicker">IV — хозяйка дома</div>
+        <h2>У особняка может<br>быть <em>ваше имя.</em></h2>
+        <p>Оставь фамилию Лубарианийа или придумай собственную. Выбор сохранится в этом браузере.</p>
+        <form id="nameForm" class="name-form">
+          <label for="mansionNameInput">Название особняка</label>
+          <div class="name-input-row"><input id="mansionNameInput" maxlength="48" value="Особняк Лубарианийа" autocomplete="off"><button class="button button-gold" type="submit">Сохранить</button></div>
+          <button class="reset-link" id="resetName" type="button">Вернуть название по умолчанию</button>
+          <p class="form-status" id="nameStatus" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+  </main>
 
-document.querySelector("#editNameTop").addEventListener("click", () => {
-  document.querySelector("#personalize").scrollIntoView({ behavior: "smooth" });
-  window.setTimeout(() => nameInput.focus({ preventScroll: true }), 350);
-  document.querySelector("#mainNav").classList.remove("open");
-  document.querySelector("#menuToggle").setAttribute("aria-expanded", "false");
-});
-
-const menuToggle = document.querySelector("#menuToggle");
-const mainNav = document.querySelector("#mainNav");
-menuToggle.addEventListener("click", () => {
-  const isOpen = mainNav.classList.toggle("open");
-  menuToggle.setAttribute("aria-expanded", String(isOpen));
-  menuToggle.textContent = isOpen ? "×" : "☰";
-});
-mainNav.querySelectorAll("a").forEach((link) => {
-  link.addEventListener("click", () => {
-    mainNav.classList.remove("open");
-    menuToggle.setAttribute("aria-expanded", "false");
-    menuToggle.textContent = "☰";
-  });
-});
-
-document.querySelector("#revealCipher").addEventListener("click", (event) => {
-  const result = document.querySelector("#cipherResult");
-  const isHidden = result.hidden;
-  result.hidden = !isHidden;
-  event.currentTarget.innerHTML = isHidden
-    ? "Скрыть подсказку <span>↗</span>"
-    : "Раскрыть подсказку <span>↗</span>";
-});
+  <footer class="site-footer">
+    <div class="footer-symbol">✧</div>
+    <p class="footer-title" id="footerMansionName">Особняк Лубарианийа</p>
+    <p>Дело остаётся открытым.</p>
+    <div class="footer-rule">────────── ♡ ──────────</div>
+    <small>Авторские иллюстрации и алфавит · создано для истории, которая ещё пишется</small>
+  </footer>
+</body>
+  </html>
