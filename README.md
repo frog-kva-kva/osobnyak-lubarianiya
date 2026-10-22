@@ -1,2 +1,4 @@
-# osobnyak-lubarianiya
-•×MAFIA×•
+node_modules/
+.env
+.DS_Store
+npm-debug.log*
