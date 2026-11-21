@@ -44,12 +44,12 @@
 
 
 /* Полноэкранная оболочка приложения: переходы выполняются кнопками, не прокруткой страницы */
-html,body{width:100%;height:100%;min-height:100%;overflow:hidden!important;overscroll-behavior:none}
-body{position:fixed;inset:0}
-.site-header,#home>.hero,#home>.intro,#home>.gallery-section,#home>.cipher-section,#home>.personalize,.site-footer{display:none!important}
-#home{height:100%;min-height:0}
-#game-root{position:fixed;inset:0;z-index:10;min-width:0;min-height:0}
-#game{position:absolute;inset:0;display:flex;min-height:0;height:100%;overflow:hidden;padding:14px;background:radial-gradient(ellipse at 50% 0%,#55596c 0%,#34394d 48%,#222a3b 100%);border:0}
+body.game-app-ready,body.game-app-ready html{width:100%;height:100%;min-height:100%;overflow:hidden!important;overscroll-behavior:none}
+body.game-app-ready{position:fixed;inset:0}
+body.game-app-ready .site-header,body.game-app-ready #home>.hero,body.game-app-ready #home>.intro,body.game-app-ready #home>.gallery-section,body.game-app-ready #home>.cipher-section,body.game-app-ready #home>.personalize,body.game-app-ready .site-footer{display:none!important}
+body.game-app-ready #home{height:100%;min-height:0}
+body.game-app-ready #game-root{position:fixed;inset:0;z-index:10;min-width:0;min-height:0}
+body.game-app-ready #game{position:absolute;inset:0;display:flex;min-height:0;height:100%;overflow:hidden;padding:14px;background:radial-gradient(ellipse at 50% 0%,#55596c 0%,#34394d 48%,#222a3b 100%);border:0}
 .game-shell{width:100%;max-width:none;height:100%;min-height:0;display:flex;flex-direction:column;gap:10px}
 .game-heading{display:none}
 .game-panel{width:100%;max-width:none;flex:1;min-height:0;overflow:hidden;display:flex;flex-direction:column;gap:10px;padding:clamp(14px,2.5vh,28px) clamp(16px,3vw,38px);border-width:10px}
