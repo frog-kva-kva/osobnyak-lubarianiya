@@ -4,49 +4,12 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#5d5b6d">
-  <meta name="description" content="Особняк Лубарианийа — игра в мафию в атмосфере таинственного особняка.">
-  <title>Особняк Лубарианийа — игра</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Marck+Script&display=swap" rel="stylesheet">
-  <style>
-    *{box-sizing:border-box}
-    html,body{width:100%;height:100%;min-height:100%;margin:0;overflow:hidden}
-    body{font-family:'Cormorant Garamond',Georgia,serif;color:#f5e9df;background:radial-gradient(ellipse at 18% 12%,#858091,#626171 48%,#454653)}
-    #game-root{width:100%;height:100%;min-height:0}
-    .boot-screen{height:100%;display:flex;align-items:center;justify-content:center;padding:18px}
-    .boot-card{width:min(900px,100%);padding:clamp(24px,5vw,56px);text-align:center;background:linear-gradient(145deg,#775b4e,#534243 55%,#494653);border:10px ridge #947768;outline:1px solid #d4b7a4;box-shadow:0 22px 70px #201b2a88}
-    .boot-kicker{font:11px Arial,sans-serif;letter-spacing:.2em;text-transform:uppercase;color:#e9c5c9}
-    .boot-card h1{font-size:clamp(42px,8vw,76px);font-weight:500;line-height:1;margin:20px 0}
-    .boot-card h1 em{font-family:'Marck Script',cursive;color:#e8c2cb;font-weight:400}
-    .boot-card p{font-size:19px;color:#e1d2ce}
-    .boot-actions{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:28px}
-    .boot-actions button{padding:13px 22px;background:#b78e9b;color:#fff4e9;border:1px solid #f0d1d1;font:14px Arial,sans-serif;cursor:pointer}
-    .boot-note{font:12px Arial,sans-serif;color:#e2c5c8;margin-top:24px}
-    @media(max-width:600px){.boot-card{border-width:7px;padding:26px 16px}.boot-card p{font-size:16px}}
-  </style>
-  <link rel="stylesheet" href="/game.css?v=storybook-3">
-  <script src="/game.js?v=storybook-3" defer></script>
+  <meta name="description" content="Особняк Лубарианийа — игра в мафию.">
+  <title>Особняк Лубарианийа</title>
+  <link rel="stylesheet" href="/game.css?v=storybook-4">
+  <script src="/game.js?v=storybook-4" defer></script>
 </head>
 <body>
-  <main id="game-root">
-    <section class="boot-screen">
-      <div class="boot-card">
-        <div class="boot-kicker">✧ Особняк Лубарианийа ✧</div>
-        <h1>Добро пожаловать<br><em>домой</em></h1>
-        <p>Вечер только начинается. Особняк готовится открыть двери.</p>
-        <div class="boot-actions"><button type="button" onclick="location.reload()">Открыть приложение</button></div>
-        <div class="boot-note">Если игра не загрузилась, этот экран останется вместо пустой страницы.</div>
-      </div>
-    </section>
-  </main>
-  <script>
-    document.addEventListener('DOMContentLoaded',function(){
-      if(!document.querySelector('#game')){
-        const note=document.querySelector('.boot-note');
-        if(note) note.textContent='Игровой модуль не запустился. Это экран-запасной вариант; основной интерфейс пока не загрузился.';
-      }
-    });
-  </script>
+  <main id="game-root" aria-label="Игровое приложение"></main>
 </body>
 </html>
