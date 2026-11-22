@@ -255,3 +255,53 @@ body.game-app-ready .app-nav{display:none!important}
  .road-scene .scene-copy h3{font-size:32px;margin-bottom:12px}
  .road-scene .scene-button{min-height:50px}
 }
+
+
+/* Gothic illustrated entrance — replaces the temporary CSS house shapes */
+.road-scene{
+ position:relative; isolation:isolate; min-height:min(760px, calc(100svh - 34px));
+ display:flex; align-items:center; justify-content:center; overflow:hidden;
+ padding:clamp(20px,4vw,58px);
+ background:#080b12 url("/images/mansion-road.svg") center center/cover no-repeat;
+}
+.road-scene::before{
+ content:""; position:absolute; inset:0; z-index:-1;
+ background:linear-gradient(90deg,rgba(5,7,12,.22),rgba(5,7,12,.12) 42%,rgba(5,7,12,.25)),
+ linear-gradient(0deg,rgba(4,6,10,.5),transparent 42%,rgba(4,6,10,.18));
+}
+.road-scene .scene-copy{
+ width:min(460px,92%); margin:0 auto; padding:clamp(22px,3vw,38px);
+ text-align:center; position:relative; z-index:1;
+ background:linear-gradient(145deg,rgba(15,17,24,.9),rgba(26,17,22,.88));
+ border:1px solid rgba(174,139,126,.72);
+ outline:1px solid rgba(174,139,126,.25); outline-offset:6px;
+ box-shadow:0 22px 70px rgba(0,0,0,.72), inset 0 0 36px rgba(95,42,49,.14);
+ backdrop-filter:blur(5px);
+}
+.road-scene .scene-copy h3{
+ margin:0 0 24px; color:#e4d7cc;
+ font:clamp(30px,4vw,46px)/1.12 Georgia,"Times New Roman",serif;
+ font-weight:400; letter-spacing:.035em; text-shadow:0 2px 12px #000;
+}
+.road-scene .scene-actions{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:0}
+.road-scene .scene-button{
+ min-height:62px; padding:12px 10px; border:1px solid #80615e;
+ border-radius:2px; color:#e6d8ce;
+ background:linear-gradient(180deg,rgba(65,37,43,.96),rgba(28,19,25,.98));
+ box-shadow:inset 0 0 0 2px rgba(0,0,0,.25),0 5px 14px #0008;
+ transition:background .18s,border-color .18s,transform .18s;
+}
+.road-scene .scene-button strong{font:17px Georgia,"Times New Roman",serif;letter-spacing:.02em}
+.road-scene .scene-button:hover,.road-scene .scene-button.primary{
+ background:linear-gradient(180deg,#70434a,#3b242c);border-color:#c19a83;color:#fff0e3;
+}
+.road-scene .scene-button:hover{transform:translateY(-2px)}
+.road-scene .scene-button small{display:none}
+@media(max-width:700px){
+ .road-scene{min-height:calc(100svh - 20px);background-position:56% center;padding:16px}
+ .road-scene .scene-copy{width:min(390px,94%);padding:22px 16px}
+ .road-scene .scene-copy h3{font-size:32px;margin-bottom:20px}
+ .road-scene .scene-actions{gap:9px}
+ .road-scene .scene-button{min-height:56px}
+ .road-scene .scene-button strong{font-size:15px}
+}
