@@ -305,3 +305,177 @@ body.game-app-ready .app-nav{display:none!important}
  .road-scene .scene-button{min-height:56px}
  .road-scene .scene-button strong{font-size:15px}
 }
+
+
+/* Полный редизайн комнат и главной рамы */
+body.game-app-ready #game{
+ background:
+  radial-gradient(ellipse at 50% 48%,rgba(62,48,48,.25),transparent 52%),
+  linear-gradient(115deg,#080a0e 0%,#12151b 48%,#090b10 100%);
+}
+body.game-app-ready .game-panel{
+ background:#111319;
+ border:0;
+ outline:0;
+ box-shadow:none;
+ padding:clamp(12px,2vw,26px);
+}
+body.game-app-ready .game-panel:before,
+body.game-app-ready .game-panel:after{display:none}
+body.game-app-ready .game-screen{border:0}
+.road-scene{
+ position:relative;isolation:isolate;display:flex;align-items:center;justify-content:center;
+ min-height:0;padding:22px;overflow:hidden;
+ background:
+  radial-gradient(ellipse at 50% 42%,rgba(93,71,66,.22),transparent 36%),
+  radial-gradient(ellipse at 50% 110%,#29252a 0%,transparent 55%),
+  linear-gradient(180deg,#090d14 0%,#151a21 55%,#0a0d12 100%);
+}
+.road-scene:before{
+ content:"";position:absolute;inset:0;z-index:-1;opacity:.7;
+ background:
+  radial-gradient(ellipse at 13% 55%,rgba(111,119,125,.16),transparent 30%),
+  radial-gradient(ellipse at 88% 48%,rgba(111,119,125,.12),transparent 32%),
+  linear-gradient(90deg,transparent 0 8%,rgba(0,0,0,.38) 8.2% 8.6%,transparent 8.8% 91%,rgba(0,0,0,.4) 91.2% 91.6%,transparent 92%);
+}
+.road-scene .scene-copy{
+ position:relative;width:min(430px,92%);padding:clamp(26px,4vw,42px) clamp(24px,4vw,46px);
+ margin:auto;text-align:center;background:linear-gradient(145deg,#19191d 0%,#21191c 50%,#15161b 100%);
+ border:1px solid #8b6d60;outline:1px solid rgba(185,146,119,.5);outline-offset:7px;
+ box-shadow:0 25px 70px #000c,inset 0 0 0 5px #0c0d11,inset 0 0 0 6px #57443d,inset 0 0 32px #6c3d3520;
+}
+.road-scene .scene-copy:before,.road-scene .scene-copy:after{
+ content:"";position:absolute;left:12px;right:12px;height:1px;background:linear-gradient(90deg,transparent,#a98b70 18%,#a98b70 82%,transparent);
+}
+.road-scene .scene-copy:before{top:13px}.road-scene .scene-copy:after{bottom:13px}
+.road-scene .frame-ornament{display:block;color:#b99a7c;font:22px Georgia,serif;line-height:1}
+.road-scene .frame-top{margin:0 auto 15px}
+.road-scene .frame-bottom{margin:18px auto 0}
+.road-scene .scene-copy h3{
+ margin:0 0 24px;color:#e8ddd0;font:clamp(29px,4vw,39px)/1.18 Georgia,"Times New Roman",serif;
+ font-weight:400;letter-spacing:.025em;text-shadow:0 2px 12px #000;
+}
+.road-scene .scene-actions{display:flex;flex-direction:column;gap:9px;margin:0}
+.road-scene .scene-button{
+ position:relative;display:flex;justify-content:center;align-items:center;width:100%;min-height:52px;
+ padding:12px 18px;background:linear-gradient(180deg,#302326,#1c171b);
+ border:1px solid #70564f;border-radius:0;color:#e8d9ca;box-shadow:inset 0 0 0 2px #0c0c0f,0 3px 10px #0007;
+}
+.road-scene .scene-button:before,.road-scene .scene-button:after{
+ content:"";position:absolute;top:50%;width:5px;height:5px;border:1px solid #a98b70;transform:translateY(-50%) rotate(45deg);
+}
+.road-scene .scene-button:before{left:12px}.road-scene .scene-button:after{right:12px}
+.road-scene .scene-button strong{font:17px Georgia,"Times New Roman",serif;letter-spacing:.035em}
+.road-scene .scene-button:hover,.road-scene .scene-button.primary{
+ background:linear-gradient(180deg,#52363a,#2b1d22);border-color:#b18a72;color:#fff0df;
+}
+.road-scene .scene-button:hover{transform:none;box-shadow:inset 0 0 0 2px #0c0c0f,0 0 16px #9a6b5944}
+.road-scene .scene-button small{display:none}
+
+/* Внутренние помещения: отдельные композиции, а не повторяющиеся карточки */
+.app-placeholder-screen{
+ position:relative;isolation:isolate;min-height:0;padding:clamp(20px,4vw,48px);
+ display:flex;align-items:center;justify-content:center;overflow-y:auto;
+}
+.app-placeholder-screen:before{
+ content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+ background:radial-gradient(ellipse at 50% 45%,rgba(120,82,65,.16),transparent 55%),linear-gradient(90deg,#090c11,#17171a 50%,#090c11);
+}
+.page-composition{width:min(980px,100%);margin:auto;position:relative}
+.page-composition:before{
+ content:"";position:absolute;inset:-15px -18px;z-index:-1;border:1px solid #70594d;
+ box-shadow:inset 0 0 0 5px #0c0d11,inset 0 0 0 6px #493a36,0 18px 60px #0008;
+ pointer-events:none;
+}
+.page-composition>.scene-eyebrow{display:block;text-align:center;color:#b89a7d;font:10px var(--sans);letter-spacing:.24em;text-transform:uppercase}
+.page-composition>h3{text-align:center;font:400 clamp(32px,5vw,49px)/1.1 Georgia,serif!important;color:#e8ddd0!important;margin:10px 0 28px!important}
+.page-composition .game-actions{justify-content:center;margin-top:25px}
+.page-composition .game-secondary,.page-composition .game-primary{
+ min-width:150px;background:#211b1d;border:1px solid #876b5d;color:#e9d9ca;border-radius:0;
+ font:14px Georgia,serif;letter-spacing:.02em;text-transform:none;
+}
+.page-composition .game-primary{background:#513238;border-color:#b28a78;color:#fff0e5}
+.page-composition .game-secondary:hover,.page-composition .game-primary:hover{background:#67454a;border-color:#d1aa91}
+
+/* Дверь: массивная тёмная створка и настройки сбоку */
+.door-scene:before{background:radial-gradient(ellipse at 20% 50%,#302024 0%,transparent 38%),linear-gradient(90deg,#0b0d12,#191518 52%,#0b0d12)}
+.setup-layout{display:grid;grid-template-columns:minmax(180px,.72fr) minmax(0,1.5fr);gap:clamp(22px,5vw,56px);align-items:center}
+.door-illustration{
+ min-height:340px;position:relative;border:8px double #6d5146;
+ background:linear-gradient(90deg,#1b1517,#38272a 48%,#1b1517);
+ box-shadow:inset 0 0 0 5px #100f12,inset 0 0 0 8px #806453,0 18px 35px #0009;
+}
+.door-illustration:before{content:"";position:absolute;inset:16px;border:2px solid #8e705b;box-shadow:inset 0 0 0 5px #21181a,inset 0 0 0 6px #6d5547}
+.door-illustration:after{content:"";position:absolute;top:50%;right:23px;width:13px;height:13px;border-radius:50%;background:#b18c60;box-shadow:0 0 12px #b18c60}
+.door-illustration span{position:absolute;top:42%;left:50%;transform:translate(-50%,-50%);font:38px Georgia;color:#b89a78}
+.setup-form .game-form-grid{grid-template-columns:1fr 1fr;margin:0 0 22px}
+.setup-form .game-field label{color:#c1a18a}
+.setup-form .game-field input,.setup-form .game-chat-input{background:#111319;border:1px solid #71594d;border-radius:0;color:#eee0d1}
+.setup-form .game-role-custom{display:grid;grid-template-columns:1fr 1fr;gap:7px;max-height:190px;overflow:auto;padding-right:5px}
+.setup-form .game-role-custom .game-hint{margin:0;padding:8px 10px;background:#171519;border-left:2px solid #76574e;color:#d8c8b8;font-size:12px}
+.setup-form .game-field>label{margin-bottom:9px}
+
+/* Холл: галерея старых портретных рам */
+.hall-scene:before{background:radial-gradient(ellipse at 50% 20%,#3b2b28 0%,transparent 46%),linear-gradient(90deg,#0b0c11,#1b1717 50%,#0b0c11)}
+.hall-gallery{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(18px,4vw,42px);max-width:760px;margin:36px auto 0}
+.hall-frame{
+ min-height:230px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;
+ padding:22px;text-align:center;background:linear-gradient(145deg,#211a1b,#121317);
+ border:9px ridge #705548;outline:1px solid #a17e64;outline-offset:4px;
+ box-shadow:0 12px 28px #0009,inset 0 0 0 5px #0b0c10,inset 0 0 0 7px #58443b;
+}
+.hall-frame>span{font:34px Georgia;color:#b89a78}
+.hall-frame strong{font:20px Georgia,serif;font-weight:400;color:#e8d8c7}
+.hall-frame small{font:13px Georgia,serif;color:#b6a69a}
+
+/* Спальня: кровать, комод и портрет в одной комнате */
+.bedroom-scene:before{background:radial-gradient(ellipse at 50% 12%,#34313b 0%,transparent 42%),linear-gradient(180deg,#10131b,#1c171a 60%,#0a0c11)}
+.bedroom-interior{min-height:300px;display:grid;grid-template-columns:1.35fr 1fr .72fr;gap:18px;align-items:end;padding:22px 0 8px}
+.bedroom-bed{height:180px;position:relative;background:linear-gradient(180deg,#39313a,#1b1920);border:5px double #806653;box-shadow:inset 0 0 0 5px #111218,0 15px 28px #0008}
+.bed-pillow{position:absolute;top:17px;left:12%;width:36%;height:47px;background:#b2a19a;border:2px solid #6e5550;box-shadow:inset 0 0 0 4px #d2c0b0}
+.bed-cover{position:absolute;left:5%;right:5%;bottom:0;height:68%;background:linear-gradient(135deg,#493039,#211d27);border-top:2px solid #9b786b}
+.bedroom-dresser{min-height:190px;padding:18px 14px 12px;background:linear-gradient(90deg,#2b1d1b,#50352b 48%,#281b1b);border:5px double #9a7758;box-shadow:inset 0 0 0 4px #171216,0 12px 24px #0008;display:flex;flex-direction:column;gap:9px;color:#ead9c5}
+.bedroom-dresser strong{font:18px Georgia,serif;text-align:center;font-weight:400}
+.dresser-drawer{height:25px;border:1px solid #a0805e;background:#382622;box-shadow:inset 0 0 0 2px #211719}
+.bedroom-dresser>span{font:12px Georgia,serif;text-align:center;color:#cbb8a4}
+.bedroom-portrait{height:190px;padding:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;background:#21191b;border:8px ridge #84664e;outline:1px solid #b09270;box-shadow:0 12px 25px #0008}
+.bedroom-portrait>span{width:80px;height:100px;display:grid;place-items:center;background:linear-gradient(#44404a,#1b1b22);border:2px solid #9a8067;color:#c8b092;font-size:43px}
+.bedroom-portrait small{font:12px Georgia,serif;color:#e2d2c0}
+
+/* Настройки: лист в старом переплёте */
+.study-scene:before{background:radial-gradient(ellipse at 50% 45%,#302326 0%,transparent 55%),linear-gradient(90deg,#0b0c10,#191619 50%,#0b0c10)}
+.settings-ledger{max-width:650px;margin:30px auto 0;padding:16px 26px;background:linear-gradient(135deg,#30231f,#1b1718);border:7px double #82644f;box-shadow:inset 0 0 0 4px #111217,0 16px 35px #0008}
+.settings-ledger>div{display:grid;grid-template-columns:52px 1fr;column-gap:16px;align-items:center;padding:20px 0;border-bottom:1px solid #71584b}
+.settings-ledger>div:last-child{border-bottom:0}
+.settings-ledger>div>span{grid-row:span 2;font:28px Georgia;color:#b99775;text-align:center}
+.settings-ledger strong{font:19px Georgia,serif;font-weight:400;color:#e8d8c8}
+.settings-ledger small{font:13px Georgia,serif;color:#b8a69a;margin-top:5px}
+@media(max-width:700px){
+ .road-scene{padding:14px;background-position:center}
+ .road-scene .scene-copy{width:min(390px,94%);padding:25px 22px}
+ .road-scene .scene-copy h3{font-size:31px;margin-bottom:19px}
+ .road-scene .scene-button{min-height:49px}
+ .setup-layout{grid-template-columns:1fr;gap:15px}
+ .door-illustration{min-height:125px;max-width:210px;width:100%;margin:auto}
+ .setup-form .game-form-grid{grid-template-columns:1fr}
+ .setup-form .game-role-custom{grid-template-columns:1fr 1fr;max-height:150px}
+ .hall-gallery{gap:12px;margin-top:20px}
+ .hall-frame{min-height:175px;padding:12px;border-width:6px}
+ .hall-frame strong{font-size:16px}
+ .hall-frame small{font-size:11px}
+ .bedroom-interior{grid-template-columns:1fr 1fr;gap:10px;min-height:0}
+ .bedroom-bed{grid-column:span 2;height:125px}
+ .bedroom-dresser,.bedroom-portrait{min-height:150px;height:150px}
+ .bedroom-portrait>span{height:78px;width:60px}
+ .page-composition:before{inset:-8px -5px}
+ .app-placeholder-screen{padding:22px 12px}
+}
+@media(max-height:650px){
+ .road-scene .scene-copy{padding:18px 25px}
+ .road-scene .frame-top{margin-bottom:8px}
+ .road-scene .frame-bottom{margin-top:9px}
+ .road-scene .scene-copy h3{margin-bottom:12px;font-size:29px}
+ .road-scene .scene-button{min-height:42px;padding:8px}
+ .door-illustration{min-height:230px}
+ .bedroom-interior{min-height:230px}
+}
