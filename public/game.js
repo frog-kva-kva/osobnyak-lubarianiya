@@ -52,11 +52,7 @@
   <section class="game-screen mansion-scene bedroom-scene app-page" id="roomScreen" hidden>
    <div class="page-shade"></div><div class="page-wrap room-wrap">
     <header class="page-heading"><span class="eyebrow">Личные покои</span><h2>Моя комната</h2></header>
-    <div class="bedroom-interior">
-     <div class="bedroom-bed"><span class="bed-canopy"></span><span class="bed-pillow"></span><span class="bed-cover"></span></div>
-     <div class="bedroom-dresser"><h3>Мои записи</h3><div class="dresser-drawer"></div><div class="dresser-drawer"></div><p>Сыграно партий: 0</p></div>
-     <div class="bedroom-portrait"><span>♙</span><small>Портрет хозяйки</small></div>
-    </div>
+    <div class="room-scene-note"><span>✦</span><p>Здесь хранятся вещи, которые вы нашли во снах.</p></div>
     <section class="room-collection-wrap"><h3>То, что пришло из снов</h3><div id="roomCollection" class="room-collection"></div></section>
     <div class="game-actions"><button class="game-secondary" data-app-screen="menuScreen">Назад</button></div>
    </div>
