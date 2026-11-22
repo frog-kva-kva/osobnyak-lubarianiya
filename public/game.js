@@ -6,33 +6,62 @@
   <div class="game-panel">
 
    <section class="game-screen mansion-scene road-scene app-home-screen" id="menuScreen">
-    <div class="scene-copy"><h3>Дорога к особняку</h3>
-     <div class="scene-actions"><button id="menuNewGame" class="scene-button primary"><strong>Новая игра</strong></button><button id="menuContinue" class="scene-button"><strong>Продолжить</strong></button><button id="menuRoom" class="scene-button"><strong>Моя комната</strong></button><button id="menuSettings" class="scene-button"><strong>Настройки</strong></button></div>
+    <div class="scene-copy portrait-frame">
+     <span class="frame-ornament frame-top">✦</span>
+     <h3>Дорога к особняку</h3>
+     <div class="scene-actions">
+      <button id="menuNewGame" class="scene-button primary"><strong>Новая игра</strong></button>
+      <button id="menuContinue" class="scene-button"><strong>Продолжить</strong></button>
+      <button id="menuRoom" class="scene-button"><strong>Моя комната</strong></button>
+      <button id="menuSettings" class="scene-button"><strong>Настройки</strong></button>
+     </div>
+     <span class="frame-ornament frame-bottom">❦</span>
     </div>
    </section>
    <section class="game-screen mansion-scene door-scene app-placeholder-screen" id="setupScreen" hidden>
-    <div class="door-visual" aria-hidden="true"><div class="door-panel"><span>✦</span></div></div>
-    <div class="scene-content"><span class="scene-eyebrow">Входная дверь</span><h3>Перед тем как войти</h3><p>Настрой вечер и пригласи гостей за общий стол.</p>
-     <div class="game-form-grid"><div class="game-field"><label for="playerName">Как вас называть</label><input id="playerName" maxlength="24" value="Хозяйка"></div><div class="game-field"><label for="playerCount">Количество игроков</label><div class="game-range-line"><span>Гостей за столом</span><strong id="countValue">13</strong></div><input id="playerCount" type="range" min="10" max="20" value="13"></div></div>
-     <div class="game-field"><label>Набор ролей</label><p class="game-hint">В стандартном наборе доступны роли с согласованными правилами.</p><div id="rolePreview" class="game-role-custom"></div></div>
-     <div class="game-actions"><button class="game-primary" id="startGame">Открыть дверь и начать</button></div><p class="game-error" id="setupError" role="alert"></p>
+    <div class="scene-content page-composition">
+     <span class="scene-eyebrow">Дверь особняка</span><h3>Дверь особняка</h3>
+     <div class="setup-layout">
+      <div class="door-illustration" aria-hidden="true"><span>✦</span></div>
+      <div class="setup-form">
+       <div class="game-form-grid">
+        <div class="game-field"><label for="playerName">Имя игрока</label><input id="playerName" maxlength="24" value="Хозяйка"></div>
+        <div class="game-field"><label for="playerCount">Количество игроков</label><div class="game-range-line"><span>Участники</span><strong id="countValue">13</strong></div><input id="playerCount" type="range" min="10" max="20" value="13"></div>
+       </div>
+       <div class="game-field"><label>Набор ролей</label><div id="rolePreview" class="game-role-custom"></div></div>
+       <div class="game-actions"><button class="game-primary" id="startGame">Начать игру</button><button class="game-secondary" data-app-screen="menuScreen">Назад</button></div>
+       <p class="game-error" id="setupError" role="alert"></p>
+      </div>
+     </div>
     </div>
    </section>
    <section class="game-screen mansion-scene hall-scene app-placeholder-screen" id="continueScreen" hidden>
-    <div class="scene-content"><span class="scene-eyebrow">Галерея воспоминаний</span><h3>Холл особняка</h3><p>Вдоль стен висят портреты прошлых вечеров, а у лестницы ждут записи.</p>
-     <div class="hall-gallery"><div class="hall-frame"><span>◷</span><strong>Сохранённые партии</strong><small>Здесь будут ваши незавершённые игры</small></div><div class="hall-frame"><span>✧</span><strong>История вечеров</strong><small>Здесь появятся завершённые партии</small></div><div class="hall-frame"><span>❦</span><strong>Память особняка</strong><small>Пока в архиве тихо</small></div></div>
-     <div class="game-actions"><button class="game-secondary" data-app-screen="menuScreen">Вернуться к дороге</button></div>
-    </div><div class="hall-stair" aria-hidden="true"></div>
+    <div class="scene-content page-composition hall-composition">
+     <span class="scene-eyebrow">Холл особняка</span><h3>Холл особняка</h3>
+     <div class="hall-gallery">
+      <div class="hall-frame"><span>Ⅰ</span><strong>Сохранённые партии</strong><small>Здесь будут сохранённые игры</small></div>
+      <div class="hall-frame"><span>Ⅱ</span><strong>Прошлые игры</strong><small>Здесь появится история партий</small></div>
+     </div>
+     <div class="game-actions"><button class="game-secondary" data-app-screen="menuScreen">Назад</button></div>
+    </div>
    </section>
    <section class="game-screen mansion-scene bedroom-scene app-placeholder-screen" id="roomScreen" hidden>
-    <div class="bedroom-window" aria-hidden="true">☾</div><div class="bedroom-bed" aria-hidden="true"><div class="bed-pillow"></div></div>
-    <div class="scene-content bedroom-content"><span class="scene-eyebrow">Личное пространство</span><h3>Моя комната</h3><p>Здесь можно передохнуть между историями и перечитать то, что осталось после сна.</p>
-     <div class="bedroom-furniture"><div class="player-portrait"><span>♡</span><small>Ваш портрет</small></div><div class="dresser"><strong>Комод</strong><div class="drawer"></div><div class="drawer"></div><div class="drawer"></div><small>Статистика игр: <b>0</b></small></div><div class="dream-shelf"><span>✧</span><small>Коллекция снов</small></div></div>
-     <div class="game-actions"><button class="game-secondary" data-app-screen="menuScreen">Вернуться к дороге</button></div>
+    <div class="scene-content page-composition bedroom-composition">
+     <span class="scene-eyebrow">Моя комната</span><h3>Моя комната</h3>
+     <div class="bedroom-interior">
+      <div class="bedroom-bed"><div class="bed-pillow"></div><div class="bed-cover"></div></div>
+      <div class="bedroom-dresser"><strong>Статистика игр</strong><div class="dresser-drawer"></div><div class="dresser-drawer"></div><div class="dresser-drawer"></div><span>Сыграно партий: 0</span></div>
+      <div class="bedroom-portrait"><span>♙</span><small>Портрет игрока</small></div>
+     </div>
+     <div class="game-actions"><button class="game-secondary" data-app-screen="menuScreen">Назад</button></div>
     </div>
    </section>
    <section class="game-screen mansion-scene study-scene app-placeholder-screen" id="settingsScreen" hidden>
-    <div class="scene-content"><span class="scene-eyebrow">Тихая библиотека</span><h3>Настройки особняка</h3><p>Параметры игры и личные предпочтения.</p><div class="study-desk"><span>✒</span><strong>Звук и музыка</strong><small>Настройки звука будут добавлены отдельно.</small><span>❧</span><strong>Оформление</strong><small>Дополнительные темы появятся позже.</small></div><div class="game-actions"><button class="game-secondary" data-app-screen="menuScreen">Вернуться к дороге</button></div></div>
+    <div class="scene-content page-composition settings-composition">
+     <span class="scene-eyebrow">Настройки</span><h3>Настройки особняка</h3>
+     <div class="settings-ledger"><div><span>♫</span><strong>Звук и музыка</strong><small>Настройки звука появятся здесь</small></div><div><span>❖</span><strong>Оформление</strong><small>Настройки внешнего вида появятся здесь</small></div></div>
+     <div class="game-actions"><button class="game-secondary" data-app-screen="menuScreen">Назад</button></div>
+    </div>
    </section>
    <section class="game-screen play-scene" id="playScreen" hidden><div class="game-topline"><span id="roundLabel"></span><span id="aliveLabel"></span></div><h3 class="game-phase-title" id="phaseTitle"></h3><p class="game-story" id="phaseStory"></p><div class="game-role-reveal" id="roleReveal" hidden></div><div class="game-log" id="gameLog" aria-live="polite"></div><div id="actionArea"></div><div class="game-actions" id="phaseActions"></div></section>
    <section class="game-screen end-scene" id="endScreen" hidden><div class="game-result"><div class="end-ornament">✧ ❦ ✧</div><h3 id="endTitle"></h3><p id="endText"></p><div class="game-actions" style="justify-content:center"><button class="game-primary" id="newGame">Сыграть ещё раз</button><button class="game-secondary" id="showRoles">Посмотреть роли</button></div><div id="finalRoster" class="game-roster" hidden></div></div></section>
