@@ -162,3 +162,18 @@ input[type=range]{width:100%;accent-color:#ad8865}
  .page-wrap{max-height:calc(100svh - 42px)}
  .setup-wrap{max-width:1120px}
 }
+
+/* Комната использует цельную иллюстрацию, а не собранную из CSS мебель */
+#roomScreen{background-position:center;background-size:cover}
+#roomScreen .room-wrap{width:min(1240px,100%);max-height:calc(100svh - 24px);padding:18px 22px;background:transparent;border:0;outline:0;box-shadow:none}
+#roomScreen .page-heading{width:max-content;max-width:100%;margin:0 auto 18px;padding:9px 24px;background:rgba(10,10,14,.78);border:1px solid rgba(174,139,103,.6);box-shadow:0 8px 24px #0008}
+#roomScreen .room-scene-note{display:flex;align-items:center;justify-content:center;gap:10px;max-width:440px;margin:clamp(180px,35vh,340px) auto 18px;padding:9px 16px;background:rgba(9,10,13,.78);border:1px solid rgba(174,139,103,.45);color:#d8c6b0}
+#roomScreen .room-scene-note span{color:#c5a17c}
+#roomScreen .room-scene-note p{margin:0;font:15px var(--serif)}
+#roomScreen .room-collection-wrap{max-width:780px;margin:0 auto;background:rgba(9,9,12,.88);box-shadow:0 12px 30px #0009}
+#setupScreen .setup-wrap{background:rgba(8,9,12,.38);border-color:rgba(170,137,104,.5);outline:0;box-shadow:none}
+#setupScreen .setup-form{background:rgba(8,8,11,.88);box-shadow:0 16px 38px #0009}
+@media(max-width:760px){
+ #roomScreen .room-wrap{padding:10px 6px}
+ #roomScreen .room-scene-note{margin-top:clamp(150px,27vh,250px)}
+}
