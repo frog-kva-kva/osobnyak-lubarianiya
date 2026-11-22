@@ -2,7 +2,6 @@
  const root=document.querySelector("#game-root"); if(!root)return;
  root.innerHTML=`<section id="game">
  <div class="game-shell">
-  <div class="game-heading"><div class="section-kicker">Особняк Лубарианийа</div><h2>Тайны <em>за закрытыми дверями</em></h2><p>История, в которой каждый гость хранит секрет.</p></div>
   <div class="game-panel">
 
    <section class="game-screen mansion-scene road-scene app-home-screen" id="menuScreen">
@@ -20,9 +19,9 @@
    </section>
    <section class="game-screen mansion-scene door-scene app-placeholder-screen" id="setupScreen" hidden>
     <div class="scene-content page-composition">
-     <span class="scene-eyebrow">Дверь особняка</span><h3>Дверь особняка</h3>
+     <h3>Дверь особняка</h3>
      <div class="setup-layout">
-      <div class="door-illustration" aria-hidden="true"><span>✦</span></div>
+      <div class="door-illustration" role="img" aria-label="Тяжёлая резная дверь готического особняка"></div>
       <div class="setup-form">
        <div class="game-form-grid">
         <div class="game-field"><label for="playerName">Имя игрока</label><input id="playerName" maxlength="24" value="Хозяйка"></div>
