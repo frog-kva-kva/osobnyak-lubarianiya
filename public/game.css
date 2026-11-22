@@ -479,3 +479,62 @@ body.game-app-ready .game-screen{border:0}
  .door-illustration{min-height:230px}
  .bedroom-interior{min-height:230px}
 }
+
+
+/* Иллюстрированные пространства особняка — отдельные сцены вместо CSS-заглушек */
+body.game-app-ready #game{background:#090b10!important;padding:0!important;min-height:100svh}
+body.game-app-ready .game-shell{width:100%;max-width:none;height:100svh;min-height:620px;padding:0!important;gap:0!important}
+body.game-app-ready .game-panel{padding:0!important;margin:0!important;width:100%;max-width:none;flex:1;min-height:0;border:0!important;background:#090b10!important;overflow:hidden}
+body.game-app-ready .game-screen{min-height:0}
+.road-scene{
+ min-height:100%!important;height:100%;padding:clamp(18px,4vw,56px)!important;
+ background:#080b12 url("/images/mansion-road.svg") center/cover no-repeat!important;
+}
+.road-scene:before{background:linear-gradient(90deg,#080a0d66,transparent 30%,transparent 70%,#080a0d66),linear-gradient(0deg,#080a0dcc,transparent 30%,#080a0d55)!important}
+.road-scene .scene-copy{
+ width:min(430px,92%)!important;padding:clamp(28px,4vw,46px)!important;
+ background:linear-gradient(145deg,#111116ed,#211719ed 52%,#101116ed)!important;
+ border:0!important;outline:1px solid #a98a6c!important;outline-offset:7px;
+ box-shadow:0 22px 70px #000d,inset 0 0 0 1px #634b3e,inset 0 0 0 7px #0b0c10!important;
+ clip-path:polygon(0 3%,3% 0,97% 0,100% 3%,100% 97%,97% 100%,3% 100%,0 97%);
+}
+.road-scene .scene-copy:before,.road-scene .scene-copy:after{left:22px!important;right:22px!important;background:linear-gradient(90deg,transparent,#b39270 18%,#b39270 82%,transparent)!important}
+.road-scene .scene-copy h3{font:400 clamp(28px,4vw,38px)/1.2 Georgia,serif!important;color:#eadbc8!important;letter-spacing:.025em!important}
+.road-scene .scene-button{min-height:54px!important;background:linear-gradient(180deg,#292126,#151419)!important;border:1px solid #806552!important;box-shadow:inset 0 0 0 2px #0c0c10,0 4px 12px #0009!important}
+.road-scene .scene-button strong{font:17px Georgia,serif!important;letter-spacing:.04em}
+.road-scene .scene-button.primary{background:linear-gradient(180deg,#503038,#2a1c23)!important;border-color:#b08a70!important}
+.road-scene .scene-button:hover{background:linear-gradient(180deg,#614047,#33232a)!important}
+.app-placeholder-screen{min-height:100%!important;height:100%;padding:clamp(22px,4vw,58px)!important}
+.app-placeholder-screen:before{inset:0!important;background:linear-gradient(90deg,#090a0dc9,#090a0d55 25%,#090a0d55 75%,#090a0dc9)!important}
+.door-scene{background:#0a0b10 url("/images/mansion-door.svg") center/cover no-repeat!important}
+.hall-scene{background:#0a0b10 url("/images/mansion-hall.svg") center/cover no-repeat!important}
+.bedroom-scene{background:#0a0b10 url("/images/mansion-bedroom.svg") center/cover no-repeat!important}
+.study-scene{background:#0a0b10 url("/images/mansion-study.svg") center/cover no-repeat!important}
+.page-composition{max-width:980px!important;padding:clamp(22px,4vw,42px)!important;background:#0d0e13d9;border:1px solid #94765c;box-shadow:0 18px 55px #000b,inset 0 0 0 5px #111116!important}
+.page-composition:before{display:none!important}
+.door-illustration{display:none!important}
+.setup-layout{display:block!important;max-width:740px;margin:auto}
+.setup-form .game-form-grid{grid-template-columns:1fr 1fr}
+.hall-gallery{margin-top:24px!important}
+.hall-frame{background:linear-gradient(145deg,#211a1bdf,#121317e8)!important;border:7px solid #755b48!important;outline:1px solid #c09a70!important;outline-offset:3px}
+.bedroom-interior{background:linear-gradient(0deg,#0c0b0de0,transparent 70%);padding:28px 18px 10px!important}
+.bedroom-bed{border:7px solid #795a47!important;outline:1px solid #b18a68;outline-offset:3px}
+.bedroom-dresser{border:5px solid #8c684b!important}
+.bedroom-portrait{border:7px solid #967654!important}
+.settings-ledger{background:#211a18e8!important}
+.play-scene{background:#111319!important}
+.play-scene.phase-night{background:#090d17 url("/images/mansion-bedroom.svg") center/cover fixed!important}
+.play-scene.phase-day{background:#171519 url("/images/mansion-hall.svg") center/cover fixed!important}
+.play-scene.phase-night:before,.play-scene.phase-day:before{content:"";position:absolute;inset:0;background:#080a10c9;pointer-events:none}
+.play-scene{position:relative;isolation:isolate;padding:clamp(18px,3vw,38px)!important}
+.play-scene>*{position:relative}
+.dream-note{background:#d4c5a8 url("/images/mansion-bedroom.svg") center/cover!important;color:#281d1b!important;box-shadow:0 12px 40px #000b!important;border:1px solid #9b7957!important}
+.dream-note p{color:#30231e!important}
+.game-roster .game-person{border:1px solid #94765d!important;background:linear-gradient(145deg,#211a1b,#111319)!important}
+@media(max-width:700px){
+ body.game-app-ready .game-shell{min-height:100svh}
+ .app-placeholder-screen{padding:16px 10px!important}
+ .page-composition{padding:20px 14px!important}
+ .setup-form .game-form-grid{grid-template-columns:1fr}
+ .road-scene .scene-copy{width:min(390px,94%)!important}
+}
