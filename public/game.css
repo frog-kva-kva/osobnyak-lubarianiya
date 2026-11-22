@@ -605,3 +605,173 @@ body.game-app-ready .game-screen{min-height:0}
  .play-scene .portrait-art{height:90px}
  .dream-note{padding:30px 25px!important;min-height:180px}
 }
+
+
+/* Первая аккуратная правка: особняк вместо общей декоративной панели */
+body.game-app-ready #game{
+  min-height:100svh;
+  padding:0;
+  border:0;
+  background:#090b10;
+}
+body.game-app-ready .game-shell{
+  width:100%;
+  max-width:none;
+  min-height:100svh;
+  margin:0;
+}
+body.game-app-ready .game-panel{
+  width:100%;
+  max-width:none;
+  min-height:100svh;
+  margin:0;
+  padding:0;
+  border:0;
+  outline:0;
+  box-shadow:none;
+  background:transparent;
+}
+body.game-app-ready .game-panel:before,
+body.game-app-ready .game-panel:after{display:none}
+body.game-app-ready .game-heading{display:none!important}
+
+/* Главное меню — четыре вертикальные двери-кнопки */
+.road-scene .scene-copy{
+  width:min(430px,92%);
+  padding:clamp(26px,4vw,42px);
+  background:rgba(12,13,17,.88);
+  border:1px solid #8d7058;
+  outline:1px solid rgba(181,143,103,.45);
+  outline-offset:6px;
+  box-shadow:0 22px 65px #000c,inset 0 0 30px #0008;
+}
+.road-scene .scene-copy h3{
+  margin:0 0 26px;
+  color:#e7d5c0;
+  font:400 clamp(29px,4vw,42px)/1.15 Georgia,serif;
+  letter-spacing:.025em;
+}
+.road-scene .scene-actions{display:flex;flex-direction:column;gap:12px}
+.road-scene .scene-button{
+  min-height:58px;
+  justify-content:center;
+  background:linear-gradient(90deg,#21191a,#382729 48%,#21191a);
+  border:1px solid #80634f;
+  box-shadow:inset 0 0 0 2px rgba(0,0,0,.35),0 5px 14px #0008;
+  color:#ead9c5;
+  transition:background .18s,border-color .18s,transform .18s;
+}
+.road-scene .scene-button strong{font:400 18px Georgia,serif;letter-spacing:.04em}
+.road-scene .scene-button.primary,
+.road-scene .scene-button:hover{
+  background:linear-gradient(90deg,#392126,#60343a 48%,#392126);
+  border-color:#b18a69;
+  transform:translateY(-1px);
+}
+
+/* Экран начала игры — иллюстрация двери, а не нарисованный CSS-прямоугольник */
+#setupScreen{
+  min-height:100svh;
+  padding:clamp(18px,3vw,42px);
+  align-items:center;
+  justify-content:center;
+  background:
+    linear-gradient(90deg,rgba(5,7,11,.35),rgba(5,7,11,.84) 42%,rgba(5,7,11,.94)),
+    url("/images/mansion-door.svg") center/cover no-repeat;
+}
+#setupScreen .page-composition{
+  width:min(1100px,100%)!important;
+  max-width:1100px!important;
+  margin:auto!important;
+  padding:clamp(22px,4vw,48px)!important;
+  background:rgba(9,10,14,.84)!important;
+  border:1px solid #8b6c53!important;
+  outline:1px solid rgba(185,148,111,.48);
+  outline-offset:5px;
+  box-shadow:0 24px 70px #000c,inset 0 0 38px #0008!important;
+}
+#setupScreen .page-composition>h3{
+  margin:0 0 28px;
+  text-align:center;
+  color:#ead9c5;
+  font:400 clamp(30px,4vw,43px)/1.15 Georgia,serif!important;
+  letter-spacing:.04em;
+}
+#setupScreen .setup-layout{
+  grid-template-columns:minmax(250px,.9fr) minmax(0,1.1fr);
+  gap:clamp(22px,4vw,48px);
+  align-items:stretch;
+}
+#setupScreen .door-illustration{
+  min-height:430px;
+  border:1px solid #8e6f55;
+  background:url("/images/mansion-door.svg") center/cover no-repeat;
+  box-shadow:0 18px 38px #000a,inset 0 0 0 8px rgba(8,8,11,.55);
+}
+#setupScreen .door-illustration:before,
+#setupScreen .door-illustration:after{display:none}
+#setupScreen .setup-form{
+  align-self:center;
+  padding:clamp(16px,2.4vw,30px);
+  background:rgba(10,11,15,.72);
+  border:1px solid rgba(139,108,83,.7);
+  box-shadow:inset 0 0 24px #0008;
+}
+#setupScreen .setup-form .game-form-grid{
+  grid-template-columns:1fr;
+  gap:20px;
+}
+#setupScreen .game-field>label{
+  color:#d6b99a;
+  font:13px Georgia,serif;
+  letter-spacing:.06em;
+  text-transform:none;
+}
+#setupScreen .setup-form input:not([type=range]){
+  background:#111116;
+  border:1px solid #765a49;
+  border-radius:0;
+  color:#f0e3d2;
+}
+#setupScreen .setup-form input[type=range]{accent-color:#a77c5b}
+#setupScreen .game-range-line{
+  margin-bottom:9px;
+  color:#e4d3c1;
+  font:18px Georgia,serif;
+}
+#setupScreen .game-role-custom{
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  max-height:230px;
+  gap:8px;
+}
+#setupScreen .game-role-custom .game-hint{
+  padding:10px 12px;
+  background:rgba(25,20,21,.94);
+  border:1px solid #594238;
+  border-left:2px solid #987052;
+  color:#dfcdb9;
+  font:13px/1.4 Georgia,serif;
+}
+#setupScreen .game-primary{
+  background:linear-gradient(90deg,#48262d,#6a3b40,#48262d);
+  border:1px solid #b28b6b;
+  color:#f4e6d5;
+}
+#setupScreen .game-secondary{
+  background:#17171b;
+  border:1px solid #715747;
+  color:#d7c3ae;
+}
+@media(max-width:760px){
+  #setupScreen{padding:14px 10px;background-position:42% center}
+  #setupScreen .page-composition{padding:20px 14px!important}
+  #setupScreen .setup-layout{grid-template-columns:1fr;gap:16px}
+  #setupScreen .door-illustration{min-height:170px;background-position:center 54%}
+  #setupScreen .setup-form{padding:15px 12px}
+  #setupScreen .setup-form .game-form-grid{grid-template-columns:1fr}
+  #setupScreen .game-role-custom{grid-template-columns:1fr}
+}
+@media(orientation:landscape) and (min-width:761px){
+  #setupScreen{min-height:100svh}
+  #setupScreen .page-composition{max-height:94svh;overflow:auto}
+}
