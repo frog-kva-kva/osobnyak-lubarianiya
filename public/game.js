@@ -2,7 +2,27 @@
  const root=document.querySelector("#game-root"); if(!root)return;
  root.innerHTML=`<section id="game"><div class="game-shell"><div class="game-heading"><div class="section-kicker">V — ночь начинается</div><h2>Комната <em>игры</em></h2><p>Собери гостей, получи тайную роль и попробуй разобраться, кому здесь можно доверять.</p></div><div class="game-panel">
  <nav class="app-nav" aria-label="Навигация по игре"><button data-app-screen="menuScreen">Главная</button><button data-app-screen="setupScreen">Новая игра</button><button data-app-screen="roomScreen">Моя комната</button><button data-app-screen="settingsScreen">Настройки</button></nav>
- <section class="game-screen app-home-screen" id="menuScreen"><div class="app-menu-copy"><div class="app-eyebrow">✧ Особняк Лубарианийа ✧</div><h3>Добро пожаловать<br><em>домой</em></h3><p>Вечер только начинается. Выбери, куда отправиться.</p></div><div class="app-menu-buttons"><button class="app-menu-button app-menu-primary" id="menuNewGame"><span>✦</span><strong>Новая игра</strong><small>Собрать гостей и начать партию</small></button><button class="app-menu-button" id="menuContinue"><span>◷</span><strong>Продолжить</strong><small>Вернуться к сохранённой партии</small></button><button class="app-menu-button" id="menuRoom"><span>⌂</span><strong>Моя комната</strong><small>Личное пространство хозяйки</small></button><button class="app-menu-button" id="menuSettings"><span>⚙</span><strong>Настройки</strong><small>Параметры игры</small></button></div></section>
+ <section class="game-screen app-home-screen mansion-road-screen" id="menuScreen">
+ <div class="mansion-night-sky" aria-hidden="true"><span class="mansion-moon"></span><span class="mansion-star star-one">✦</span><span class="mansion-star star-two">✧</span><span class="mansion-star star-three">·</span></div>
+ <div class="mansion-distant-hills" aria-hidden="true"></div>
+ <div class="mansion-building" aria-hidden="true"><div class="mansion-roof"></div><div class="mansion-tower tower-left"><i></i><i></i></div><div class="mansion-tower tower-right"><i></i><i></i></div><div class="mansion-facade"><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="mansion-door"></div></div>
+ <div class="mansion-garden" aria-hidden="true"><span>✿</span><span>♧</span><span>✿</span><span>♧</span></div>
+ <div class="mansion-road-path" aria-hidden="true"></div>
+ <div class="mansion-menu-frame">
+  <div class="mansion-frame-inner">
+   <div class="mansion-frame-ornament">✧ ❦ ✧</div>
+   <div class="app-menu-copy"><div class="app-eyebrow">✧ Добро пожаловать ✧</div><h3>Дорога <em>к особняку</em></h3><p>За окнами уже зажглись огни. Кажется, тебя здесь ждали…</p></div>
+   <div class="app-menu-buttons">
+    <button class="app-menu-button app-menu-primary" id="menuNewGame"><span>✦</span><strong>Новая игра</strong><small>Переступить порог и собрать гостей</small></button>
+    <button class="app-menu-button" id="menuContinue"><span>◷</span><strong>Продолжить</strong><small>Вернуться к прежнему вечеру</small></button>
+    <button class="app-menu-button" id="menuRoom"><span>⌂</span><strong>Моя комната</strong><small>Заглянуть в своё убежище</small></button>
+    <button class="app-menu-button" id="menuSettings"><span>⚙</span><strong>Настройки</strong><small>Настроить правила и атмосферу</small></button>
+   </div>
+   <div class="mansion-frame-ornament bottom-ornament">❧</div>
+  </div>
+ </div>
+ <div class="mansion-road-caption">Особняк Лубарианийа <span>·</span> вечер начинается</div>
+</section>
  <section class="game-screen app-placeholder-screen" id="continueScreen" hidden><div class="app-page-heading"><span>✧ Архив партий</span><h3>Продолжить</h3><p>Сохранения появятся в следующих версиях.</p></div><div class="app-empty-state">Пока нет сохранений.</div><div class="game-actions"><button class="game-secondary" data-app-screen="menuScreen">Вернуться в меню</button></div></section>
  <section class="game-screen app-placeholder-screen" id="roomScreen" hidden><div class="app-page-heading"><span>✧ Личное пространство</span><h3>Моя комната</h3><p>Комната будет постепенно наполняться вещами, найденными во снах.</p></div><div class="app-room-preview"><div class="room-object">☾<small>Кровать</small></div><div class="room-object">♧<small>Питомец</small></div><div class="room-object">✧<small>Коллекция снов</small></div></div><div class="game-actions"><button class="game-secondary" data-app-screen="menuScreen">Вернуться в меню</button></div></section>
  <section class="game-screen app-placeholder-screen" id="settingsScreen" hidden><div class="app-page-heading"><span>✧ Параметры особняка</span><h3>Настройки</h3><p>Настройки звука и оформления появятся позже.</p></div><div class="game-actions"><button class="game-secondary" data-app-screen="menuScreen">Вернуться в меню</button></div></section>
