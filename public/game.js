@@ -1,6 +1,6 @@
 (() => {
  const root=document.querySelector("#game-root"); if(!root)return;
- root.innerHTML=\`<section id="game" data-theme="gothic-mansion">
+ root.innerHTML=`<section id="game" data-theme="gothic-mansion">
  <div class="game-shell"><div class="game-panel">
   <section class="game-screen mansion-scene road-scene app-home-screen" id="menuScreen">
    <div class="menu-vignette"></div>
@@ -78,7 +78,7 @@
    <div class="play-content"><h2 class="game-phase-title" id="phaseTitle"></h2><p class="game-story" id="phaseStory"></p><div class="game-role-reveal" id="roleReveal" hidden></div><div class="game-log" id="gameLog" aria-live="polite"></div><div id="actionArea"></div><div class="game-actions" id="phaseActions"></div></div>
   </section>
   <section class="game-screen end-scene" id="endScreen" hidden><div class="game-result"><span class="eyebrow">Конец истории</span><div class="end-ornament">✧ ❦ ✧</div><h2 id="endTitle"></h2><p id="endText"></p><div class="game-actions" style="justify-content:center"><button class="game-primary" id="newGame">Сыграть ещё раз</button><button class="game-secondary" id="showRoles">Посмотреть роли</button></div><div id="finalRoster" class="game-roster" hidden></div></div></section>
- </div></div></section>\`;
+ </div></div></section>`;
 
  document.body.classList.add("game-app-ready");
  const $=s=>root.querySelector(s);
