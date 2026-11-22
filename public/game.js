@@ -8,7 +8,7 @@
    <section class="game-screen mansion-scene road-scene app-home-screen" id="menuScreen">
     <div class="scene-copy"><h3>Дорога к особняку</h3>
      <div class="scene-actions"><button id="menuNewGame" class="scene-button primary"><strong>Новая игра</strong></button><button id="menuContinue" class="scene-button"><strong>Продолжить</strong></button><button id="menuRoom" class="scene-button"><strong>Моя комната</strong></button><button id="menuSettings" class="scene-button"><strong>Настройки</strong></button></div>
-    </div><div class="road-art" aria-hidden="true"><div class="road-moon"></div><div class="road-house"><i></i><i></i><i></i><i></i><b></b></div><div class="road-path"></div></div>
+    </div>
    </section>
    <section class="game-screen mansion-scene door-scene app-placeholder-screen" id="setupScreen" hidden>
     <div class="door-visual" aria-hidden="true"><div class="door-panel"><span>✦</span></div></div>
