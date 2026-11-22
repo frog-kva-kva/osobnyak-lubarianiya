@@ -13,18 +13,18 @@
  document.body.classList.add("game-app-ready");
  const $=s=>root.querySelector(s);
  const roleInfo={
- assassin:{name:"Убийца (мафия)",team:"mafia",night:"kill",desc:"Вместе со вторым Убийцей выбирает общую цель. Убийцы знают друг друга."},
+ assassin:{name:"Убийца",team:"mafia",night:"kill",desc:"Вместе со вторым Убийцей выбирает общую цель. Убийцы знают друг друга."},
  maniac:{name:"Маньяк",team:"solo",night:"kill",desc:"Ночью выбирает игрока для устранения. Побеждает, если остаётся последним."},
  doctor:{name:"Доктор",team:"town",night:"heal",desc:"Ночью спасает одного игрока, включая себя."},
  butterfly:{name:"Бабочка",team:"town",night:"guard",desc:"Защищает выбранного игрока. Если Бабочка погибает, погибает и тот, кого она защищала."},
  host:{name:"Хозяин замка",team:"town",night:"block",desc:"Ночью запирает одного игрока в комнате: тот не может применить свою способность, но остаётся доступной целью для остальных действий."},
- detective:{name:"Сыщик (комиссар)",team:"town",night:"inspect",desc:"Проверяет игрока и узнаёт, относится ли тот к убийцам — Убийцам или Маньяку."},
+ detective:{name:"Сыщик",team:"town",night:"inspect",desc:"Проверяет игрока и узнаёт, относится ли тот к убийцам — Убийцам или Маньяку."},
  celebrity:{name:"Знаменитость",team:"town",night:null,desc:"Знает Фаната и не голосует против него."},
  fan:{name:"Фанат",team:"town",night:null,desc:"Знает Знаменитость и не голосует против неё."},
  loner:{name:"Одиночка",team:"solo",night:null,desc:"Побеждает индивидуально, если доживает до любой концовки."},
  crazy:{name:"Сумасшедший",team:"crazy",night:null,desc:"Побеждает, если его исключают дневным голосованием."},
  thief:{name:"Вор",team:"thief",night:"steal",desc:"Меняется ролями с выбранным игроком. Вместе с ролью переходят её способность и условие победы; роль Вора получает прежний обладатель выбранной роли."},
- citizen:{name:"Мирный житель",team:"town",night:null,desc:"Не имеет ночного действия. Помогает мирным найти убийц."}
+ citizen:{name:"Гость особняка",team:"town",night:null,desc:"Не имеет ночного действия. Помогает обитателям особняка раскрыть убийц."}
  };
  const roleOrder=["assassin","maniac","doctor","butterfly","host","detective","celebrity","fan","loner","crazy","thief","citizen"];
  const names=["Макс","Тёмный лорд","Просто парень","Лили","Агент Чой","Косуля","Принцесса лени","Лягушка","Боб","Лучший детектив","Шерлок","Ирэн","Полина","Элиас","Марта","Теодор","Ливия","Оскар","Изольда"];
@@ -73,7 +73,7 @@
  game.protected=guarded?.id??null;const deaths=[];for(const target of killTargets){if(!target||!target.alive||target.id===healed?.id||target.id===guarded?.id)continue;if(!deaths.some(x=>x.id===target.id))deaths.push(target);}deaths.forEach(p=>{p.alive=false;log("Особняк",p.name+" погиб этой ночью. Его роль: "+role(p).name+".","system");});const fallenButterfly=deaths.find(p=>p.role==="butterfly"&&p.id===game.protectedBy);if(fallenButterfly&&guarded?.alive){guarded.alive=false;log("Особняк",guarded.name+" тоже погиб: его защитница-Бабочка выбыла.","system");game.protected=null;game.protectedBy=null;}
  if(!deaths.length)game.lastNight="Ночь прошла без потерь.";else game.lastNight="Ночью погибли: "+deaths.map(p=>p.name).join(", ")+".";
  const result=checkEnd();if(result){finish(result);return;}game.round++;day(false);}
- function finish(winner){const loner=game.players.find(p=>p.role==="loner"&&p.alive);show("endScreen");const titles={town:"Победа мирных",mafia:"Победа мафии",maniac:"Победа Маньяка",crazy:"Победа Сумасшедшего",loner:"Победа Одиночки",other:"Партия завершена"};$("#endTitle").textContent=titles[winner]||"Партия завершена";$("#endText").textContent=(loner&&winner!=="loner"?"Одиночка тоже получает индивидуальную победу, потому что дожил до конца. ":"")+({town:"Мафия и Маньяк больше не представляют угрозы.",mafia:"Убийцы получили численное преимущество.",maniac:"Маньяк остался последним игроком.",crazy:"Сумасшедшего исключили голосованием.",loner:"Одиночка дожил до завершения партии и победил один.",other:"Наступила одна из особых концовок."}[winner]||"");const wrap=$("#finalRoster");wrap.innerHTML="";game.players.forEach(p=>{const d=document.createElement("div"),s=document.createElement("strong"),m=document.createElement("span");d.className="game-person"+(!p.alive?" dead":"");s.textContent=p.name+(p.isUser?" · вы":"");m.textContent=role(p).name+(p.alive?" · в игре":" · выбыл");d.append(s,m);wrap.append(d);});}
+ function finish(winner){const loner=game.players.find(p=>p.role==="loner"&&p.alive);show("endScreen");const titles={town:"Победа обитателей особняка",mafia:"Победа убийц",maniac:"Победа Маньяка",crazy:"Победа Сумасшедшего",loner:"Победа Одиночки",other:"Партия завершена"};$("#endTitle").textContent=titles[winner]||"Партия завершена";$("#endText").textContent=(loner&&winner!=="loner"?"Одиночка тоже получает индивидуальную победу, потому что дожил до конца. ":"")+({town:"Убийцы и Маньяк больше не представляют угрозы особняку.",mafia:"Убийцы взяли верх над обитателями особняка.",maniac:"Маньяк остался последним игроком.",crazy:"Сумасшедшего исключили голосованием.",loner:"Одиночка дожил до завершения партии и победил один.",other:"Наступила одна из особых концовок."}[winner]||"");const wrap=$("#finalRoster");wrap.innerHTML="";game.players.forEach(p=>{const d=document.createElement("div"),s=document.createElement("strong"),m=document.createElement("span");d.className="game-person"+(!p.alive?" dead":"");s.textContent=p.name+(p.isUser?" · вы":"");m.textContent=role(p).name+(p.alive?" · в игре":" · выбыл");d.append(s,m);wrap.append(d);});}
  $("#newGame").onclick=()=>{game=null;show("setupScreen");};$("#showRoles").onclick=()=>{$("#finalRoster").hidden=!$("#finalRoster").hidden;};
  show("menuScreen");
 })();
