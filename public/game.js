@@ -4,13 +4,11 @@
  <div class="game-shell">
   <div class="game-heading"><div class="section-kicker">Особняк Лубарианийа</div><h2>Тайны <em>за закрытыми дверями</em></h2><p>История, в которой каждый гость хранит секрет.</p></div>
   <div class="game-panel">
-   <nav class="app-nav" aria-label="Навигация по игре">
-    <button data-app-screen="menuScreen">К особняку</button><button data-app-screen="setupScreen">Новая игра</button><button data-app-screen="continueScreen">Сохранения</button><button data-app-screen="roomScreen">Моя комната</button><button data-app-screen="settingsScreen">Настройки</button>
-   </nav>
+
    <section class="game-screen mansion-scene road-scene app-home-screen" id="menuScreen">
-    <div class="scene-copy"><span class="scene-eyebrow">Вечернее приглашение</span><h3>Дорога к<br><em>особняку</em></h3><p>Вдали мерцают окна. Дорога привела тебя сюда не случайно.</p>
-     <div class="scene-actions"><button id="menuNewGame" class="scene-button primary"><strong>Новая игра</strong><small>Открыть входную дверь</small></button><button id="menuContinue" class="scene-button"><strong>Продолжить</strong><small>Вернуться к прежней истории</small></button><button id="menuRoom" class="scene-button"><strong>Моя комната</strong><small>Заглянуть к себе</small></button><button id="menuSettings" class="scene-button"><strong>Настройки</strong><small>Изменить параметры</small></button></div>
-    </div><div class="road-art" aria-hidden="true"><div class="road-moon"></div><div class="road-house"><i></i><i></i><i></i><i></i><b></b></div><div class="road-path"></div><div class="road-lantern">✧</div></div><div class="scene-location">Особняк Лубарианийа · вечер начинается</div>
+    <div class="scene-copy"><h3>Дорога к особняку</h3>
+     <div class="scene-actions"><button id="menuNewGame" class="scene-button primary"><strong>Новая игра</strong></button><button id="menuContinue" class="scene-button"><strong>Продолжить</strong></button><button id="menuRoom" class="scene-button"><strong>Моя комната</strong></button><button id="menuSettings" class="scene-button"><strong>Настройки</strong></button></div>
+    </div><div class="road-art" aria-hidden="true"><div class="road-moon"></div><div class="road-house"><i></i><i></i><i></i><i></i><b></b></div><div class="road-path"></div></div>
    </section>
    <section class="game-screen mansion-scene door-scene app-placeholder-screen" id="setupScreen" hidden>
     <div class="door-visual" aria-hidden="true"><div class="door-panel"><span>✦</span></div></div>
