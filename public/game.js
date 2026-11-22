@@ -3,38 +3,53 @@
  root.innerHTML=`<section id="game" data-theme="gothic-mansion">
  <div class="game-shell"><div class="game-panel">
   <section class="game-screen mansion-scene road-scene app-home-screen" id="menuScreen">
-   <div class="menu-vignette"></div>
    <div class="menu-composition">
-    <div class="menu-title"><span class="menu-kicker">Старинный особняк</span><h1>Особняк<br>Лубарианийа</h1><span class="title-rule">✦</span></div>
-    <nav class="scene-actions" aria-label="Главное меню">
-     <button id="menuNewGame" class="scene-button primary"><strong>Новая игра</strong></button>
-     <button id="menuContinue" class="scene-button"><strong>Продолжить</strong></button>
-     <button id="menuRoom" class="scene-button"><strong>Моя комната</strong></button>
-     <button id="menuSettings" class="scene-button"><strong>Настройки</strong></button>
-    </nav>
+    <div class="menu-plaque">
+     <div class="plaque-ornament">✦ ❦ ✦</div>
+     <h1>Особняк<br>Лубарианийа</h1>
+     <nav class="scene-actions" aria-label="Главное меню">
+      <button id="menuNewGame" class="scene-button primary"><strong>Новая игра</strong></button>
+      <button id="menuContinue" class="scene-button"><strong>Продолжить</strong></button>
+      <button id="menuRoom" class="scene-button"><strong>Моя комната</strong></button>
+      <button id="menuSettings" class="scene-button"><strong>Настройки</strong></button>
+     </nav>
+     <div class="plaque-ornament bottom">❧</div>
+    </div>
    </div>
   </section>
 
   <section class="game-screen mansion-scene door-scene app-page" id="setupScreen" hidden>
-   <div class="page-shade"></div><div class="page-wrap setup-wrap">
-    <header class="page-heading"><span class="eyebrow">Подготовка к игре</span><h2>Новая игра</h2></header>
-    <div class="setup-layout">
-     <div class="theme-column">
-      <span class="section-label">Оформление игры</span>
-      <button class="theme-choice is-selected" id="themeGothic" type="button" aria-pressed="true">
-       <span class="theme-art"></span><span class="theme-copy"><strong>Готический особняк</strong><small>Тёмные залы, старинные портреты и тайны за закрытыми дверями</small></span><span class="theme-check">✓</span>
-      </button>
-     </div>
-     <div class="setup-form">
-      <div class="game-form-grid">
-       <div class="game-field"><label for="playerName">Имя игрока</label><input id="playerName" maxlength="24" value="Хозяйка"></div>
-       <div class="game-field"><label for="playerCount">Количество участников</label><div class="game-range-line"><strong id="countValue">13</strong><span>человек</span></div><input id="playerCount" type="range" min="10" max="20" value="13"></div>
+   <div class="setup-door-layout">
+    <header class="setup-door-title"><span>✦</span><h2>Новая игра</h2><span>✦</span></header>
+    <div class="setup-plaque">
+     <section class="setup-option">
+      <h3>1. Режим игры</h3>
+      <div class="choice-row"><button class="choice-button is-active" type="button" data-mode="solo" aria-pressed="true">Одиночная</button><button class="choice-button" type="button" data-mode="coop" disabled title="Кооперативный режим ещё не подключён">Кооператив</button></div>
+     </section>
+     <section class="setup-option">
+      <h3>2. Количество игроков</h3>
+      <div class="player-count-line"><strong id="countValue">13</strong><span>участников</span></div>
+      <input id="playerCount" type="range" min="10" max="20" value="13">
+     </section>
+     <section class="setup-option">
+      <h3>3. Настройки ролей</h3>
+      <div class="choice-row role-presets">
+       <button type="button" class="choice-button is-active" data-role-preset="all">Все роли</button>
+       <button type="button" class="choice-button" data-role-preset="classic">Классика</button>
+       <button type="button" class="choice-button" data-role-preset="custom">Настроить</button>
       </div>
-      <div class="game-field roles-field"><label>Роли в партии</label><div id="rolePreview" class="game-role-custom"></div></div>
-      <div class="game-actions"><button class="game-primary" id="startGame">Начать игру</button><button class="game-secondary" data-app-screen="menuScreen">Назад</button></div>
-      <p class="game-error" id="setupError" role="alert"></p>
-     </div>
+      <div id="rolePreview" class="game-role-custom"></div>
+     </section>
+     <section class="setup-option">
+      <h3>4. Оформление особняка</h3>
+      <button class="theme-choice is-selected" id="themeGothic" type="button" aria-pressed="true">
+       <span class="theme-art"></span><span class="theme-copy"><strong>Готический особняк</strong></span><span class="theme-check">✓</span>
+      </button>
+     </section>
+     <div class="setup-actions"><button class="game-primary" id="startGame">Начать игру</button><button class="game-secondary" data-app-screen="menuScreen">Назад</button></div>
+     <p class="game-error" id="setupError" role="alert"></p>
     </div>
+    <div class="door-welcome">WELCOME</div>
    </div>
   </section>
 
@@ -134,13 +149,17 @@ const renderRoomCollection=()=>{const box=$("#roomCollection");if(!box)return;bo
  const phase=(title,story,label)=>{$("#phaseTitle").textContent=title;$("#phaseStory").textContent=story;$("#roundLabel").textContent=label;$("#aliveLabel").textContent=alive().length+" в игре";$("#playScreen").classList.toggle("phase-night",game.phase==="night");$("#playScreen").classList.toggle("phase-day",game.phase==="day");$("#gameLog").innerHTML="";$("#actionArea").innerHTML="";$("#phaseActions").innerHTML="";};
  const actionButton=(text,fn)=>{const b=document.createElement("button");b.className="game-primary";b.textContent=text;b.onclick=fn;$("#phaseActions").append(b);};
  const cards=(list)=>{const wrap=document.createElement("div");wrap.className="game-roster "+(game?.phase==="night"?"door-roster":"portrait-roster");list.forEach((p,i)=>{const b=document.createElement("button"),no=document.createElement("span"),nm=document.createElement("strong"),meta=document.createElement("span"),portrait=document.createElement("span");b.className="game-person"+(!p.alive?" dead":"");portrait.className="portrait-art";portrait.textContent=p.name.trim().slice(0,1).toUpperCase();b.disabled=!p.alive;no.className="person-number";no.textContent="№"+String(i+1).padStart(2,"0");nm.textContent=p.name+(p.isUser?" · вы":"");meta.textContent=p.isUser?"Вы":traits[p.trait];b.append(portrait,no,nm,meta);b.onclick=()=>{chosen=p.id;wrap.querySelectorAll("button").forEach(x=>x.classList.toggle("selected",x===b));};wrap.append(b);});return wrap;};
- const renderRolePreview=()=>{const box=$("#rolePreview");box.innerHTML="";roleOrder.forEach(id=>{const d=document.createElement("div");d.className="game-hint";d.textContent=roleInfo[id].name+" — "+roleInfo[id].desc;box.append(d);});};
- renderRolePreview();
+ let rolePreset="all";
+ let selectedRoleIds=roleOrder.filter(id=>id!=="citizen");
+ const renderRolePreview=()=>{const box=$("#rolePreview");box.innerHTML="";roleOrder.filter(id=>id!=="assassin"&&id!=="citizen").forEach(id=>{const label=document.createElement("label");label.className="role-toggle";const input=document.createElement("input");input.type="checkbox";input.checked=selectedRoleIds.includes(id);input.disabled=rolePreset!=="custom";input.addEventListener("change",()=>{selectedRoleIds=input.checked?[...selectedRoleIds,id]:selectedRoleIds.filter(x=>x!==id);});const name=document.createElement("strong");name.textContent=roleInfo[id].name;label.append(input,name);box.append(label);});};
+ const setRolePreset=preset=>{rolePreset=preset;if(preset==="all")selectedRoleIds=roleOrder.filter(id=>id!=="citizen");if(preset==="classic")selectedRoleIds=["assassin","doctor","detective","citizen"];document.querySelectorAll("[data-role-preset]").forEach(b=>{const active=b.dataset.rolePreset===preset;b.classList.toggle("is-active",active);b.setAttribute("aria-pressed",String(active));});renderRolePreview();};
+ root.querySelectorAll("[data-role-preset]").forEach(b=>b.addEventListener("click",()=>setRolePreset(b.dataset.rolePreset)));
+ setRolePreset("all");
  renderRoomCollection();
- const roleDeck=n=>{let deck=["assassin","assassin","maniac","doctor","butterfly","host","detective","celebrity","fan","loner","crazy","thief"];if(n<11){deck=["assassin","assassin","maniac","doctor","butterfly","host","detective","loner","thief"];if(n<7)deck=["assassin","maniac","doctor","detective"];}while(deck.length>n)deck.pop();while(deck.length<n)deck.push("citizen");return shuffle(deck);};
+ const roleDeck=n=>{let deck=["assassin","assassin"];selectedRoleIds.filter(id=>id!=="assassin"&&id!=="citizen").forEach(id=>deck.push(id));if(selectedRoleIds.includes("citizen"))deck.push("citizen");while(deck.length>n)deck.pop();while(deck.length<n)deck.push("citizen");return shuffle(deck);};
  const roleSummary=id=>roleInfo[id].name+". "+roleInfo[id].desc;
  $("#playerCount").addEventListener("input",()=>$("#countValue").textContent=$("#playerCount").value);
- $("#startGame").onclick=()=>{const n=+$("#playerCount").value,deck=roleDeck(n),guestNames=shuffle(names);const playerName=$("#playerName").value.trim()||"Хозяйка";game={round:1,phase:"day",players:deck.map((r,i)=>({id:i,name:i===0?playerName:guestNames[i-1],role:r,alive:true,isUser:i===0,trait:Math.floor(Math.random()*traits.length),suspicion:0,vote:null,knownKiller:false,knownKillerIds:[]})),lastNight:"",lastVotes:[],protected:null,protectedBy:null,celebrity:null,fan:null,lonerWins:false,crazyWon:false};game.celebrity=game.players.find(p=>p.role==="celebrity")?.id??null;game.fan=game.players.find(p=>p.role==="fan")?.id??null;$("#setupError").textContent="";$("#roleReveal").hidden=false;$("#roleReveal").textContent="Ваша роль: "+roleSummary(me().role)+(me().role==="celebrity"?" Вы знаете Фаната: "+(game.players.find(p=>p.role==="fan")?.name||"его пока нет")+".":me().role==="fan"?" Вы знаете Знаменитость: "+(game.players.find(p=>p.role==="celebrity")?.name||"её пока нет")+".":"");show("playScreen");day(true);};
+ $("#startGame").onclick=()=>{const n=+$("#playerCount").value,deck=roleDeck(n),guestNames=shuffle(names);const playerName="Хозяйка";game={round:1,phase:"day",players:deck.map((r,i)=>({id:i,name:i===0?playerName:guestNames[i-1],role:r,alive:true,isUser:i===0,trait:Math.floor(Math.random()*traits.length),suspicion:0,vote:null,knownKiller:false,knownKillerIds:[]})),lastNight:"",lastVotes:[],protected:null,protectedBy:null,celebrity:null,fan:null,lonerWins:false,crazyWon:false};game.celebrity=game.players.find(p=>p.role==="celebrity")?.id??null;game.fan=game.players.find(p=>p.role==="fan")?.id??null;$("#setupError").textContent="";$("#roleReveal").hidden=false;$("#roleReveal").textContent="Ваша роль: "+roleSummary(me().role)+(me().role==="celebrity"?" Вы знаете Фаната: "+(game.players.find(p=>p.role==="fan")?.name||"его пока нет")+".":me().role==="fan"?" Вы знаете Знаменитость: "+(game.players.find(p=>p.role==="celebrity")?.name||"её пока нет")+".":"");show("playScreen");day(true);};
  const isKiller=p=>["assassin","maniac"].includes(p.role);
  const voteTarget=(p)=>{const others=alive().filter(x=>x.id!==p.id&&!(p.role==="assassin"&&x.role==="assassin")&&!(p.role==="celebrity"&&x.role==="fan")&&!(p.role==="fan"&&x.role==="celebrity"));if(p.role==="crazy")return p.id;if(p.role==="assassin"){const partner=mafia().find(x=>x.id!==p.id);if(partner)return partner.vote;}if(p.role==="detective"&&p.knownKillerIds?.length){const k=others.find(x=>p.knownKillerIds.includes(x.id));if(k)return k.id;}const ranked=others.sort((a,b)=>(b.suspicion+Math.random()*2)-(a.suspicion+Math.random()*2));return ranked[0]?.id??null;};
  const checkEnd=()=>{if(game.crazyWon)return"crazy";const aliveNow=alive(),solo=aliveNow.find(p=>p.role==="loner");if(!aliveNow.some(p=>p.role==="assassin")&&!aliveNow.some(p=>p.role==="maniac"))return"town";if(aliveNow.some(p=>p.role==="maniac")&&aliveNow.length===1)return"maniac";if(aliveNow.some(p=>p.role==="assassin")&&aliveNow.length===mafia().length)return"mafia";if(aliveNow.length===1&&aliveNow[0].role==="loner")return"loner";if(aliveNow.length===2&&aliveNow.some(p=>p.role==="loner"))return"other";if(solo&&aliveNow.length<=2)return"other";if(mafia().length&&aliveNow.every(p=>p.role==="assassin"))return"mafia";return null;};
