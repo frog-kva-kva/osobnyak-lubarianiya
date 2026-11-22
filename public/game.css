@@ -223,3 +223,76 @@ body.game-app-ready .game-disclaimer{color:#ddc9c5}
   body.game-app-ready .game-panel{border-width:7px}
   body.game-app-ready .app-nav button{font-size:9px}
 }
+
+
+/* Главная сцена: дорога к особняку */
+body.game-app-ready #game{padding:0;background:#555365}
+body.game-app-ready .game-panel{padding:0;border:0;outline:0;border-radius:0;box-shadow:none;background:#555365;gap:0}
+body.game-app-ready .game-panel:before,body.game-app-ready .game-panel:after{display:none}
+body.game-app-ready .app-home-screen.mansion-road-screen{
+ position:relative;isolation:isolate;flex:1;min-height:0;overflow:hidden;
+ display:flex;align-items:center;justify-content:flex-end;
+ padding:clamp(18px,4vh,48px) clamp(18px,5vw,72px);
+ background:
+  radial-gradient(ellipse at 72% 32%,rgba(248,215,190,.24),transparent 28%),
+  linear-gradient(180deg,#777488 0%,#777184 25%,#656477 55%,#454a58 100%);
+}
+.mansion-night-sky{position:absolute;inset:0;z-index:-5;overflow:hidden;background:linear-gradient(180deg,rgba(205,190,198,.18),transparent 52%)}
+.mansion-moon{position:absolute;right:19%;top:9%;width:clamp(48px,7vw,90px);aspect-ratio:1;border-radius:50%;background:#f0dfc8;box-shadow:0 0 25px 9px rgba(242,220,198,.2),0 0 90px 30px rgba(242,220,198,.12)}
+.mansion-star{position:absolute;color:#f4e2d3;text-shadow:0 0 12px #fff0d6}
+.star-one{top:13%;left:22%;font-size:20px}.star-two{top:27%;right:39%;font-size:14px}.star-three{top:9%;left:48%;font-size:32px}
+.mansion-distant-hills{position:absolute;z-index:-4;left:-8%;right:-8%;bottom:19%;height:40%;background:linear-gradient(160deg,#73777a,#58616a);clip-path:polygon(0 54%,18% 24%,33% 49%,52% 9%,71% 48%,88% 18%,100% 44%,100% 100%,0 100%);opacity:.75}
+.mansion-building{position:absolute;z-index:-2;right:9%;top:14%;width:clamp(260px,42vw,590px);height:53%;filter:drop-shadow(0 15px 18px rgba(36,32,43,.3));opacity:.97}
+.mansion-facade{position:absolute;left:12%;right:12%;bottom:0;height:62%;background:linear-gradient(90deg,#665b62,#8a7371 48%,#665b62);border:5px solid #534b57;border-bottom:0;box-shadow:inset 0 0 0 5px rgba(218,187,168,.18)}
+.mansion-roof{position:absolute;left:7%;right:7%;top:15%;height:32%;background:#4c4857;clip-path:polygon(50% 0,100% 100%,0 100%);filter:drop-shadow(0 5px 2px #332f3b)}
+.mansion-tower{position:absolute;bottom:42%;width:24%;height:52%;background:linear-gradient(90deg,#645963,#907875,#625661);border:4px solid #514957}
+.mansion-tower:before{content:"";position:absolute;left:-12%;right:-12%;top:-17%;height:20%;background:#494553;clip-path:polygon(50% 0,100% 100%,0 100%)}
+.tower-left{left:4%}.tower-right{right:4%}
+.mansion-tower i,.mansion-facade i{position:absolute;display:block;width:13%;height:25%;left:22%;top:25%;border:3px solid #4d4652;border-radius:50% 50% 2px 2px;background:#e9c89b;box-shadow:0 0 13px rgba(248,211,157,.35)}
+.mansion-tower i+ i{left:64%}
+.mansion-facade i{width:10%;height:28%;top:18%;left:13%}.mansion-facade i:nth-child(2){left:37%}.mansion-facade i:nth-child(3){left:61%}.mansion-facade i:nth-child(4){left:78%;top:53%}.mansion-facade i:nth-child(5){left:13%;top:53%}.mansion-facade i:nth-child(6){left:37%;top:53%}
+.mansion-door{position:absolute;bottom:0;left:43%;width:15%;height:34%;background:linear-gradient(90deg,#413943,#80605b);border:4px solid #4b414a;border-bottom:0;border-radius:48% 48% 0 0}
+.mansion-garden{position:absolute;z-index:-1;bottom:17%;left:0;right:0;height:15%;display:flex;justify-content:space-around;align-items:end;color:#87927f;font-size:clamp(25px,4vw,48px);opacity:.8}
+.mansion-road-path{position:absolute;z-index:-1;bottom:-15%;left:30%;width:42%;height:57%;background:linear-gradient(90deg,#7d7779,#aaa0a0 48%,#77747c);clip-path:polygon(45% 0,57% 0,100% 100%,0 100%);filter:drop-shadow(0 -5px 8px rgba(39,38,48,.2));opacity:.9}
+.mansion-menu-frame{position:relative;z-index:2;width:min(430px,43%);max-height:100%;padding:10px;background:linear-gradient(135deg,#604b46,#a18470 20%,#584747 45%,#a58a75 72%,#55433f);border:3px solid #c4a38c;box-shadow:0 16px 42px rgba(32,27,38,.38),inset 0 0 0 2px #493d43,inset 0 0 0 5px #b08b76;transform:rotate(-.5deg)}
+.mansion-frame-inner{position:relative;max-height:100%;overflow:auto;padding:clamp(17px,2.5vh,28px) clamp(16px,2.2vw,27px);background:linear-gradient(145deg,rgba(71,58,66,.96),rgba(58,57,70,.97));border:1px solid #d1ad96;box-shadow:inset 0 0 0 3px rgba(211,174,151,.18)}
+.mansion-frame-ornament{text-align:center;color:#e4c4b9;font-size:19px;letter-spacing:.35em;margin-bottom:9px}
+.mansion-frame-ornament.bottom-ornament{margin:12px 0 0;font-size:23px}
+.mansion-menu-frame .app-menu-copy{text-align:center;margin:0 auto 16px}
+.mansion-menu-frame .app-menu-copy h3{font-size:clamp(31px,4vw,48px);line-height:1.04;margin:10px 0}
+.mansion-menu-frame .app-menu-copy h3 em{display:block;font-size:1.04em}
+.mansion-menu-frame .app-menu-copy p{font-size:14px;line-height:1.45;margin:0 auto}
+.mansion-menu-frame .app-menu-buttons{grid-template-columns:1fr;gap:8px}
+.mansion-menu-frame .app-menu-button{min-height:65px;display:grid;grid-template-columns:35px 1fr;grid-template-rows:auto auto;column-gap:9px;align-content:center;padding:9px 13px;background:linear-gradient(110deg,rgba(127,104,111,.65),rgba(83,78,91,.75));border:1px solid rgba(212,177,166,.65);box-shadow:inset 0 0 0 2px rgba(238,216,200,.05);transform:none}
+.mansion-menu-frame .app-menu-button>span{grid-row:1/3;align-self:center;font-size:22px;text-align:center}
+.mansion-menu-frame .app-menu-button strong{font-size:17px;line-height:1.1}
+.mansion-menu-frame .app-menu-button small{font-size:11px}
+.mansion-menu-frame .app-menu-button:hover,.mansion-menu-frame .app-menu-primary{background:linear-gradient(110deg,#a77f89,#786b80);border-color:#f0d3ca}
+.mansion-road-caption{position:absolute;bottom:13px;left:20px;color:#f0dfd5;font:10px var(--sans);letter-spacing:.16em;text-transform:uppercase;text-shadow:0 2px 5px #34313e}
+.mansion-road-caption span{padding:0 8px;color:#e6c4c1}
+@media(max-width:700px){
+ body.game-app-ready #game{padding:0}
+ body.game-app-ready .game-panel{padding:0}
+ body.game-app-ready .app-home-screen.mansion-road-screen{justify-content:center;align-items:flex-end;padding:12px 12px 36px}
+ .mansion-building{right:-4%;top:5%;width:88%;height:42%;opacity:.85}
+ .mansion-moon{right:17%;top:6%;width:52px}
+ .mansion-distant-hills{bottom:27%;height:32%}
+ .mansion-road-path{left:19%;width:64%;height:42%;bottom:-12%}
+ .mansion-menu-frame{width:min(390px,100%);max-height:78%;padding:7px;transform:none}
+ .mansion-frame-inner{padding:12px 14px}
+ .mansion-menu-frame .app-menu-copy{margin-bottom:10px}
+ .mansion-menu-frame .app-menu-copy h3{font-size:34px;margin:6px 0}
+ .mansion-menu-frame .app-menu-copy p{font-size:12px}
+ .mansion-frame-ornament{margin-bottom:5px;font-size:15px}
+ .mansion-menu-frame .app-menu-button{min-height:53px;padding:7px 10px}
+ .mansion-menu-frame .app-menu-button strong{font-size:15px}
+ .mansion-menu-frame .app-menu-button small{font-size:10px}
+ .mansion-menu-frame .app-menu-buttons{gap:6px}
+ .mansion-road-caption{bottom:8px;left:0;right:0;text-align:center;font-size:8px}
+}
+@media(max-height:650px) and (min-width:701px){
+ .mansion-menu-frame{width:390px}.mansion-menu-frame .app-menu-button{min-height:55px}
+ .mansion-menu-frame .app-menu-copy{margin-bottom:8px}
+ .mansion-menu-frame .app-menu-copy h3{font-size:34px;margin:5px 0}
+ .mansion-frame-ornament{margin-bottom:4px}
+}
