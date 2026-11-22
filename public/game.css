@@ -225,74 +225,108 @@ body.game-app-ready .game-disclaimer{color:#ddc9c5}
 }
 
 
-/* Главная сцена: дорога к особняку */
-body.game-app-ready #game{padding:0;background:#555365}
-body.game-app-ready .game-panel{padding:0;border:0;outline:0;border-radius:0;box-shadow:none;background:#555365;gap:0}
+
+/* Новая архитектура сцен: каждая часть особняка имеет собственную композицию */
+body.game-app-ready #game{padding:0;background:#242b2b;color:#f3eadc}
+body.game-app-ready .game-panel{padding:0;border:0;outline:0;border-radius:0;box-shadow:none;background:#242b2b;gap:0;position:relative}
 body.game-app-ready .game-panel:before,body.game-app-ready .game-panel:after{display:none}
-body.game-app-ready .app-home-screen.mansion-road-screen{
- position:relative;isolation:isolate;flex:1;min-height:0;overflow:hidden;
- display:flex;align-items:center;justify-content:flex-end;
- padding:clamp(18px,4vh,48px) clamp(18px,5vw,72px);
- background:
-  radial-gradient(ellipse at 72% 32%,rgba(248,215,190,.24),transparent 28%),
-  linear-gradient(180deg,#777488 0%,#777184 25%,#656477 55%,#454a58 100%);
-}
-.mansion-night-sky{position:absolute;inset:0;z-index:-5;overflow:hidden;background:linear-gradient(180deg,rgba(205,190,198,.18),transparent 52%)}
-.mansion-moon{position:absolute;right:19%;top:9%;width:clamp(48px,7vw,90px);aspect-ratio:1;border-radius:50%;background:#f0dfc8;box-shadow:0 0 25px 9px rgba(242,220,198,.2),0 0 90px 30px rgba(242,220,198,.12)}
-.mansion-star{position:absolute;color:#f4e2d3;text-shadow:0 0 12px #fff0d6}
-.star-one{top:13%;left:22%;font-size:20px}.star-two{top:27%;right:39%;font-size:14px}.star-three{top:9%;left:48%;font-size:32px}
-.mansion-distant-hills{position:absolute;z-index:-4;left:-8%;right:-8%;bottom:19%;height:40%;background:linear-gradient(160deg,#73777a,#58616a);clip-path:polygon(0 54%,18% 24%,33% 49%,52% 9%,71% 48%,88% 18%,100% 44%,100% 100%,0 100%);opacity:.75}
-.mansion-building{position:absolute;z-index:-2;right:9%;top:14%;width:clamp(260px,42vw,590px);height:53%;filter:drop-shadow(0 15px 18px rgba(36,32,43,.3));opacity:.97}
-.mansion-facade{position:absolute;left:12%;right:12%;bottom:0;height:62%;background:linear-gradient(90deg,#665b62,#8a7371 48%,#665b62);border:5px solid #534b57;border-bottom:0;box-shadow:inset 0 0 0 5px rgba(218,187,168,.18)}
-.mansion-roof{position:absolute;left:7%;right:7%;top:15%;height:32%;background:#4c4857;clip-path:polygon(50% 0,100% 100%,0 100%);filter:drop-shadow(0 5px 2px #332f3b)}
-.mansion-tower{position:absolute;bottom:42%;width:24%;height:52%;background:linear-gradient(90deg,#645963,#907875,#625661);border:4px solid #514957}
-.mansion-tower:before{content:"";position:absolute;left:-12%;right:-12%;top:-17%;height:20%;background:#494553;clip-path:polygon(50% 0,100% 100%,0 100%)}
-.tower-left{left:4%}.tower-right{right:4%}
-.mansion-tower i,.mansion-facade i{position:absolute;display:block;width:13%;height:25%;left:22%;top:25%;border:3px solid #4d4652;border-radius:50% 50% 2px 2px;background:#e9c89b;box-shadow:0 0 13px rgba(248,211,157,.35)}
-.mansion-tower i+ i{left:64%}
-.mansion-facade i{width:10%;height:28%;top:18%;left:13%}.mansion-facade i:nth-child(2){left:37%}.mansion-facade i:nth-child(3){left:61%}.mansion-facade i:nth-child(4){left:78%;top:53%}.mansion-facade i:nth-child(5){left:13%;top:53%}.mansion-facade i:nth-child(6){left:37%;top:53%}
-.mansion-door{position:absolute;bottom:0;left:43%;width:15%;height:34%;background:linear-gradient(90deg,#413943,#80605b);border:4px solid #4b414a;border-bottom:0;border-radius:48% 48% 0 0}
-.mansion-garden{position:absolute;z-index:-1;bottom:17%;left:0;right:0;height:15%;display:flex;justify-content:space-around;align-items:end;color:#87927f;font-size:clamp(25px,4vw,48px);opacity:.8}
-.mansion-road-path{position:absolute;z-index:-1;bottom:-15%;left:30%;width:42%;height:57%;background:linear-gradient(90deg,#7d7779,#aaa0a0 48%,#77747c);clip-path:polygon(45% 0,57% 0,100% 100%,0 100%);filter:drop-shadow(0 -5px 8px rgba(39,38,48,.2));opacity:.9}
-.mansion-menu-frame{position:relative;z-index:2;width:min(430px,43%);max-height:100%;padding:10px;background:linear-gradient(135deg,#604b46,#a18470 20%,#584747 45%,#a58a75 72%,#55433f);border:3px solid #c4a38c;box-shadow:0 16px 42px rgba(32,27,38,.38),inset 0 0 0 2px #493d43,inset 0 0 0 5px #b08b76;transform:rotate(-.5deg)}
-.mansion-frame-inner{position:relative;max-height:100%;overflow:auto;padding:clamp(17px,2.5vh,28px) clamp(16px,2.2vw,27px);background:linear-gradient(145deg,rgba(71,58,66,.96),rgba(58,57,70,.97));border:1px solid #d1ad96;box-shadow:inset 0 0 0 3px rgba(211,174,151,.18)}
-.mansion-frame-ornament{text-align:center;color:#e4c4b9;font-size:19px;letter-spacing:.35em;margin-bottom:9px}
-.mansion-frame-ornament.bottom-ornament{margin:12px 0 0;font-size:23px}
-.mansion-menu-frame .app-menu-copy{text-align:center;margin:0 auto 16px}
-.mansion-menu-frame .app-menu-copy h3{font-size:clamp(31px,4vw,48px);line-height:1.04;margin:10px 0}
-.mansion-menu-frame .app-menu-copy h3 em{display:block;font-size:1.04em}
-.mansion-menu-frame .app-menu-copy p{font-size:14px;line-height:1.45;margin:0 auto}
-.mansion-menu-frame .app-menu-buttons{grid-template-columns:1fr;gap:8px}
-.mansion-menu-frame .app-menu-button{min-height:65px;display:grid;grid-template-columns:35px 1fr;grid-template-rows:auto auto;column-gap:9px;align-content:center;padding:9px 13px;background:linear-gradient(110deg,rgba(127,104,111,.65),rgba(83,78,91,.75));border:1px solid rgba(212,177,166,.65);box-shadow:inset 0 0 0 2px rgba(238,216,200,.05);transform:none}
-.mansion-menu-frame .app-menu-button>span{grid-row:1/3;align-self:center;font-size:22px;text-align:center}
-.mansion-menu-frame .app-menu-button strong{font-size:17px;line-height:1.1}
-.mansion-menu-frame .app-menu-button small{font-size:11px}
-.mansion-menu-frame .app-menu-button:hover,.mansion-menu-frame .app-menu-primary{background:linear-gradient(110deg,#a77f89,#786b80);border-color:#f0d3ca}
-.mansion-road-caption{position:absolute;bottom:13px;left:20px;color:#f0dfd5;font:10px var(--sans);letter-spacing:.16em;text-transform:uppercase;text-shadow:0 2px 5px #34313e}
-.mansion-road-caption span{padding:0 8px;color:#e6c4c1}
+body.game-app-ready .app-nav{position:absolute;z-index:20;top:10px;left:50%;transform:translateX(-50%);width:max-content;max-width:calc(100% - 24px);display:flex;justify-content:center;gap:5px;padding:5px;background:rgba(28,31,31,.76);border:1px solid rgba(224,201,166,.45);backdrop-filter:blur(8px)}
+body.game-app-ready .app-nav button{font:11px var(--sans);letter-spacing:.04em;text-transform:none;color:#eee4d5;background:transparent;border:1px solid transparent;padding:9px 13px;cursor:pointer}
+body.game-app-ready .app-nav button:hover,body.game-app-ready .app-nav button.active{background:#d5c09e;color:#342e2b;border-color:#f1dfbd}
+.game-screen[hidden]{display:none!important}
+.mansion-scene,.play-scene,.end-scene{position:relative;isolation:isolate;flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin}
+.mansion-scene{display:flex;align-items:center;padding:80px clamp(22px,7vw,100px) 34px;background:#4d5551;color:#f5ebdc}
+.scene-content,.scene-copy{position:relative;z-index:3;width:min(660px,100%);padding:24px 28px;background:rgba(38,39,37,.78);border-left:3px solid #c8ae87;box-shadow:0 14px 40px #171b1a66;backdrop-filter:blur(3px)}
+.scene-eyebrow{font:10px var(--sans);letter-spacing:.2em;text-transform:uppercase;color:#d9bd91}
+.scene-content h3,.scene-copy h3{font:clamp(34px,5vw,58px) Georgia,serif;font-weight:400;line-height:1.02;margin:12px 0;color:#f4e8d6}
+.scene-content h3 em,.scene-copy h3 em{font-style:italic;color:#d8bd99}
+.scene-content>p,.scene-copy>p{max-width:500px;color:#d8d0c3;line-height:1.6}
+.road-scene{justify-content:flex-start;background:linear-gradient(90deg,#202a2b99,#202a2b22),linear-gradient(180deg,#747b78 0%,#555f59 45%,#293936 100%)}
+.road-scene:before{content:"";position:absolute;inset:0;z-index:-3;background:radial-gradient(ellipse at 75% 30%,#e7d6b177,transparent 25%),linear-gradient(180deg,transparent 50%,#1e302b 100%)}
+.road-art{position:absolute;z-index:-1;inset:0;overflow:hidden}
+.road-moon{position:absolute;right:21%;top:13%;width:clamp(54px,8vw,100px);aspect-ratio:1;border-radius:50%;background:#e8d8b9;box-shadow:0 0 50px #eadbb455}
+.road-house{position:absolute;right:12%;bottom:28%;width:clamp(230px,36vw,480px);height:43%;background:linear-gradient(90deg,#454747,#71665a,#414443);border:5px solid #353b39;box-shadow:0 0 0 8px #b9a17a33,0 20px 40px #1118}
+.road-house:before{content:"";position:absolute;left:-8%;right:-8%;top:-31%;height:34%;background:#343b39;clip-path:polygon(50% 0,100% 100%,0 100%)}
+.road-house i{position:absolute;top:20%;left:14%;width:13%;height:23%;background:#e9cb91;box-shadow:0 0 15px #e9cb9188;border:5px solid #373c39}
+.road-house i:nth-child(2){left:43%}.road-house i:nth-child(3){left:72%;top:20%}.road-house i:nth-child(4){left:43%;top:57%}
+.road-house b{position:absolute;bottom:0;left:41%;width:19%;height:36%;background:#302f2b;border:5px solid #b39870;border-bottom:0;border-radius:48% 48% 0 0}
+.road-path{position:absolute;bottom:-12%;right:18%;width:40%;height:50%;background:linear-gradient(90deg,#827d6c,#b0a48c,#777466);clip-path:polygon(42% 0,58% 0,100% 100%,0 100%);opacity:.75}
+.road-lantern{position:absolute;right:12%;bottom:13%;font-size:42px;color:#e4c995;text-shadow:0 0 22px #e4c995}
+.scene-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin-top:23px}
+.scene-button{min-height:68px;padding:12px 14px;text-align:left;color:#f1e7d7;background:#454b45;border:1px solid #a99574;cursor:pointer;display:flex;flex-direction:column;justify-content:center;gap:5px}
+.scene-button.primary,.scene-button:hover{background:#78664f;border-color:#e2c99d}
+.scene-button strong{font:17px Georgia,serif}.scene-button small{font:11px var(--sans);color:#d8cdbb}
+.scene-location{position:absolute;bottom:12px;left:20px;font:10px var(--sans);letter-spacing:.15em;text-transform:uppercase;color:#e0d4c2}
+.door-scene{background:linear-gradient(90deg,#282c29 0%,#42453d 55%,#6a6556 100%)}
+.door-visual{position:absolute;left:7%;top:14%;bottom:8%;width:30%;display:flex;justify-content:center;align-items:center}
+.door-panel{width:72%;height:100%;border:12px ridge #8e7958;background:repeating-linear-gradient(90deg,#493a30 0 28px,#5b4737 30px 55px);box-shadow:inset 0 0 0 8px #2e2b26,0 20px 45px #1119;display:grid;place-items:center}
+.door-panel span{font-size:54px;color:#d6bd91}
+.door-scene .scene-content{margin-left:auto;width:min(650px,67%)}
+.hall-scene{background:linear-gradient(90deg,#302b27,#635446 48%,#342e2b)}
+.hall-scene:before{content:"";position:absolute;left:0;right:0;bottom:0;height:40%;background:linear-gradient(175deg,transparent 25%,#211f1d 26%);opacity:.8}
+.hall-stair{position:absolute;right:0;bottom:0;width:38%;height:60%;background:repeating-linear-gradient(0deg,#493d33 0 18px,#9b8060 19px 22px);clip-path:polygon(55% 0,100% 0,100% 100%,0 100%);opacity:.8}
+.hall-gallery{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:24px 0}
+.hall-frame{min-height:155px;padding:14px 10px;text-align:center;background:#352e29;border:8px ridge #9d805d;box-shadow:inset 0 0 0 2px #d0b78c;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:9px}
+.hall-frame span{font-size:28px;color:#d8c09a}.hall-frame strong{font:16px Georgia,serif;color:#f0e4d2}.hall-frame small{font:10px var(--sans);color:#cfc1ac;line-height:1.4}
+.bedroom-scene{align-items:flex-start;background:linear-gradient(115deg,#4d5350,#777063 55%,#3c4542)}
+.bedroom-window{position:absolute;right:9%;top:13%;width:23%;height:43%;border:12px ridge #7b634c;background:linear-gradient(160deg,#283b46,#8a8b80);color:#e9d9b6;text-align:center;font-size:48px;padding-top:24px;box-shadow:0 0 45px #d9c99a33}
+.bedroom-bed{position:absolute;right:2%;bottom:0;width:60%;height:36%;background:#51473f;border:8px solid #8c755b;box-shadow:inset 0 0 0 6px #2d302d}
+.bed-pillow{position:absolute;left:18%;top:10%;width:34%;height:37%;background:#d0c2a8;border-radius:8px}
+.bedroom-content{width:min(630px,67%);margin-top:14px}
+.bedroom-furniture{display:flex;align-items:flex-end;gap:14px;margin:20px 0}
+.player-portrait{width:104px;height:132px;border:9px ridge #a78c65;background:linear-gradient(145deg,#6d7770,#394540);display:flex;flex-direction:column;align-items:center;justify-content:center;color:#e7d3ae;font-size:36px}
+.player-portrait small,.dream-shelf small{font:10px var(--sans);color:#eee1cb}
+.dresser{width:145px;padding:10px;background:#594333;border:5px solid #96754f;color:#f1e4cf;text-align:center}
+.dresser strong{font:17px Georgia,serif}.dresser small{font:10px var(--sans);display:block;margin-top:8px;color:#e5d4b9}
+.drawer{height:13px;margin-top:6px;background:#765a40;border:1px solid #bd9a69}
+.dream-shelf{width:94px;height:84px;background:#4a514a;border:5px solid #9b805e;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#e3c99c;font-size:25px}
+.study-scene{background:linear-gradient(120deg,#313b38,#555447 50%,#2c3431)}
+.study-desk{max-width:480px;margin:22px 0;padding:18px 22px;background:#44372b;border:8px ridge #94734d;display:grid;grid-template-columns:34px 1fr;gap:8px 12px;color:#e9d8bb}
+.study-desk span{grid-row:span 2;font-size:24px;color:#d7bd91}.study-desk strong{font:17px Georgia,serif}.study-desk small{font:11px var(--sans);color:#cfc1ac}
+.play-scene{padding:78px clamp(14px,4vw,54px) 18px;background:linear-gradient(135deg,#353b37,#514d42 52%,#292f2d);color:#f2e7d7;display:flex;flex-direction:column}
+.play-scene .game-phase-title{font:clamp(27px,4vw,42px) Georgia,serif;color:#f2e4d0;margin:9px 0}
+.play-scene .game-story,.play-scene .game-muted,.play-scene .game-hint{color:#ded2bf}
+.play-scene .game-log{flex:1;min-height:75px;max-height:35%;overflow:auto;background:#252b29aa;border:1px solid #87765d;padding:10px 15px}
+.play-scene .game-line{color:#eee2d1;border-color:#a18c6b44}.play-scene .game-line small{color:#cdb78e}.play-scene .game-line strong{color:#f0d5a9}
+.play-scene .game-field label{color:#e5c99a}
+.play-scene .game-field input,.play-scene .game-chat-input{background:#292e2b;border:1px solid #9e8966;color:#f5ead9}
+.game-roster{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:10px;margin:12px 0}
+.game-person{position:relative;min-height:130px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;padding:9px;background:#373a35;border:7px ridge #947c59;color:#f4e7d4;cursor:pointer;text-align:center}
+.game-person .portrait-art{width:54px;height:54px;border:3px solid #c1a779;border-radius:50% 50% 4px 4px;background:linear-gradient(145deg,#879087,#3d4942);display:grid;place-items:center;color:#eee0c5;font:24px Georgia,serif}
+.game-person .person-number{font:9px var(--sans);color:#d6c29f}.game-person strong{font:15px Georgia,serif;font-weight:400}.game-person span:last-child{font:10px var(--sans);color:#d3c7b5}
+.game-person.selected{background:#655743;border-color:#e3c99c}.game-person.dead{opacity:.35}
+.door-roster{grid-template-columns:repeat(auto-fit,minmax(112px,1fr))}
+.door-roster .game-person{min-height:155px;padding-top:15px;background:linear-gradient(180deg,#423c35,#292e2b);border:6px ridge #907653;border-radius:44% 44% 2px 2px}
+.door-roster .portrait-art{width:48px;height:48px;border-radius:50%}
+.dream-note{width:min(540px,92%);margin:16px auto;padding:22px 28px;background:#e4d9bd;color:#4b4337;transform:rotate(-1deg);box-shadow:2px 7px 18px #10171488;border:1px solid #c5b895;position:relative}
+.dream-note:before{content:"";position:absolute;inset:7px;border:1px dashed #a99a7a;pointer-events:none}
+.dream-note small{font:10px var(--sans);letter-spacing:.15em;text-transform:uppercase;color:#8a795e}.dream-note p{font:17px Georgia,serif;line-height:1.5;margin:12px 0 0}
+.game-primary,.game-secondary{padding:11px 18px;border:1px solid #b99c70;background:#7c684e;color:#fff0dc;cursor:pointer}
+.game-secondary{background:#3d4540}.game-actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:12px}
+.game-topline{display:flex;justify-content:space-between;color:#e0c99f;border-bottom:1px solid #a58c68;padding-bottom:8px}
+.end-scene{display:grid;place-items:center;background:linear-gradient(135deg,#303a35,#645646)}
+.end-ornament{font-size:26px;color:#e2c99c}
 @media(max-width:700px){
- body.game-app-ready #game{padding:0}
- body.game-app-ready .game-panel{padding:0}
- body.game-app-ready .app-home-screen.mansion-road-screen{justify-content:center;align-items:flex-end;padding:12px 12px 36px}
- .mansion-building{right:-4%;top:5%;width:88%;height:42%;opacity:.85}
- .mansion-moon{right:17%;top:6%;width:52px}
- .mansion-distant-hills{bottom:27%;height:32%}
- .mansion-road-path{left:19%;width:64%;height:42%;bottom:-12%}
- .mansion-menu-frame{width:min(390px,100%);max-height:78%;padding:7px;transform:none}
- .mansion-frame-inner{padding:12px 14px}
- .mansion-menu-frame .app-menu-copy{margin-bottom:10px}
- .mansion-menu-frame .app-menu-copy h3{font-size:34px;margin:6px 0}
- .mansion-menu-frame .app-menu-copy p{font-size:12px}
- .mansion-frame-ornament{margin-bottom:5px;font-size:15px}
- .mansion-menu-frame .app-menu-button{min-height:53px;padding:7px 10px}
- .mansion-menu-frame .app-menu-button strong{font-size:15px}
- .mansion-menu-frame .app-menu-button small{font-size:10px}
- .mansion-menu-frame .app-menu-buttons{gap:6px}
- .mansion-road-caption{bottom:8px;left:0;right:0;text-align:center;font-size:8px}
+ body.game-app-ready .app-nav{top:5px;max-width:calc(100% - 10px);gap:1px;padding:3px}
+ body.game-app-ready .app-nav button{font-size:9px;padding:8px 7px}
+ .mansion-scene{padding:64px 12px 28px}
+ .scene-content,.scene-copy{padding:16px;width:100%}
+ .road-scene{align-items:flex-end}.road-scene .scene-copy{margin-bottom:5px}
+ .road-house{right:-5%;bottom:42%;width:72%;height:32%;opacity:.8}
+ .road-moon{right:14%;top:12%;width:50px}
+ .road-path{right:6%;width:75%;height:35%}
+ .scene-actions{gap:6px;margin-top:15px}.scene-button{min-height:58px;padding:8px}.scene-button strong{font-size:15px}.scene-button small{font-size:9px}
+ .door-visual{left:2%;top:15%;bottom:50%;width:30%}.door-panel{width:85%;border-width:7px}
+ .door-scene .scene-content{width:100%;margin:0;margin-top:32vh}
+ .hall-gallery{grid-template-columns:1fr;gap:8px}.hall-frame{min-height:92px;flex-direction:row;text-align:left;justify-content:flex-start;padding:8px 12px}.hall-frame span{font-size:22px}.hall-frame small{max-width:150px}
+ .hall-stair{width:25%;opacity:.45}
+ .bedroom-window{right:5%;top:14%;width:34%;height:30%}.bedroom-bed{width:85%;height:24%}
+ .bedroom-content{width:100%;margin-top:0}.bedroom-furniture{gap:6px;flex-wrap:wrap}.player-portrait{width:76px;height:105px}.dresser{width:115px}.dream-shelf{width:78px}
+ .play-scene{padding:66px 10px 12px}.play-scene .game-log{max-height:28%;min-height:60px}
+ .game-roster{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}.game-person{min-height:116px;padding:6px}.door-roster .game-person{min-height:133px}
 }
-@media(max-height:650px) and (min-width:701px){
- .mansion-menu-frame{width:390px}.mansion-menu-frame .app-menu-button{min-height:55px}
- .mansion-menu-frame .app-menu-copy{margin-bottom:8px}
- .mansion-menu-frame .app-menu-copy h3{font-size:34px;margin:5px 0}
- .mansion-frame-ornament{margin-bottom:4px}
+@media(max-height:650px){
+ .mansion-scene{padding-top:62px;padding-bottom:12px}.scene-content,.scene-copy{padding:12px 18px}
+ .scene-content h3,.scene-copy h3{font-size:34px}.scene-actions{margin-top:10px}.scene-button{min-height:52px}
+ .play-scene{padding-top:64px}.play-scene .game-log{max-height:23%}
 }
