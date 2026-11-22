@@ -6,7 +6,6 @@
    <div class="menu-composition">
     <div class="menu-plaque">
      <div class="plaque-ornament">✦ ❦ ✦</div>
-     <h1>Особняк<br>Лубарианийа</h1>
      <nav class="scene-actions" aria-label="Главное меню">
       <button id="menuNewGame" class="scene-button primary"><strong>Новая игра</strong></button>
       <button id="menuContinue" class="scene-button"><strong>Продолжить</strong></button>
