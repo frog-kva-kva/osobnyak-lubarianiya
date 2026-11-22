@@ -1,73 +1,84 @@
 (() => {
  const root=document.querySelector("#game-root"); if(!root)return;
- root.innerHTML=`<section id="game">
- <div class="game-shell">
-  <div class="game-panel">
+ root.innerHTML=\`<section id="game" data-theme="gothic-mansion">
+ <div class="game-shell"><div class="game-panel">
+  <section class="game-screen mansion-scene road-scene app-home-screen" id="menuScreen">
+   <div class="menu-vignette"></div>
+   <div class="menu-composition">
+    <div class="menu-title"><span class="menu-kicker">Старинный особняк</span><h1>Особняк<br>Лубарианийа</h1><span class="title-rule">✦</span></div>
+    <nav class="scene-actions" aria-label="Главное меню">
+     <button id="menuNewGame" class="scene-button primary"><strong>Новая игра</strong></button>
+     <button id="menuContinue" class="scene-button"><strong>Продолжить</strong></button>
+     <button id="menuRoom" class="scene-button"><strong>Моя комната</strong></button>
+     <button id="menuSettings" class="scene-button"><strong>Настройки</strong></button>
+    </nav>
+   </div>
+  </section>
 
-   <section class="game-screen mansion-scene road-scene app-home-screen" id="menuScreen">
-    <div class="scene-copy portrait-frame">
-     <span class="frame-ornament frame-top">✦</span>
-     <h3>Дорога к особняку</h3>
-     <div class="scene-actions">
-      <button id="menuNewGame" class="scene-button primary"><strong>Новая игра</strong></button>
-      <button id="menuContinue" class="scene-button"><strong>Продолжить</strong></button>
-      <button id="menuRoom" class="scene-button"><strong>Моя комната</strong></button>
-      <button id="menuSettings" class="scene-button"><strong>Настройки</strong></button>
+  <section class="game-screen mansion-scene door-scene app-page" id="setupScreen" hidden>
+   <div class="page-shade"></div><div class="page-wrap setup-wrap">
+    <header class="page-heading"><span class="eyebrow">Подготовка к игре</span><h2>Новая игра</h2></header>
+    <div class="setup-layout">
+     <div class="theme-column">
+      <span class="section-label">Оформление игры</span>
+      <button class="theme-choice is-selected" id="themeGothic" type="button" aria-pressed="true">
+       <span class="theme-art"></span><span class="theme-copy"><strong>Готический особняк</strong><small>Тёмные залы, старинные портреты и тайны за закрытыми дверями</small></span><span class="theme-check">✓</span>
+      </button>
      </div>
-     <span class="frame-ornament frame-bottom">❦</span>
-    </div>
-   </section>
-   <section class="game-screen mansion-scene door-scene app-placeholder-screen" id="setupScreen" hidden>
-    <div class="scene-content page-composition">
-     <h3>Дверь особняка</h3>
-     <div class="setup-layout">
-      <div class="door-illustration" role="img" aria-label="Тяжёлая резная дверь готического особняка"></div>
-      <div class="setup-form">
-       <div class="game-form-grid">
-        <div class="game-field"><label for="playerName">Имя игрока</label><input id="playerName" maxlength="24" value="Хозяйка"></div>
-        <div class="game-field"><label for="playerCount">Количество игроков</label><div class="game-range-line"><span>Участники</span><strong id="countValue">13</strong></div><input id="playerCount" type="range" min="10" max="20" value="13"></div>
-       </div>
-       <div class="game-field"><label>Набор ролей</label><div id="rolePreview" class="game-role-custom"></div></div>
-       <div class="game-actions"><button class="game-primary" id="startGame">Начать игру</button><button class="game-secondary" data-app-screen="menuScreen">Назад</button></div>
-       <p class="game-error" id="setupError" role="alert"></p>
+     <div class="setup-form">
+      <div class="game-form-grid">
+       <div class="game-field"><label for="playerName">Имя игрока</label><input id="playerName" maxlength="24" value="Хозяйка"></div>
+       <div class="game-field"><label for="playerCount">Количество участников</label><div class="game-range-line"><strong id="countValue">13</strong><span>человек</span></div><input id="playerCount" type="range" min="10" max="20" value="13"></div>
       </div>
+      <div class="game-field roles-field"><label>Роли в партии</label><div id="rolePreview" class="game-role-custom"></div></div>
+      <div class="game-actions"><button class="game-primary" id="startGame">Начать игру</button><button class="game-secondary" data-app-screen="menuScreen">Назад</button></div>
+      <p class="game-error" id="setupError" role="alert"></p>
      </div>
     </div>
-   </section>
-   <section class="game-screen mansion-scene hall-scene app-placeholder-screen" id="continueScreen" hidden>
-    <div class="scene-content page-composition hall-composition">
-     <span class="scene-eyebrow">Холл особняка</span><h3>Холл особняка</h3>
-     <div class="hall-gallery">
-      <div class="hall-frame"><span>Ⅰ</span><strong>Сохранённые партии</strong><small>Здесь будут сохранённые игры</small></div>
-      <div class="hall-frame"><span>Ⅱ</span><strong>Прошлые игры</strong><small>Здесь появится история партий</small></div>
-     </div>
-     <div class="game-actions"><button class="game-secondary" data-app-screen="menuScreen">Назад</button></div>
+   </div>
+  </section>
+
+  <section class="game-screen mansion-scene hall-scene app-page" id="continueScreen" hidden>
+   <div class="page-shade"></div><div class="page-wrap">
+    <header class="page-heading"><span class="eyebrow">Архив особняка</span><h2>Продолжить</h2></header>
+    <div class="hall-gallery">
+     <article class="hall-frame"><span class="frame-number">I</span><h3>Сохранённые партии</h3><p>Сохранённых партий пока нет.</p></article>
+     <article class="hall-frame"><span class="frame-number">II</span><h3>Прошлые игры</h3><p>Здесь будут отображаться завершённые партии.</p></article>
     </div>
-   </section>
-   <section class="game-screen mansion-scene bedroom-scene app-placeholder-screen" id="roomScreen" hidden>
-    <div class="scene-content page-composition bedroom-composition">
-     <span class="scene-eyebrow">Моя комната</span><h3>Моя комната</h3>
-     <div class="bedroom-interior">
-      <div class="bedroom-bed"><div class="bed-pillow"></div><div class="bed-cover"></div></div>
-      <div class="bedroom-dresser"><strong>Статистика игр</strong><div class="dresser-drawer"></div><div class="dresser-drawer"></div><div class="dresser-drawer"></div><span>Сыграно партий: 0</span></div>
-      <div class="bedroom-portrait"><span>♙</span><small>Портрет игрока</small></div>
-     </div>
-     <div class="room-collection-wrap"><h4>Находки из сновидений</h4><div id="roomCollection" class="room-collection"></div></div>
-     <div class="game-actions"><button class="game-secondary" data-app-screen="menuScreen">Назад</button></div>
+    <div class="game-actions"><button class="game-secondary" data-app-screen="menuScreen">Назад</button></div>
+   </div>
+  </section>
+
+  <section class="game-screen mansion-scene bedroom-scene app-page" id="roomScreen" hidden>
+   <div class="page-shade"></div><div class="page-wrap room-wrap">
+    <header class="page-heading"><span class="eyebrow">Личные покои</span><h2>Моя комната</h2></header>
+    <div class="bedroom-interior">
+     <div class="bedroom-bed"><span class="bed-canopy"></span><span class="bed-pillow"></span><span class="bed-cover"></span></div>
+     <div class="bedroom-dresser"><h3>Мои записи</h3><div class="dresser-drawer"></div><div class="dresser-drawer"></div><p>Сыграно партий: 0</p></div>
+     <div class="bedroom-portrait"><span>♙</span><small>Портрет хозяйки</small></div>
     </div>
-   </section>
-   <section class="game-screen mansion-scene study-scene app-placeholder-screen" id="settingsScreen" hidden>
-    <div class="scene-content page-composition settings-composition">
-     <span class="scene-eyebrow">Настройки</span><h3>Настройки особняка</h3>
-     <div class="settings-ledger"><div><span>♫</span><strong>Звук и музыка</strong><small>Настройки звука появятся здесь</small></div><div><span>❖</span><strong>Оформление</strong><small>Настройки внешнего вида появятся здесь</small></div></div>
-     <div class="game-actions"><button class="game-secondary" data-app-screen="menuScreen">Назад</button></div>
+    <section class="room-collection-wrap"><h3>То, что пришло из снов</h3><div id="roomCollection" class="room-collection"></div></section>
+    <div class="game-actions"><button class="game-secondary" data-app-screen="menuScreen">Назад</button></div>
+   </div>
+  </section>
+
+  <section class="game-screen mansion-scene study-scene app-page" id="settingsScreen" hidden>
+   <div class="page-shade"></div><div class="page-wrap settings-wrap">
+    <header class="page-heading"><span class="eyebrow">Параметры</span><h2>Настройки</h2></header>
+    <div class="settings-ledger">
+     <label class="setting-row"><span class="setting-symbol">♫</span><span><strong>Звуковое сопровождение</strong><small>Музыка и звуки игры</small></span><input id="soundSetting" type="checkbox" checked></label>
+     <div class="setting-row"><span class="setting-symbol">✦</span><span><strong>Оформление</strong><small>Сейчас выбрано: готический особняк</small></span><span class="setting-current">Готика</span></div>
     </div>
-   </section>
-   <section class="game-screen play-scene" id="playScreen" hidden><div class="game-topline"><span id="roundLabel"></span><span id="aliveLabel"></span></div><h3 class="game-phase-title" id="phaseTitle"></h3><p class="game-story" id="phaseStory"></p><div class="game-role-reveal" id="roleReveal" hidden></div><div class="game-log" id="gameLog" aria-live="polite"></div><div id="actionArea"></div><div class="game-actions" id="phaseActions"></div></section>
-   <section class="game-screen end-scene" id="endScreen" hidden><div class="game-result"><div class="end-ornament">✧ ❦ ✧</div><h3 id="endTitle"></h3><p id="endText"></p><div class="game-actions" style="justify-content:center"><button class="game-primary" id="newGame">Сыграть ещё раз</button><button class="game-secondary" id="showRoles">Посмотреть роли</button></div><div id="finalRoster" class="game-roster" hidden></div></div></section>
-  </div>
- </div>
- </section>`;
+    <div class="game-actions"><button class="game-secondary" data-app-screen="menuScreen">Назад</button></div>
+   </div>
+  </section>
+
+  <section class="game-screen play-scene" id="playScreen" hidden>
+   <div class="play-backdrop"></div><header class="game-topline"><span id="roundLabel"></span><span id="aliveLabel"></span></header>
+   <div class="play-content"><h2 class="game-phase-title" id="phaseTitle"></h2><p class="game-story" id="phaseStory"></p><div class="game-role-reveal" id="roleReveal" hidden></div><div class="game-log" id="gameLog" aria-live="polite"></div><div id="actionArea"></div><div class="game-actions" id="phaseActions"></div></div>
+  </section>
+  <section class="game-screen end-scene" id="endScreen" hidden><div class="game-result"><span class="eyebrow">Конец истории</span><div class="end-ornament">✧ ❦ ✧</div><h2 id="endTitle"></h2><p id="endText"></p><div class="game-actions" style="justify-content:center"><button class="game-primary" id="newGame">Сыграть ещё раз</button><button class="game-secondary" id="showRoles">Посмотреть роли</button></div><div id="finalRoster" class="game-roster" hidden></div></div></section>
+ </div></div></section>\`;
 
  document.body.classList.add("game-app-ready");
  const $=s=>root.querySelector(s);
@@ -113,6 +124,13 @@ const renderRoomCollection=()=>{const box=$("#roomCollection");if(!box)return;bo
  const mafia=()=>alive().filter(p=>p.role==="assassin");
  const killers=()=>alive().filter(p=>["assassin","maniac"].includes(p.role));
  const screenIds=["menuScreen","continueScreen","roomScreen","settingsScreen","setupScreen","playScreen","endScreen"];
+ const themeKey="lubarianiya-theme";
+ const activeTheme=localStorage.getItem(themeKey)==="gothic-mansion"?"gothic-mansion":"gothic-mansion";
+ $("#game").dataset.theme=activeTheme;
+ $("#themeGothic").onclick=()=>{localStorage.setItem(themeKey,"gothic-mansion");$("#themeGothic").classList.add("is-selected");$("#themeGothic").setAttribute("aria-pressed","true");};
+ const soundKey="lubarianiya-sound";
+ const soundSetting=$("#soundSetting");
+ if(soundSetting){soundSetting.checked=localStorage.getItem(soundKey)!=="off";soundSetting.addEventListener("change",()=>localStorage.setItem(soundKey,soundSetting.checked?"on":"off"));}
  const show=id=>{screenIds.forEach(x=>$("#"+x).hidden=x!==id);};
  root.querySelectorAll("[data-app-screen]").forEach(b=>b.addEventListener("click",()=>show(b.dataset.appScreen)));
  $("#menuNewGame").onclick=()=>show("setupScreen");$("#menuContinue").onclick=()=>show("continueScreen");$("#menuRoom").onclick=()=>{renderRoomCollection();show("roomScreen");};$("#menuSettings").onclick=()=>show("settingsScreen");
