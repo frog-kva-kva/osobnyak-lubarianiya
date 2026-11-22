@@ -1,777 +1,164 @@
-/* Интерфейс игры: сказочная усадьба, резное дерево и небесные мотивы */
-#game{scroll-margin-top:88px;padding:58px 0 88px;background:radial-gradient(ellipse at 50% 10%,#4b5268 0%,#30364b 45%,#202638 100%);border-block:1px solid rgba(220,205,190,.3);color:#eee6dc}
-.game-shell{width:min(1120px,calc(100% - 28px));margin:auto}
-.game-heading{text-align:center;margin-bottom:26px}
-.game-heading .section-kicker{justify-content:center;color:#d9c9b9}
-.game-heading h2{font-size:clamp(38px,6vw,62px);font-weight:500;line-height:1;margin:12px 0;color:#f1e6d9}
-.game-heading h2 em{color:#d6b8c1}
-.game-heading p{color:#d0c9c6;max-width:620px;margin:0 auto}
-.game-panel{max-width:940px;margin:auto;padding:clamp(22px,4vw,42px);position:relative;background:linear-gradient(135deg,#493d3d,#352f3c 48%,#303849);border:12px ridge #725d54;outline:1px solid #c0a18c;box-shadow:0 18px 55px #11182799,inset 0 0 0 2px #a98a75,inset 0 0 0 8px #302c37}
-.game-panel:before,.game-panel:after{content:"✦  ☾  ✧";position:absolute;color:#d4b9aa;letter-spacing:.5em;font-size:15px;pointer-events:none}
-.game-panel:before{top:5px;left:16px}.game-panel:after{right:16px;bottom:4px}
-.game-screen[hidden]{display:none!important}
-.game-screen h3{font-size:29px;font-weight:500;margin:0 0 8px;color:#f0e4d8}
-.game-muted{color:#d0c5c2;font-size:15px}
-.game-form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin:24px 0}
-.game-field label{display:block;color:#dfc4c5;font:10px var(--sans);letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px}
-.game-field input,.game-chat-input{width:100%;background:#242b3b;border:1px solid #98817e;color:#f5e9df;padding:12px 13px;border-radius:3px;font:16px var(--serif);min-height:46px}
-.game-field input[type=range]{padding:0;accent-color:#c7aeb2}
-.game-range-line{display:flex;justify-content:space-between;color:#eee0d4;font-size:17px}
-.game-role-options{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
-.game-choice{border:1px solid #98817e;background:#3a3543;color:#e9ded8;padding:10px 14px;cursor:pointer;font:11px var(--sans);border-radius:2px}
-.game-choice.active{background:#c9b2b4;color:#302c38;border-color:#e8d5cf}
-.game-role-custom{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:16px}
-.game-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}
-.game-primary,.game-secondary{padding:12px 18px;min-height:46px;cursor:pointer;font:10px var(--sans);letter-spacing:.08em;text-transform:uppercase;border-radius:2px}
-.game-primary{background:#cbb4b2;border:1px solid #ead5cc;color:#292b38}.game-primary:hover{background:#e4cfd0}
-.game-secondary{background:#343747;border:1px solid #b49a91;color:#f0e5dc}.game-secondary:hover{border-color:#e1c4c5;color:#f2d8d8}
-.game-error{color:#f0b4b4;font-size:14px;margin:12px 0 0;min-height:20px}
-.game-topline{display:flex;justify-content:space-between;gap:12px;align-items:center;border-bottom:1px solid #9b8582;padding-bottom:12px;margin-bottom:20px;color:#dfc8c3;font:11px var(--sans);letter-spacing:.08em}
-.game-phase-title{font-size:34px!important}
-.game-story{color:#e0d5d1;font-size:17px;max-width:720px}
-.game-role-reveal{padding:12px 16px;margin:16px 0;background:#55444c;border:1px solid #b99a9c;color:#f3dfd9}
-.game-log{max-height:330px;overflow:auto;padding:14px 16px;background:#282d3b99;border:1px solid #877674;margin:18px 0}
-.game-line{padding:9px 0;border-bottom:1px solid #82777955;color:#e7ddd8;font-size:15px}.game-line:last-child{border-bottom:0}.game-line small{display:block;color:#c5aeb2;font:9px var(--sans);letter-spacing:.1em;text-transform:uppercase}.game-line strong{color:#f0d9d4}.user-line{background:#51434b66;margin-inline:-8px;padding-inline:8px}
-.game-hint{color:#e1c9c7;font-size:14px;margin:18px 0 8px}
-.game-chat{display:flex;gap:8px}.game-chat-input{flex:1;min-width:0}
-.game-roster{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:10px;margin-top:14px}
-.game-person{display:flex;flex-direction:column;align-items:flex-start;text-align:left;gap:5px;padding:13px;background:#373746;border:1px solid #92807d;color:#eee3dc;cursor:pointer;min-height:78px;border-radius:2px}
-.game-person strong{font-size:17px;font-weight:500}.game-person span:last-child{font-size:12px;color:#c8b8b6}.game-person.selected{border:2px solid #d8b9bd;background:#59464f}.game-person.dead{opacity:.42;cursor:not-allowed}
-.person-number{font:9px var(--sans);color:#c8aeb2;letter-spacing:.1em}
-.game-disclaimer{color:#c3b7b6;font-size:12px;margin-top:18px}
-.game-result{text-align:center;padding:24px 0}.game-result h3{font-size:38px}.game-result>p{color:#d6c9c6}
-@media(max-width:620px){#game{padding:42px 0 60px}.game-panel{padding:26px 16px;border-width:8px}.game-form-grid{grid-template-columns:1fr}.game-role-custom{grid-template-columns:1fr}.game-chat{flex-direction:column}.game-heading p{font-size:15px}.game-person{min-height:72px}}
-
-
-/* Полноэкранная оболочка приложения: переходы выполняются кнопками, не прокруткой страницы */
-body.game-app-ready,body.game-app-ready html{width:100%;height:100%;min-height:100%;overflow:hidden!important;overscroll-behavior:none}
-body.game-app-ready{position:fixed;inset:0}
-body.game-app-ready .site-header,body.game-app-ready #home>.hero,body.game-app-ready #home>.intro,body.game-app-ready #home>.gallery-section,body.game-app-ready #home>.cipher-section,body.game-app-ready #home>.personalize,body.game-app-ready .site-footer{display:none!important}
-body.game-app-ready #home{height:100%;min-height:0}
-body.game-app-ready #game-root{position:fixed;inset:0;z-index:10;min-width:0;min-height:0}
-body.game-app-ready #game{position:absolute;inset:0;display:flex;min-height:0;height:100%;overflow:hidden;padding:14px;background:radial-gradient(ellipse at 50% 0%,#55596c 0%,#34394d 48%,#222a3b 100%);border:0}
-.game-shell{width:100%;max-width:none;height:100%;min-height:0;display:flex;flex-direction:column;gap:10px}
-.game-heading{display:none}
-.game-panel{width:100%;max-width:none;flex:1;min-height:0;overflow:hidden;display:flex;flex-direction:column;gap:10px;padding:clamp(14px,2.5vh,28px) clamp(16px,3vw,38px);border-width:10px}
-.app-nav{display:flex;justify-content:center;align-items:center;gap:8px;flex-wrap:wrap;flex:0 0 auto;padding:0 0 10px;border-bottom:1px solid #b49a914d}
-.app-nav button{background:transparent;border:1px solid transparent;color:#e9ded8;padding:9px 14px;cursor:pointer;font:10px var(--sans);letter-spacing:.07em;text-transform:uppercase}
-.app-nav button:hover,.app-nav button.active{background:#c9b2b4;color:#302c38;border-color:#e8d5cf}
-.game-screen[hidden]{display:none!important}
-.game-screen{min-height:0;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:#b49a91 #343747}
-.app-home-screen{flex:1;display:grid;grid-template-columns:minmax(0,1fr) minmax(300px,.9fr);align-items:center;gap:clamp(22px,6vw,90px);padding:clamp(10px,3vh,38px) clamp(4px,4vw,54px)}
-.app-menu-copy{text-align:left;max-width:520px}
-.app-eyebrow,.app-page-heading>span{font:10px var(--sans);letter-spacing:.2em;text-transform:uppercase;color:#d6b8c1}
-.app-menu-copy h3{font-size:clamp(44px,7vw,86px);line-height:.94;margin:18px 0;color:#f1e6d9}
-.app-menu-copy h3 em{font-family:'Marck Script',cursive;color:#d6b8c1;font-weight:400}
-.app-menu-copy p,.app-page-heading p{color:#d0c9c6;font-size:clamp(15px,1.7vw,19px);max-width:440px}
-.app-menu-buttons{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-.app-menu-button{min-height:125px;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:5px;padding:17px;background:#373746;border:1px solid #92807d;color:#eee3dc;text-align:left;cursor:pointer;transition:background .2s,border-color .2s,transform .2s}
-.app-menu-button:hover,.app-menu-primary{background:#59464f;border-color:#d8b9bd}
-.app-menu-button:hover{transform:translateY(-2px)}
-.app-menu-button>span{font-size:22px;color:#d8b9bd}
-.app-menu-button strong{font-size:19px;font-weight:500}
-.app-menu-button small{font-size:12px;color:#c8b8b6;line-height:1.35}
-.app-placeholder-screen{flex:1;padding:clamp(10px,3vh,36px) clamp(4px,4vw,54px)}
-.app-page-heading{text-align:center;margin:8px auto 26px}
-.app-page-heading h3{font-size:clamp(36px,5vw,58px);margin:10px 0;color:#f0e4d8}
-.app-empty-state{max-width:620px;margin:24px auto;padding:28px;text-align:center;background:#282d3b99;border:1px solid #877674;color:#eee3dc;line-height:1.8}
-.app-empty-state small{color:#c8b8b6}
-.app-room-preview{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;max-width:760px;margin:35px auto}
-.room-object{min-height:140px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;background:#373746;border:1px solid #92807d;color:#d8b9bd;font-size:36px}
-.room-object small{font:12px var(--sans);color:#eee3dc}
-#setupScreen,#playScreen,#endScreen{flex:1}
-#playScreen{display:flex;flex-direction:column;overflow:hidden}
-#playScreen .game-log{flex:1;min-height:90px;max-height:none}
-#playScreen #actionArea{flex:0 1 auto;max-height:42%;overflow-y:auto;overscroll-behavior:contain}
-#playScreen .game-roster{max-height:190px;overflow-y:auto;grid-template-columns:repeat(auto-fit,minmax(125px,1fr))}
-.game-form-grid{margin:14px 0}
-.game-log{scrollbar-width:thin}
-@media(max-width:700px){
- #game{padding:7px}
- .game-panel{padding:12px 10px;border-width:7px;gap:7px}
- .app-nav{justify-content:space-around;gap:2px;padding-bottom:6px}
- .app-nav button{font-size:9px;padding:8px 7px;letter-spacing:.02em}
- .app-home-screen{grid-template-columns:1fr;align-content:center;gap:18px;padding:10px 5px}
- .app-menu-copy{text-align:center;margin:auto}
- .app-menu-copy h3{font-size:clamp(42px,12vw,64px);margin:9px 0}
- .app-menu-copy p{margin:0 auto;font-size:14px}
- .app-menu-buttons{gap:8px}
- .app-menu-button{min-height:98px;padding:11px}
- .app-menu-button strong{font-size:16px}
- .app-menu-button small{font-size:10px}
- .app-menu-button>span{font-size:18px}
- .app-placeholder-screen{padding:8px 4px}
- .app-room-preview{gap:6px;margin:20px auto}
- .room-object{min-height:100px;font-size:27px}
- .room-object small{font-size:9px}
- #playScreen #actionArea{max-height:45%}
- #playScreen .game-roster{max-height:145px;grid-template-columns:repeat(2,minmax(0,1fr))}
- .game-form-grid{grid-template-columns:1fr;gap:10px}
- .game-role-custom{grid-template-columns:repeat(3,minmax(0,1fr))}
- .game-field input,.game-chat-input{min-height:40px;padding:9px}
- .game-actions{margin-top:12px}
- .game-phase-title{font-size:27px!important}
- .game-story{font-size:14px;margin-bottom:8px}
- .game-log{padding:8px 10px;margin:8px 0}
- .game-line{font-size:13px;padding:6px 0}
-}
-@media(max-height:650px){
- #game{padding:5px}
- .game-shell{gap:5px}
- .game-panel{padding:9px 12px}
- .app-home-screen{padding-top:4px;padding-bottom:4px}
- .app-menu-button{min-height:82px}
- .app-menu-copy h3{font-size:42px}
- .app-menu-copy p{font-size:14px}
- .game-role-reveal{margin:7px 0;padding:8px 10px}
- .game-log{margin:8px 0}
-}
-
-
-/* Новая палитра Особняка: лунная лаванда, пыльная роза, шалфей и тёплое дерево */
-body.game-app-ready #game{
-  background:
-    radial-gradient(ellipse at 18% 12%,rgba(225,205,210,.55),transparent 36%),
-    radial-gradient(ellipse at 82% 88%,rgba(156,165,151,.28),transparent 42%),
-    linear-gradient(145deg,#777383 0%,#5d5b6d 48%,#484957 100%);
-  color:#f4e9df;
-}
-body.game-app-ready .game-panel{
-  background:
-    linear-gradient(135deg,rgba(119,91,78,.96),rgba(83,66,65,.98) 42%,rgba(69,64,76,.98)),
-    repeating-linear-gradient(0deg,transparent 0 9px,rgba(255,255,255,.018) 10px 11px);
-  border:10px ridge #947768;
-  outline:1px solid #d4b7a4;
-  box-shadow:0 22px 70px rgba(28,25,36,.42),inset 0 0 0 2px #c2a18d,inset 0 0 0 8px rgba(45,39,48,.55);
-}
-body.game-app-ready .game-panel:before,
-body.game-app-ready .game-panel:after{color:#e5c8bb;text-shadow:0 1px 5px #30242a}
-body.game-app-ready .app-nav{border-bottom:1px solid rgba(229,200,187,.38)}
-body.game-app-ready .app-nav button{
-  color:#f1e3d9;border:1px solid rgba(224,197,184,.24);
-  background:rgba(48,42,53,.22);border-radius:3px;
-  font:500 11px var(--sans);letter-spacing:.045em;
-  transition:background .18s,border-color .18s,color .18s;
-}
-body.game-app-ready .app-nav button:hover,
-body.game-app-ready .app-nav button.active{
-  color:#443840;background:#e1c2c2;border-color:#f0d9d1;
-}
-body.game-app-ready .app-eyebrow,
-body.game-app-ready .app-page-heading>span{color:#e9c5c9}
-body.game-app-ready .app-menu-copy h3,
-body.game-app-ready .app-page-heading h3,
-body.game-app-ready .game-screen h3{color:#f7e9dc}
-body.game-app-ready .app-menu-copy h3 em{color:#e8c2cb}
-body.game-app-ready .app-menu-copy p,
-body.game-app-ready .app-page-heading p{color:#e1d2ce}
-body.game-app-ready .app-menu-button{
-  background:linear-gradient(145deg,rgba(105,91,103,.94),rgba(77,75,88,.96));
-  border:1px solid #b49a9a;border-radius:4px;color:#f4e9df;
-  box-shadow:0 5px 0 rgba(40,34,42,.28),inset 0 0 0 2px rgba(235,213,202,.08);
-}
-body.game-app-ready .app-menu-button:hover,
-body.game-app-ready .app-menu-primary{
-  background:linear-gradient(145deg,#b78e9b,#927b8d);
-  border-color:#f0d1d1;color:#fff4e9;
-}
-body.game-app-ready .app-menu-button>span{color:#f1cbd0}
-body.game-app-ready .app-menu-button small{color:#e6d4d2}
-body.game-app-ready .app-empty-state{
-  background:rgba(54,49,59,.48);border:1px solid #b89a98;color:#f3e7df;
-  box-shadow:inset 0 0 25px rgba(28,24,34,.18);border-radius:4px;
-}
-body.game-app-ready .app-empty-state small{color:#ddc7c4}
-body.game-app-ready .room-object{
-  background:linear-gradient(145deg,#716775,#555966);border:1px solid #bda2a0;
-  color:#efcbd0;border-radius:4px;box-shadow:inset 0 0 0 3px rgba(238,215,205,.08);
-}
-body.game-app-ready .room-object small{color:#f4e9df}
-body.game-app-ready .game-field label{color:#edcbd0}
-body.game-app-ready .game-field input,
-body.game-app-ready .game-chat-input{
-  background:#383642;border:1px solid #b69a99;color:#fff0e5;border-radius:3px;
-}
-body.game-app-ready .game-choice,
-body.game-app-ready .game-secondary{
-  background:#514b5a;border:1px solid #b89b9b;color:#f5e8df;border-radius:3px;
-}
-body.game-app-ready .game-choice.active,
-body.game-app-ready .game-primary{
-  background:#dfbec2;border:1px solid #f2d8d4;color:#453841;border-radius:3px;
-}
-body.game-app-ready .game-person{
-  background:linear-gradient(145deg,#615968,#4c4c5b);border:1px solid #a99497;
-  color:#f5e9df;border-radius:4px;
-}
-body.game-app-ready .game-person span:last-child,
-body.game-app-ready .person-number{color:#e2c5c8}
-body.game-app-ready .game-person.selected{background:#876b79;border:2px solid #edcbd0}
-body.game-app-ready .game-topline{color:#e8cbd0;border-color:#b99a98}
-body.game-app-ready .game-story,
-body.game-app-ready .game-muted,
-body.game-app-ready .game-hint{color:#eadbd5}
-body.game-app-ready .game-log{background:rgba(45,43,53,.58);border:1px solid #a88d8d}
-body.game-app-ready .game-line{color:#f0e4dc;border-color:rgba(220,194,187,.2)}
-body.game-app-ready .game-line small{color:#e0bec4}
-body.game-app-ready .game-line strong{color:#f4d9d4}
-body.game-app-ready .game-role-reveal{background:#745a68;border-color:#d6b0b6;color:#fff0e7}
-body.game-app-ready .game-error{color:#ffd0ca}
-body.game-app-ready .game-disclaimer{color:#ddc9c5}
-@media(max-width:700px){
-  body.game-app-ready #game{background:linear-gradient(150deg,#777383,#4c4b5a)}
-  body.game-app-ready .game-panel{border-width:7px}
-  body.game-app-ready .app-nav button{font-size:9px}
-}
-
-
-
-
-/* Упрощение главного экрана по макету пользователя */
-body.game-app-ready .app-nav{display:none!important}
-.road-scene{align-items:center;justify-content:center;padding:20px;overflow:hidden}
-.road-scene .scene-copy{width:min(410px,90%);margin:0 auto;padding:28px 30px;text-align:center;background:rgba(35,37,35,.82);border:1px solid #9e8b6b;box-shadow:0 12px 36px #1119}
-.road-scene .scene-copy h3{font:clamp(30px,4.5vw,46px) Georgia,serif;line-height:1.1;margin:0 0 22px;color:#f2e6d2}
-.road-scene .scene-actions{grid-template-columns:1fr 1fr;gap:10px;margin:0}
-.road-scene .scene-button{min-height:64px;align-items:center;text-align:center;background:rgba(83,73,59,.94);border:1px solid #b6a17b;padding:10px}
-.road-scene .scene-button strong{font:17px Georgia,serif}
-.road-scene .scene-button small{display:none}
-.road-scene .scene-button.primary,.road-scene .scene-button:hover{background:#8a7453;border-color:#e5d0a7}
-.road-scene .road-house{right:11%;bottom:24%;width:clamp(250px,38vw,500px);height:45%;opacity:.8}
-.road-scene .road-moon{right:22%;top:10%}
-.road-scene .road-path{right:20%;bottom:-15%;height:45%}
-@media(max-width:700px){
- .road-scene{padding:14px}
- .road-scene .scene-copy{width:min(360px,94%);padding:22px 18px}
- .road-scene .scene-copy h3{font-size:34px;margin-bottom:18px}
- .road-scene .scene-actions{gap:8px}
- .road-scene .scene-button{min-height:58px}
- .road-scene .road-house{right:-6%;bottom:40%;width:78%;height:33%}
- .road-scene .road-moon{right:15%;top:10%;width:50px}
- .road-scene .road-path{right:5%;width:76%;height:35%}
-}
-@media(max-height:650px){
- .road-scene .scene-copy{padding:16px 20px}
- .road-scene .scene-copy h3{font-size:32px;margin-bottom:12px}
- .road-scene .scene-button{min-height:50px}
-}
-
-
-/* Gothic illustrated entrance — replaces the temporary CSS house shapes */
-.road-scene{
- position:relative; isolation:isolate; min-height:min(760px, calc(100svh - 34px));
- display:flex; align-items:center; justify-content:center; overflow:hidden;
- padding:clamp(20px,4vw,58px);
- background:#080b12 url("/images/mansion-road.svg") center center/cover no-repeat;
-}
-.road-scene::before{
- content:""; position:absolute; inset:0; z-index:-1;
- background:linear-gradient(90deg,rgba(5,7,12,.22),rgba(5,7,12,.12) 42%,rgba(5,7,12,.25)),
- linear-gradient(0deg,rgba(4,6,10,.5),transparent 42%,rgba(4,6,10,.18));
-}
-.road-scene .scene-copy{
- width:min(460px,92%); margin:0 auto; padding:clamp(22px,3vw,38px);
- text-align:center; position:relative; z-index:1;
- background:linear-gradient(145deg,rgba(15,17,24,.9),rgba(26,17,22,.88));
- border:1px solid rgba(174,139,126,.72);
- outline:1px solid rgba(174,139,126,.25); outline-offset:6px;
- box-shadow:0 22px 70px rgba(0,0,0,.72), inset 0 0 36px rgba(95,42,49,.14);
- backdrop-filter:blur(5px);
-}
-.road-scene .scene-copy h3{
- margin:0 0 24px; color:#e4d7cc;
- font:clamp(30px,4vw,46px)/1.12 Georgia,"Times New Roman",serif;
- font-weight:400; letter-spacing:.035em; text-shadow:0 2px 12px #000;
-}
-.road-scene .scene-actions{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:0}
-.road-scene .scene-button{
- min-height:62px; padding:12px 10px; border:1px solid #80615e;
- border-radius:2px; color:#e6d8ce;
- background:linear-gradient(180deg,rgba(65,37,43,.96),rgba(28,19,25,.98));
- box-shadow:inset 0 0 0 2px rgba(0,0,0,.25),0 5px 14px #0008;
- transition:background .18s,border-color .18s,transform .18s;
-}
-.road-scene .scene-button strong{font:17px Georgia,"Times New Roman",serif;letter-spacing:.02em}
-.road-scene .scene-button:hover,.road-scene .scene-button.primary{
- background:linear-gradient(180deg,#70434a,#3b242c);border-color:#c19a83;color:#fff0e3;
-}
-.road-scene .scene-button:hover{transform:translateY(-2px)}
-.road-scene .scene-button small{display:none}
-@media(max-width:700px){
- .road-scene{min-height:calc(100svh - 20px);background-position:56% center;padding:16px}
- .road-scene .scene-copy{width:min(390px,94%);padding:22px 16px}
- .road-scene .scene-copy h3{font-size:32px;margin-bottom:20px}
- .road-scene .scene-actions{gap:9px}
- .road-scene .scene-button{min-height:56px}
- .road-scene .scene-button strong{font-size:15px}
-}
-
-
-/* Полный редизайн комнат и главной рамы */
-body.game-app-ready #game{
- background:
-  radial-gradient(ellipse at 50% 48%,rgba(62,48,48,.25),transparent 52%),
-  linear-gradient(115deg,#080a0e 0%,#12151b 48%,#090b10 100%);
-}
-body.game-app-ready .game-panel{
- background:#111319;
- border:0;
- outline:0;
- box-shadow:none;
- padding:clamp(12px,2vw,26px);
-}
-body.game-app-ready .game-panel:before,
-body.game-app-ready .game-panel:after{display:none}
-body.game-app-ready .game-screen{border:0}
-.road-scene{
- position:relative;isolation:isolate;display:flex;align-items:center;justify-content:center;
- min-height:0;padding:22px;overflow:hidden;
- background:
-  radial-gradient(ellipse at 50% 42%,rgba(93,71,66,.22),transparent 36%),
-  radial-gradient(ellipse at 50% 110%,#29252a 0%,transparent 55%),
-  linear-gradient(180deg,#090d14 0%,#151a21 55%,#0a0d12 100%);
-}
-.road-scene:before{
- content:"";position:absolute;inset:0;z-index:-1;opacity:.7;
- background:
-  radial-gradient(ellipse at 13% 55%,rgba(111,119,125,.16),transparent 30%),
-  radial-gradient(ellipse at 88% 48%,rgba(111,119,125,.12),transparent 32%),
-  linear-gradient(90deg,transparent 0 8%,rgba(0,0,0,.38) 8.2% 8.6%,transparent 8.8% 91%,rgba(0,0,0,.4) 91.2% 91.6%,transparent 92%);
-}
-.road-scene .scene-copy{
- position:relative;width:min(430px,92%);padding:clamp(26px,4vw,42px) clamp(24px,4vw,46px);
- margin:auto;text-align:center;background:linear-gradient(145deg,#19191d 0%,#21191c 50%,#15161b 100%);
- border:1px solid #8b6d60;outline:1px solid rgba(185,146,119,.5);outline-offset:7px;
- box-shadow:0 25px 70px #000c,inset 0 0 0 5px #0c0d11,inset 0 0 0 6px #57443d,inset 0 0 32px #6c3d3520;
-}
-.road-scene .scene-copy:before,.road-scene .scene-copy:after{
- content:"";position:absolute;left:12px;right:12px;height:1px;background:linear-gradient(90deg,transparent,#a98b70 18%,#a98b70 82%,transparent);
-}
-.road-scene .scene-copy:before{top:13px}.road-scene .scene-copy:after{bottom:13px}
-.road-scene .frame-ornament{display:block;color:#b99a7c;font:22px Georgia,serif;line-height:1}
-.road-scene .frame-top{margin:0 auto 15px}
-.road-scene .frame-bottom{margin:18px auto 0}
-.road-scene .scene-copy h3{
- margin:0 0 24px;color:#e8ddd0;font:clamp(29px,4vw,39px)/1.18 Georgia,"Times New Roman",serif;
- font-weight:400;letter-spacing:.025em;text-shadow:0 2px 12px #000;
-}
-.road-scene .scene-actions{display:flex;flex-direction:column;gap:9px;margin:0}
-.road-scene .scene-button{
- position:relative;display:flex;justify-content:center;align-items:center;width:100%;min-height:52px;
- padding:12px 18px;background:linear-gradient(180deg,#302326,#1c171b);
- border:1px solid #70564f;border-radius:0;color:#e8d9ca;box-shadow:inset 0 0 0 2px #0c0c0f,0 3px 10px #0007;
-}
-.road-scene .scene-button:before,.road-scene .scene-button:after{
- content:"";position:absolute;top:50%;width:5px;height:5px;border:1px solid #a98b70;transform:translateY(-50%) rotate(45deg);
-}
-.road-scene .scene-button:before{left:12px}.road-scene .scene-button:after{right:12px}
-.road-scene .scene-button strong{font:17px Georgia,"Times New Roman",serif;letter-spacing:.035em}
-.road-scene .scene-button:hover,.road-scene .scene-button.primary{
- background:linear-gradient(180deg,#52363a,#2b1d22);border-color:#b18a72;color:#fff0df;
-}
-.road-scene .scene-button:hover{transform:none;box-shadow:inset 0 0 0 2px #0c0c0f,0 0 16px #9a6b5944}
-.road-scene .scene-button small{display:none}
-
-/* Внутренние помещения: отдельные композиции, а не повторяющиеся карточки */
-.app-placeholder-screen{
- position:relative;isolation:isolate;min-height:0;padding:clamp(20px,4vw,48px);
- display:flex;align-items:center;justify-content:center;overflow-y:auto;
-}
-.app-placeholder-screen:before{
- content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
- background:radial-gradient(ellipse at 50% 45%,rgba(120,82,65,.16),transparent 55%),linear-gradient(90deg,#090c11,#17171a 50%,#090c11);
-}
-.page-composition{width:min(980px,100%);margin:auto;position:relative}
-.page-composition:before{
- content:"";position:absolute;inset:-15px -18px;z-index:-1;border:1px solid #70594d;
- box-shadow:inset 0 0 0 5px #0c0d11,inset 0 0 0 6px #493a36,0 18px 60px #0008;
- pointer-events:none;
-}
-.page-composition>.scene-eyebrow{display:block;text-align:center;color:#b89a7d;font:10px var(--sans);letter-spacing:.24em;text-transform:uppercase}
-.page-composition>h3{text-align:center;font:400 clamp(32px,5vw,49px)/1.1 Georgia,serif!important;color:#e8ddd0!important;margin:10px 0 28px!important}
-.page-composition .game-actions{justify-content:center;margin-top:25px}
-.page-composition .game-secondary,.page-composition .game-primary{
- min-width:150px;background:#211b1d;border:1px solid #876b5d;color:#e9d9ca;border-radius:0;
- font:14px Georgia,serif;letter-spacing:.02em;text-transform:none;
-}
-.page-composition .game-primary{background:#513238;border-color:#b28a78;color:#fff0e5}
-.page-composition .game-secondary:hover,.page-composition .game-primary:hover{background:#67454a;border-color:#d1aa91}
-
-/* Дверь: массивная тёмная створка и настройки сбоку */
-.door-scene:before{background:radial-gradient(ellipse at 20% 50%,#302024 0%,transparent 38%),linear-gradient(90deg,#0b0d12,#191518 52%,#0b0d12)}
-.setup-layout{display:grid;grid-template-columns:minmax(180px,.72fr) minmax(0,1.5fr);gap:clamp(22px,5vw,56px);align-items:center}
-.door-illustration{
- min-height:340px;position:relative;border:8px double #6d5146;
- background:linear-gradient(90deg,#1b1517,#38272a 48%,#1b1517);
- box-shadow:inset 0 0 0 5px #100f12,inset 0 0 0 8px #806453,0 18px 35px #0009;
-}
-.door-illustration:before{content:"";position:absolute;inset:16px;border:2px solid #8e705b;box-shadow:inset 0 0 0 5px #21181a,inset 0 0 0 6px #6d5547}
-.door-illustration:after{content:"";position:absolute;top:50%;right:23px;width:13px;height:13px;border-radius:50%;background:#b18c60;box-shadow:0 0 12px #b18c60}
-.door-illustration span{position:absolute;top:42%;left:50%;transform:translate(-50%,-50%);font:38px Georgia;color:#b89a78}
-.setup-form .game-form-grid{grid-template-columns:1fr 1fr;margin:0 0 22px}
-.setup-form .game-field label{color:#c1a18a}
-.setup-form .game-field input,.setup-form .game-chat-input{background:#111319;border:1px solid #71594d;border-radius:0;color:#eee0d1}
-.setup-form .game-role-custom{display:grid;grid-template-columns:1fr 1fr;gap:7px;max-height:190px;overflow:auto;padding-right:5px}
-.setup-form .game-role-custom .game-hint{margin:0;padding:8px 10px;background:#171519;border-left:2px solid #76574e;color:#d8c8b8;font-size:12px}
-.setup-form .game-field>label{margin-bottom:9px}
-
-/* Холл: галерея старых портретных рам */
-.hall-scene:before{background:radial-gradient(ellipse at 50% 20%,#3b2b28 0%,transparent 46%),linear-gradient(90deg,#0b0c11,#1b1717 50%,#0b0c11)}
-.hall-gallery{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(18px,4vw,42px);max-width:760px;margin:36px auto 0}
-.hall-frame{
- min-height:230px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;
- padding:22px;text-align:center;background:linear-gradient(145deg,#211a1b,#121317);
- border:9px ridge #705548;outline:1px solid #a17e64;outline-offset:4px;
- box-shadow:0 12px 28px #0009,inset 0 0 0 5px #0b0c10,inset 0 0 0 7px #58443b;
-}
-.hall-frame>span{font:34px Georgia;color:#b89a78}
-.hall-frame strong{font:20px Georgia,serif;font-weight:400;color:#e8d8c7}
-.hall-frame small{font:13px Georgia,serif;color:#b6a69a}
-
-/* Спальня: кровать, комод и портрет в одной комнате */
-.bedroom-scene:before{background:radial-gradient(ellipse at 50% 12%,#34313b 0%,transparent 42%),linear-gradient(180deg,#10131b,#1c171a 60%,#0a0c11)}
-.bedroom-interior{min-height:300px;display:grid;grid-template-columns:1.35fr 1fr .72fr;gap:18px;align-items:end;padding:22px 0 8px}
-.bedroom-bed{height:180px;position:relative;background:linear-gradient(180deg,#39313a,#1b1920);border:5px double #806653;box-shadow:inset 0 0 0 5px #111218,0 15px 28px #0008}
-.bed-pillow{position:absolute;top:17px;left:12%;width:36%;height:47px;background:#b2a19a;border:2px solid #6e5550;box-shadow:inset 0 0 0 4px #d2c0b0}
-.bed-cover{position:absolute;left:5%;right:5%;bottom:0;height:68%;background:linear-gradient(135deg,#493039,#211d27);border-top:2px solid #9b786b}
-.bedroom-dresser{min-height:190px;padding:18px 14px 12px;background:linear-gradient(90deg,#2b1d1b,#50352b 48%,#281b1b);border:5px double #9a7758;box-shadow:inset 0 0 0 4px #171216,0 12px 24px #0008;display:flex;flex-direction:column;gap:9px;color:#ead9c5}
-.bedroom-dresser strong{font:18px Georgia,serif;text-align:center;font-weight:400}
-.dresser-drawer{height:25px;border:1px solid #a0805e;background:#382622;box-shadow:inset 0 0 0 2px #211719}
-.bedroom-dresser>span{font:12px Georgia,serif;text-align:center;color:#cbb8a4}
-.bedroom-portrait{height:190px;padding:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;background:#21191b;border:8px ridge #84664e;outline:1px solid #b09270;box-shadow:0 12px 25px #0008}
-.bedroom-portrait>span{width:80px;height:100px;display:grid;place-items:center;background:linear-gradient(#44404a,#1b1b22);border:2px solid #9a8067;color:#c8b092;font-size:43px}
-.bedroom-portrait small{font:12px Georgia,serif;color:#e2d2c0}
-
-/* Настройки: лист в старом переплёте */
-.study-scene:before{background:radial-gradient(ellipse at 50% 45%,#302326 0%,transparent 55%),linear-gradient(90deg,#0b0c10,#191619 50%,#0b0c10)}
-.settings-ledger{max-width:650px;margin:30px auto 0;padding:16px 26px;background:linear-gradient(135deg,#30231f,#1b1718);border:7px double #82644f;box-shadow:inset 0 0 0 4px #111217,0 16px 35px #0008}
-.settings-ledger>div{display:grid;grid-template-columns:52px 1fr;column-gap:16px;align-items:center;padding:20px 0;border-bottom:1px solid #71584b}
-.settings-ledger>div:last-child{border-bottom:0}
-.settings-ledger>div>span{grid-row:span 2;font:28px Georgia;color:#b99775;text-align:center}
-.settings-ledger strong{font:19px Georgia,serif;font-weight:400;color:#e8d8c8}
-.settings-ledger small{font:13px Georgia,serif;color:#b8a69a;margin-top:5px}
-@media(max-width:700px){
- .road-scene{padding:14px;background-position:center}
- .road-scene .scene-copy{width:min(390px,94%);padding:25px 22px}
- .road-scene .scene-copy h3{font-size:31px;margin-bottom:19px}
- .road-scene .scene-button{min-height:49px}
- .setup-layout{grid-template-columns:1fr;gap:15px}
- .door-illustration{min-height:125px;max-width:210px;width:100%;margin:auto}
- .setup-form .game-form-grid{grid-template-columns:1fr}
- .setup-form .game-role-custom{grid-template-columns:1fr 1fr;max-height:150px}
- .hall-gallery{gap:12px;margin-top:20px}
- .hall-frame{min-height:175px;padding:12px;border-width:6px}
- .hall-frame strong{font-size:16px}
- .hall-frame small{font-size:11px}
- .bedroom-interior{grid-template-columns:1fr 1fr;gap:10px;min-height:0}
- .bedroom-bed{grid-column:span 2;height:125px}
- .bedroom-dresser,.bedroom-portrait{min-height:150px;height:150px}
- .bedroom-portrait>span{height:78px;width:60px}
- .page-composition:before{inset:-8px -5px}
- .app-placeholder-screen{padding:22px 12px}
-}
-@media(max-height:650px){
- .road-scene .scene-copy{padding:18px 25px}
- .road-scene .frame-top{margin-bottom:8px}
- .road-scene .frame-bottom{margin-top:9px}
- .road-scene .scene-copy h3{margin-bottom:12px;font-size:29px}
- .road-scene .scene-button{min-height:42px;padding:8px}
- .door-illustration{min-height:230px}
- .bedroom-interior{min-height:230px}
-}
-
-
-/* Иллюстрированные пространства особняка — отдельные сцены вместо CSS-заглушек */
-body.game-app-ready #game{background:#090b10!important;padding:0!important;min-height:100svh}
-body.game-app-ready .game-shell{width:100%;max-width:none;height:100svh;min-height:620px;padding:0!important;gap:0!important}
-body.game-app-ready .game-panel{padding:0!important;margin:0!important;width:100%;max-width:none;flex:1;min-height:0;border:0!important;background:#090b10!important;overflow:hidden}
-body.game-app-ready .game-screen{min-height:0}
-.road-scene{
- min-height:100%!important;height:100%;padding:clamp(18px,4vw,56px)!important;
- background:#080b12 url("/images/mansion-road.svg") center/cover no-repeat!important;
-}
-.road-scene:before{background:linear-gradient(90deg,#080a0d66,transparent 30%,transparent 70%,#080a0d66),linear-gradient(0deg,#080a0dcc,transparent 30%,#080a0d55)!important}
-.road-scene .scene-copy{
- width:min(430px,92%)!important;padding:clamp(28px,4vw,46px)!important;
- background:linear-gradient(145deg,#111116ed,#211719ed 52%,#101116ed)!important;
- border:0!important;outline:1px solid #a98a6c!important;outline-offset:7px;
- box-shadow:0 22px 70px #000d,inset 0 0 0 1px #634b3e,inset 0 0 0 7px #0b0c10!important;
- clip-path:polygon(0 3%,3% 0,97% 0,100% 3%,100% 97%,97% 100%,3% 100%,0 97%);
-}
-.road-scene .scene-copy:before,.road-scene .scene-copy:after{left:22px!important;right:22px!important;background:linear-gradient(90deg,transparent,#b39270 18%,#b39270 82%,transparent)!important}
-.road-scene .scene-copy h3{font:400 clamp(28px,4vw,38px)/1.2 Georgia,serif!important;color:#eadbc8!important;letter-spacing:.025em!important}
-.road-scene .scene-button{min-height:54px!important;background:linear-gradient(180deg,#292126,#151419)!important;border:1px solid #806552!important;box-shadow:inset 0 0 0 2px #0c0c10,0 4px 12px #0009!important}
-.road-scene .scene-button strong{font:17px Georgia,serif!important;letter-spacing:.04em}
-.road-scene .scene-button.primary{background:linear-gradient(180deg,#503038,#2a1c23)!important;border-color:#b08a70!important}
-.road-scene .scene-button:hover{background:linear-gradient(180deg,#614047,#33232a)!important}
-.app-placeholder-screen{min-height:100%!important;height:100%;padding:clamp(22px,4vw,58px)!important}
-.app-placeholder-screen:before{inset:0!important;background:linear-gradient(90deg,#090a0dc9,#090a0d55 25%,#090a0d55 75%,#090a0dc9)!important}
-.door-scene{background:#0a0b10 url("/images/mansion-door.svg") center/cover no-repeat!important}
-.hall-scene{background:#0a0b10 url("/images/mansion-hall.svg") center/cover no-repeat!important}
-.bedroom-scene{background:#0a0b10 url("/images/mansion-bedroom.svg") center/cover no-repeat!important}
-.study-scene{background:#0a0b10 url("/images/mansion-study.svg") center/cover no-repeat!important}
-.page-composition{max-width:980px!important;padding:clamp(22px,4vw,42px)!important;background:#0d0e13d9;border:1px solid #94765c;box-shadow:0 18px 55px #000b,inset 0 0 0 5px #111116!important}
-.page-composition:before{display:none!important}
-.door-illustration{display:none!important}
-.setup-layout{display:block!important;max-width:740px;margin:auto}
-.setup-form .game-form-grid{grid-template-columns:1fr 1fr}
-.hall-gallery{margin-top:24px!important}
-.hall-frame{background:linear-gradient(145deg,#211a1bdf,#121317e8)!important;border:7px solid #755b48!important;outline:1px solid #c09a70!important;outline-offset:3px}
-.bedroom-interior{background:linear-gradient(0deg,#0c0b0de0,transparent 70%);padding:28px 18px 10px!important}
-.bedroom-bed{border:7px solid #795a47!important;outline:1px solid #b18a68;outline-offset:3px}
-.bedroom-dresser{border:5px solid #8c684b!important}
-.bedroom-portrait{border:7px solid #967654!important}
-.settings-ledger{background:#211a18e8!important}
-.play-scene{background:#111319!important}
-.play-scene.phase-night{background:#090d17 url("/images/mansion-bedroom.svg") center/cover fixed!important}
-.play-scene.phase-day{background:#171519 url("/images/mansion-hall.svg") center/cover fixed!important}
-.play-scene.phase-night:before,.play-scene.phase-day:before{content:"";position:absolute;inset:0;background:#080a10c9;pointer-events:none}
-.play-scene{position:relative;isolation:isolate;padding:clamp(18px,3vw,38px)!important}
-.play-scene>*{position:relative}
-.dream-note{background:#d4c5a8 url("/images/mansion-bedroom.svg") center/cover!important;color:#281d1b!important;box-shadow:0 12px 40px #000b!important;border:1px solid #9b7957!important}
-.dream-note p{color:#30231e!important}
-.game-roster .game-person{border:1px solid #94765d!important;background:linear-gradient(145deg,#211a1b,#111319)!important}
-@media(max-width:700px){
- body.game-app-ready .game-shell{min-height:100svh}
- .app-placeholder-screen{padding:16px 10px!important}
- .page-composition{padding:20px 14px!important}
- .setup-form .game-form-grid{grid-template-columns:1fr}
- .road-scene .scene-copy{width:min(390px,94%)!important}
-}
-
-/* Сцены особняка: отдельная композиция и адаптация под ориентацию экрана */
-.page-composition{width:min(1120px,94%)!important;max-width:1120px!important;margin:auto!important;background:linear-gradient(180deg,rgba(13,12,15,.88),rgba(13,12,15,.94))!important;border:1px solid #8c715c!important;outline:1px solid rgba(188,151,112,.55);outline-offset:5px;box-shadow:0 20px 70px #000d,inset 0 0 0 4px rgba(116,83,61,.25)!important}
-.page-composition h3{font:400 clamp(28px,4vw,44px)/1.15 Georgia,serif!important;letter-spacing:.03em}
-.scene-eyebrow{display:block;text-align:center;color:#b99b7b;font:11px Georgia,serif;letter-spacing:.22em;text-transform:uppercase}
-#setupScreen .page-composition{max-width:1050px!important}
-#setupScreen .setup-form{padding:clamp(12px,2vw,24px);background:rgba(8,9,13,.58);border:1px solid #59463c;box-shadow:inset 0 0 22px #0008}
-#setupScreen .game-field>label{font:16px Georgia,serif;color:#d7c1a8}
-#setupScreen .game-field input{accent-color:#9b7658}
-#setupScreen .game-role-custom .game-hint{border-left:2px solid #8e6c52}
-#continueScreen .hall-composition{max-width:1120px!important}
-#continueScreen .hall-gallery{grid-template-columns:repeat(2,minmax(0,1fr));max-width:900px}
-#continueScreen .hall-frame{min-height:clamp(180px,30vh,300px);position:relative;overflow:hidden}
-#continueScreen .hall-frame:before{content:"";position:absolute;inset:12px;border:1px solid #8f755c;pointer-events:none}
-#roomScreen .bedroom-composition{max-width:1150px!important}
-#roomScreen .bedroom-interior{min-height:clamp(240px,38vh,390px);grid-template-columns:1.35fr 1fr .7fr;align-items:end;gap:clamp(12px,2vw,26px)}
-#roomScreen .bedroom-bed{height:clamp(140px,24vh,230px);border-radius:48% 48% 0 0 / 12% 12% 0 0}
-#roomScreen .bedroom-bed:before{content:"";position:absolute;left:9%;right:9%;top:0;height:34%;border-radius:50% 50% 0 0;background:linear-gradient(180deg,#7c6260,#3c2b32);border:2px solid #a18770}
-#roomScreen .bedroom-dresser{min-height:clamp(160px,25vh,240px)}
-#roomScreen .bedroom-portrait{height:clamp(170px,27vh,260px)}
-.room-collection-wrap{margin:24px auto 0;max-width:980px;padding:18px 20px;background:rgba(9,10,14,.78);border:1px solid #80634e;box-shadow:inset 0 0 0 4px rgba(91,64,48,.25)}
-.room-collection-wrap h4{margin:0 0 14px;text-align:center;font:400 21px Georgia,serif;color:#e4d2bd}
-.room-collection{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:12px}
-.collection-item{min-height:112px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:12px 8px;background:linear-gradient(145deg,#282021,#141317);border:5px ridge #765b47;outline:1px solid #aa8766;outline-offset:2px;color:#eadbc9;text-align:center}
-.collection-icon{font-size:30px;filter:drop-shadow(0 2px 4px #000)}
-.collection-item strong{font:15px Georgia,serif;font-weight:400}
-.collection-item small{font:10px Georgia,serif;letter-spacing:.12em;text-transform:uppercase;color:#bca38b}
-.collection-item.is-pet{background:linear-gradient(145deg,#2b2527,#17181d);border-color:#86715d}
-.collection-empty{grid-column:1/-1;margin:0;padding:20px;text-align:center;color:#bda995;font:14px Georgia,serif}
-#settingsScreen .settings-ledger{max-width:760px}
-.play-scene .game-phase-title{font:400 clamp(28px,4vw,42px) Georgia,serif!important;color:#eadbc8}
-.play-scene .game-roster{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:16px}
-.play-scene .game-person{position:relative;min-height:178px;align-items:center;justify-content:flex-end;padding:12px 10px 14px;text-align:center;border:8px ridge #745a47!important;outline:1px solid #b18c68;outline-offset:2px;background:linear-gradient(180deg,#242027,#111218)!important;box-shadow:0 10px 25px #0009,inset 0 0 0 3px #151217}
-.play-scene .portrait-art{width:100%;height:112px;display:grid;place-items:center;margin-bottom:6px;background:radial-gradient(ellipse at 50% 28%,#71616a,#29252e 60%,#111218);border:1px solid #90745d;color:#e3c8a8;font:42px Georgia,serif;box-shadow:inset 0 0 20px #0008}
-.play-scene .game-person strong{font:15px Georgia,serif;color:#eee0cf}
-.play-scene .game-person .person-number{position:absolute;top:7px;left:9px;color:#c3a17c}
-.play-scene .game-person.selected{outline:3px solid #d4b28b;outline-offset:3px;background:#403039!important}
-.play-scene .door-roster .game-person{border-radius:45% 45% 3px 3px!important;min-height:190px}
-.play-scene .door-roster .portrait-art{height:125px;border-radius:48% 48% 0 0}
-.dream-note{position:relative;max-width:720px;min-height:230px;margin:20px auto;padding:42px 48px!important;background:linear-gradient(135deg,#d6c6a9,#b7a184)!important;color:#2d211b!important;border:1px solid #796047!important;transform:rotate(-1deg);box-shadow:0 18px 42px #000b!important}
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&display=swap');
+:root{color-scheme:dark;--ink:#0b0b0e;--panel:#141317;--panel2:#1d191b;--paper:#e7dac8;--muted:#b7a895;--gold:#a88a68;--gold2:#d0b18b;--wine:#542c32;--line:rgba(178,145,109,.55);--serif:'Cormorant Garamond',Georgia,serif;--sans:'Manrope',Arial,sans-serif}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;background:#090a0d;color:var(--paper);font-family:var(--sans)}
+body{min-height:100svh}
+button,input{font:inherit}
+button{cursor:pointer}
+button:focus-visible,input:focus-visible{outline:2px solid var(--gold2);outline-offset:3px}
+[hidden]{display:none!important}
+#game-root,#game{min-height:100svh;width:100%}
+.game-shell,.game-panel{width:100%;min-height:100svh;margin:0;padding:0;border:0;background:#090a0d}
+.game-screen{position:relative;min-height:100svh;overflow:auto;isolation:isolate}
+.game-screen:before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none}
+.mansion-scene{background-position:center;background-size:cover;background-repeat:no-repeat}
+.road-scene{display:grid;place-items:center;background-image:url('/images/mansion-road.svg')}
+.road-scene:before{background:linear-gradient(90deg,rgba(4,6,10,.55),transparent 38%,transparent 65%,rgba(4,6,10,.52)),linear-gradient(0deg,rgba(4,5,8,.65),transparent 40%,rgba(4,5,8,.2))}
+.menu-vignette{position:fixed;inset:0;pointer-events:none;background:radial-gradient(ellipse at 50% 48%,transparent 18%,rgba(3,4,7,.22) 72%,rgba(3,4,7,.7))}
+.menu-composition{position:relative;width:min(430px,calc(100% - 36px));padding:clamp(24px,4vw,42px);margin:32px 5vw 32px auto;background:linear-gradient(145deg,rgba(14,14,18,.94),rgba(25,18,20,.94) 52%,rgba(11,12,16,.96));border:1px solid #92765b;outline:1px solid rgba(194,158,119,.48);outline-offset:7px;box-shadow:0 25px 80px #000c,inset 0 0 0 5px rgba(111,79,57,.24),inset 0 0 36px #0009;text-align:center}
+.menu-composition:before,.menu-composition:after{content:"";position:absolute;left:18px;right:18px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.menu-composition:before{top:13px}.menu-composition:after{bottom:13px}
+.menu-title{margin:0 0 23px}
+.menu-kicker,.eyebrow{display:block;color:#c1a27f;font:500 11px var(--sans);letter-spacing:.24em;text-transform:uppercase}
+.menu-title h1{margin:12px 0 5px;color:#f0e2d0;font:500 clamp(42px,5vw,58px)/.88 var(--serif);letter-spacing:.015em;text-shadow:0 3px 18px #000}
+.title-rule{color:var(--gold);font-size:18px}
+.scene-actions{display:flex;flex-direction:column;gap:10px}
+.scene-button{position:relative;display:flex;align-items:center;justify-content:center;min-height:56px;width:100%;padding:10px 18px;color:#e9dccb;background:linear-gradient(90deg,#191619,#302326 50%,#191619);border:1px solid #745947;box-shadow:inset 0 0 0 2px rgba(0,0,0,.45),0 5px 14px #0008;transition:background .18s,border-color .18s,transform .18s}
+.scene-button:before{content:"";position:absolute;inset:4px;border:1px solid rgba(185,146,108,.18);pointer-events:none}
+.scene-button strong{font:600 21px var(--serif);letter-spacing:.045em}
+.scene-button:hover,.scene-button.primary{background:linear-gradient(90deg,#351d24,#60353b 50%,#351d24);border-color:#b18c6c;transform:translateY(-1px)}
+.app-page{display:flex;align-items:center;justify-content:center;padding:clamp(20px,4vw,54px);background-position:center;background-size:cover}
+.door-scene{background-image:url('/images/mansion-door.svg')}
+.hall-scene{background-image:url('/images/mansion-hall.svg')}
+.bedroom-scene{background-image:url('/images/mansion-bedroom.svg')}
+.study-scene{background-image:url('/images/mansion-study.svg')}
+.page-shade{position:fixed;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(4,5,8,.68),rgba(5,6,9,.25) 40%,rgba(5,6,9,.6)),linear-gradient(0deg,rgba(4,5,8,.68),rgba(4,5,8,.15) 50%,rgba(4,5,8,.35))}
+.page-wrap{position:relative;width:min(1100px,100%);max-height:calc(100svh - 48px);overflow:auto;padding:clamp(22px,3.5vw,42px);background:linear-gradient(145deg,rgba(13,13,17,.94),rgba(20,16,18,.93));border:1px solid #8c7056;outline:1px solid rgba(190,151,109,.45);outline-offset:5px;box-shadow:0 24px 80px #000d,inset 0 0 0 5px rgba(107,76,56,.22)}
+.page-heading{text-align:center;margin:0 0 28px}
+.page-heading .eyebrow{margin-bottom:5px}
+.page-heading h2{margin:0;color:#eee0cf;font:500 clamp(36px,4vw,49px)/1 var(--serif);letter-spacing:.04em}
+.setup-layout{display:grid;grid-template-columns:minmax(250px,.8fr) minmax(0,1.2fr);gap:clamp(20px,4vw,42px);align-items:start}
+.section-label,.game-field>label{display:block;margin:0 0 10px;color:#c9ad8d;font:600 12px var(--sans);letter-spacing:.12em;text-transform:uppercase}
+.theme-choice{position:relative;display:grid;grid-template-columns:1fr auto;gap:0;width:100%;padding:0;text-align:left;color:var(--paper);background:#100f12;border:1px solid #755b48;box-shadow:0 10px 28px #0008;overflow:hidden}
+.theme-choice.is-selected{border-color:#c09b73;box-shadow:0 0 0 2px rgba(185,146,108,.25),0 12px 30px #0009}
+.theme-art{grid-column:1/-1;display:block;aspect-ratio:16/9;background:linear-gradient(0deg,#090a0ddd,transparent 60%),url('/images/mansion-road.svg') center/cover}
+.theme-copy{display:flex;flex-direction:column;gap:6px;padding:14px 15px}
+.theme-copy strong{font:600 23px var(--serif);color:#f0e2d0}
+.theme-copy small{font:12px/1.5 var(--sans);color:#b8a999}
+.theme-check{align-self:center;margin:0 14px;color:#d5b18a;font-size:20px}
+.setup-form{padding:22px;background:rgba(7,8,11,.46);border:1px solid rgba(139,108,83,.52)}
+.game-form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.game-field{min-width:0;margin:0 0 19px}
+.game-field input:not([type=range]){width:100%;min-height:46px;padding:10px 12px;color:#eee0cf;background:#100f12;border:1px solid #715745;border-radius:0}
+.game-range-line{display:flex;align-items:baseline;gap:8px;margin:0 0 8px;color:#d9c8b5}
+.game-range-line strong{font:600 30px var(--serif);color:#f0dfca}
+.game-range-line span{font-size:12px;color:#a99a89}
+input[type=range]{width:100%;accent-color:#ad8865}
+.game-role-custom{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;max-height:210px;overflow:auto;padding:2px}
+.game-hint{padding:9px 10px;color:#d3c4b2;background:rgba(31,24,25,.86);border:1px solid rgba(128,95,70,.55);border-left:2px solid #9b795a;font:12px/1.4 var(--sans)}
+.game-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.game-primary,.game-secondary{min-height:44px;padding:10px 20px;border:1px solid #987657;color:#f1e4d3;background:linear-gradient(90deg,#4b252d,#6b3b41,#4b252d);font:600 16px var(--serif);letter-spacing:.03em}
+.game-secondary{color:#d7c6b3;background:#1a181b;border-color:#6e5745}
+.game-primary:hover{filter:brightness(1.16)}.game-secondary:hover{background:#292126}
+.game-error{color:#e5a9a3;font-size:13px}
+.hall-gallery{display:grid;grid-template-columns:1fr 1fr;gap:clamp(16px,3vw,30px)}
+.hall-frame{position:relative;display:flex;min-height:260px;flex-direction:column;align-items:center;justify-content:center;padding:28px;text-align:center;background:linear-gradient(145deg,rgba(39,28,26,.94),rgba(14,14,18,.95));border:8px ridge #705540;outline:1px solid #b08b68;outline-offset:3px;box-shadow:0 14px 36px #0009,inset 0 0 0 7px rgba(0,0,0,.38)}
+.hall-frame:before{content:"";position:absolute;inset:10px;border:1px solid rgba(190,151,109,.4);pointer-events:none}
+.frame-number{color:#c4a17a;font:italic 25px var(--serif)}
+.hall-frame h3{margin:10px 0;color:#eee0cf;font:500 29px var(--serif)}
+.hall-frame p{max-width:260px;color:#b9aa99;font:13px/1.6 var(--sans)}
+.bedroom-interior{display:grid;grid-template-columns:1.3fr .9fr .65fr;gap:20px;align-items:end;min-height:300px;padding:28px 20px 14px;background:linear-gradient(0deg,rgba(5,5,8,.7),transparent 70%)}
+.bedroom-bed{position:relative;height:210px;overflow:hidden;border:7px ridge #735541;background:linear-gradient(180deg,#4d3035,#21191e 68%);box-shadow:0 18px 28px #0009}
+.bed-canopy{position:absolute;left:12%;right:12%;top:0;height:32%;border:4px solid #977456;border-bottom:0;border-radius:50% 50% 0 0;background:#302126}
+.bed-pillow{position:absolute;top:24%;left:23%;width:54%;height:27%;border-radius:45% 45% 8px 8px;background:linear-gradient(180deg,#c0a58b,#705a56);box-shadow:0 4px 8px #0008}
+.bed-cover{position:absolute;left:0;right:0;bottom:-12%;height:62%;background:linear-gradient(135deg,#633b43,#241b23);border-top:2px solid #ad8b70}
+.bedroom-dresser{padding:16px 14px 12px;background:linear-gradient(90deg,#281a19,#54392e 50%,#241716);border:5px ridge #8a684b;box-shadow:0 12px 24px #0009}
+.bedroom-dresser h3{margin:0 0 12px;text-align:center;color:#e8d7c4;font:500 22px var(--serif)}
+.dresser-drawer{height:27px;margin:8px 0;border:1px solid #9b7958;background:linear-gradient(90deg,#211719,#49302a,#211719);box-shadow:inset 0 0 0 3px rgba(0,0,0,.35)}
+.bedroom-dresser p{margin:12px 0 0;text-align:center;color:#d4c1ad;font:12px var(--sans)}
+.bedroom-portrait{height:200px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;background:#181519;border:8px ridge #89694c;outline:1px solid #c19a71;box-shadow:0 12px 25px #0009}
+.bedroom-portrait>span{width:75px;height:100px;display:grid;place-items:center;color:#d7b995;background:radial-gradient(ellipse,#49414a,#17161c);border:1px solid #9d7e5c;font-size:40px}
+.bedroom-portrait small{color:#d8c7b4;font:12px var(--serif)}
+.room-collection-wrap{margin:20px 0 0;padding:18px 20px;background:rgba(8,9,12,.75);border:1px solid #80634e}
+.room-collection-wrap h3{margin:0 0 14px;text-align:center;color:#e8d9c8;font:500 24px var(--serif)}
+.room-collection{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:10px}
+.collection-item{min-height:105px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;padding:10px;background:linear-gradient(145deg,#282021,#141317);border:4px ridge #765b47;color:#eadbc9;text-align:center}
+.collection-icon{font-size:29px}.collection-item strong{font:500 18px var(--serif)}.collection-item small{font:10px var(--sans);letter-spacing:.12em;text-transform:uppercase;color:#bca38b}
+.collection-empty{grid-column:1/-1;margin:0;padding:18px;text-align:center;color:#bda995;font:13px var(--sans)}
+.settings-ledger{max-width:760px;margin:auto;padding:10px 26px;background:linear-gradient(135deg,#30231f,#171519);border:7px double #82644f;box-shadow:inset 0 0 0 4px #111217,0 16px 35px #0008}
+.setting-row{display:grid;grid-template-columns:50px 1fr auto;gap:15px;align-items:center;padding:20px 4px;border-bottom:1px solid #71584b}
+.setting-row:last-child{border-bottom:0}
+.setting-symbol{grid-row:span 2;color:#b99775;font:30px var(--serif);text-align:center}
+.setting-row strong{display:block;color:#e8d8c8;font:500 22px var(--serif)}
+.setting-row small{display:block;margin-top:4px;color:#b8a69a;font:12px var(--sans)}
+.setting-row input{width:20px;height:20px;accent-color:#a47b5d}
+.setting-current{color:#c7a27d;font:500 14px var(--serif)}
+.play-scene{padding:clamp(16px,3vw,36px);background:#101116}
+.play-scene:before{background:linear-gradient(rgba(5,7,12,.84),rgba(7,8,12,.93)),url('/images/mansion-hall.svg') center/cover fixed}
+.play-scene.phase-night:before{background:linear-gradient(rgba(4,7,14,.77),rgba(4,6,11,.92)),url('/images/mansion-bedroom.svg') center/cover fixed}
+.play-scene.phase-day:before{background:linear-gradient(rgba(9,8,10,.78),rgba(8,8,11,.92)),url('/images/mansion-hall.svg') center/cover fixed}
+.game-topline{position:relative;display:flex;justify-content:space-between;max-width:1180px;margin:0 auto 20px;padding:0 0 12px;border-bottom:1px solid rgba(173,139,103,.45);color:#c3a27f;font:12px var(--sans);letter-spacing:.12em;text-transform:uppercase}
+.play-content{position:relative;max-width:1180px;margin:0 auto}
+.game-phase-title{margin:8px 0;color:#f0e1cf;font:500 clamp(34px,4vw,48px)/1.05 var(--serif);text-align:center}
+.game-story{max-width:760px;margin:0 auto 22px;text-align:center;color:#c0b09f;font:15px/1.65 var(--serif)}
+.game-role-reveal{max-width:800px;margin:15px auto;padding:16px 20px;text-align:center;color:#ead8c2;background:rgba(70,42,45,.72);border:1px solid #a17b5d;font:17px var(--serif)}
+.game-log{max-width:850px;max-height:230px;overflow:auto;margin:18px auto;padding:12px 18px;background:rgba(10,10,14,.65);border:1px solid rgba(139,108,83,.45)}
+.game-line{padding:8px 0;border-bottom:1px solid rgba(139,108,83,.18);color:#d4c6b6;font:13px/1.5 var(--sans)}
+.game-line:last-child{border-bottom:0}.game-line small{display:block;color:#a58a6e;font-size:10px;letter-spacing:.12em;text-transform:uppercase}.game-line strong{color:#ead8c4}.user-line{background:rgba(74,47,51,.24)}
+.game-field{max-width:850px;margin:18px auto;color:#d9c8b5}
+.game-field label{display:block;margin-bottom:8px;color:#c5a27e;font-size:12px}
+.game-chat{display:flex;gap:8px}.game-chat-input{flex:1;min-width:0;padding:11px 13px;color:#eee0cf;background:#111116;border:1px solid #765a49}
+.game-muted{max-width:850px;margin:18px auto;color:#d0b99e;text-align:center;font:16px var(--serif)}
+.game-roster{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px;max-width:1050px;margin:20px auto}
+.game-person{position:relative;min-height:178px;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:5px;padding:12px 10px;color:#e9dccb;background:linear-gradient(180deg,#252026,#111217);border:7px ridge #765b47;outline:1px solid #b18c68;outline-offset:2px;box-shadow:0 10px 25px #0009,inset 0 0 0 3px #151217}
+.game-person:disabled{opacity:.48;filter:grayscale(1)}
+.game-person.selected{outline:3px solid #e1bd91;outline-offset:3px;background:#443037}
+.portrait-art{width:100%;height:112px;display:grid;place-items:center;margin-bottom:4px;color:#e0c6a5;background:radial-gradient(ellipse at 50% 28%,#75636a,#29252e 60%,#111218);border:1px solid #90745d;font:42px var(--serif)}
+.game-person strong{font:600 17px var(--serif)}.game-person>span:last-child{color:#b9a894;font:10px var(--sans)}
+.person-number{position:absolute;top:7px;left:9px;color:#c3a17c!important;font-size:10px!important}
+.door-roster .game-person{border-radius:48% 48% 3px 3px;min-height:190px}
+.door-roster .portrait-art{height:125px;border-radius:48% 48% 0 0}
+.dream-note{position:relative;max-width:720px;min-height:210px;margin:24px auto;padding:38px 42px;color:#30231e;background:linear-gradient(135deg,#d6c6a9,#b7a184);border:1px solid #796047;transform:rotate(-.6deg);box-shadow:0 18px 42px #000b}
 .dream-note:before{content:"";position:absolute;inset:9px;border:1px solid rgba(92,65,43,.55);pointer-events:none}
-.dream-note small{font:13px Georgia,serif;letter-spacing:.12em;text-transform:uppercase;color:#6a4c38!important}
-.dream-note p{font:clamp(18px,2.5vw,23px)/1.55 Georgia,serif;color:#30231e!important}
-@media(orientation:landscape) and (min-width:701px){
- .app-placeholder-screen{display:flex;align-items:center;justify-content:center}
- .page-composition{max-height:94%;overflow:auto}
- #roomScreen .bedroom-composition{display:flex;flex-direction:column;justify-content:center}
- #roomScreen .bedroom-interior{width:100%}
- #playScreen .game-roster{grid-template-columns:repeat(auto-fill,minmax(135px,1fr))}
-}
-@media(orientation:portrait),(max-width:700px){
- body.game-app-ready .game-shell{min-height:100svh}
- .app-placeholder-screen{align-items:flex-start;overflow-y:auto}
- .page-composition{width:96%!important;padding:18px 12px!important}
- #continueScreen .hall-gallery{grid-template-columns:1fr;max-width:440px}
- #continueScreen .hall-frame{min-height:150px}
- #roomScreen .bedroom-interior{grid-template-columns:1fr 1fr;min-height:0}
- #roomScreen .bedroom-bed{grid-column:1/-1;height:145px}
- #roomScreen .bedroom-dresser,#roomScreen .bedroom-portrait{height:165px;min-height:165px}
- .room-collection-wrap{padding:14px 10px}
- .room-collection{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
- .collection-item{min-height:100px}
- .play-scene .game-roster{grid-template-columns:repeat(2,minmax(0,1fr))}
- .play-scene .game-person{min-height:150px}
- .play-scene .portrait-art{height:90px}
- .dream-note{padding:30px 25px!important;min-height:180px}
-}
-
-
-/* Первая аккуратная правка: особняк вместо общей декоративной панели */
-body.game-app-ready #game{
-  min-height:100svh;
-  padding:0;
-  border:0;
-  background:#090b10;
-}
-body.game-app-ready .game-shell{
-  width:100%;
-  max-width:none;
-  min-height:100svh;
-  margin:0;
-}
-body.game-app-ready .game-panel{
-  width:100%;
-  max-width:none;
-  min-height:100svh;
-  margin:0;
-  padding:0;
-  border:0;
-  outline:0;
-  box-shadow:none;
-  background:transparent;
-}
-body.game-app-ready .game-panel:before,
-body.game-app-ready .game-panel:after{display:none}
-body.game-app-ready .game-heading{display:none!important}
-
-/* Главное меню — четыре вертикальные двери-кнопки */
-.road-scene .scene-copy{
-  width:min(430px,92%);
-  padding:clamp(26px,4vw,42px);
-  background:rgba(12,13,17,.88);
-  border:1px solid #8d7058;
-  outline:1px solid rgba(181,143,103,.45);
-  outline-offset:6px;
-  box-shadow:0 22px 65px #000c,inset 0 0 30px #0008;
-}
-.road-scene .scene-copy h3{
-  margin:0 0 26px;
-  color:#e7d5c0;
-  font:400 clamp(29px,4vw,42px)/1.15 Georgia,serif;
-  letter-spacing:.025em;
-}
-.road-scene .scene-actions{display:flex;flex-direction:column;gap:12px}
-.road-scene .scene-button{
-  min-height:58px;
-  justify-content:center;
-  background:linear-gradient(90deg,#21191a,#382729 48%,#21191a);
-  border:1px solid #80634f;
-  box-shadow:inset 0 0 0 2px rgba(0,0,0,.35),0 5px 14px #0008;
-  color:#ead9c5;
-  transition:background .18s,border-color .18s,transform .18s;
-}
-.road-scene .scene-button strong{font:400 18px Georgia,serif;letter-spacing:.04em}
-.road-scene .scene-button.primary,
-.road-scene .scene-button:hover{
-  background:linear-gradient(90deg,#392126,#60343a 48%,#392126);
-  border-color:#b18a69;
-  transform:translateY(-1px);
-}
-
-/* Экран начала игры — иллюстрация двери, а не нарисованный CSS-прямоугольник */
-#setupScreen{
-  min-height:100svh;
-  padding:clamp(18px,3vw,42px);
-  align-items:center;
-  justify-content:center;
-  background:
-    linear-gradient(90deg,rgba(5,7,11,.35),rgba(5,7,11,.84) 42%,rgba(5,7,11,.94)),
-    url("/images/mansion-door.svg") center/cover no-repeat;
-}
-#setupScreen .page-composition{
-  width:min(1100px,100%)!important;
-  max-width:1100px!important;
-  margin:auto!important;
-  padding:clamp(22px,4vw,48px)!important;
-  background:rgba(9,10,14,.84)!important;
-  border:1px solid #8b6c53!important;
-  outline:1px solid rgba(185,148,111,.48);
-  outline-offset:5px;
-  box-shadow:0 24px 70px #000c,inset 0 0 38px #0008!important;
-}
-#setupScreen .page-composition>h3{
-  margin:0 0 28px;
-  text-align:center;
-  color:#ead9c5;
-  font:400 clamp(30px,4vw,43px)/1.15 Georgia,serif!important;
-  letter-spacing:.04em;
-}
-#setupScreen .setup-layout{
-  grid-template-columns:minmax(250px,.9fr) minmax(0,1.1fr);
-  gap:clamp(22px,4vw,48px);
-  align-items:stretch;
-}
-#setupScreen .door-illustration{
-  min-height:430px;
-  border:1px solid #8e6f55;
-  background:url("/images/mansion-door.svg") center/cover no-repeat;
-  box-shadow:0 18px 38px #000a,inset 0 0 0 8px rgba(8,8,11,.55);
-}
-#setupScreen .door-illustration:before,
-#setupScreen .door-illustration:after{display:none}
-#setupScreen .setup-form{
-  align-self:center;
-  padding:clamp(16px,2.4vw,30px);
-  background:rgba(10,11,15,.72);
-  border:1px solid rgba(139,108,83,.7);
-  box-shadow:inset 0 0 24px #0008;
-}
-#setupScreen .setup-form .game-form-grid{
-  grid-template-columns:1fr;
-  gap:20px;
-}
-#setupScreen .game-field>label{
-  color:#d6b99a;
-  font:13px Georgia,serif;
-  letter-spacing:.06em;
-  text-transform:none;
-}
-#setupScreen .setup-form input:not([type=range]){
-  background:#111116;
-  border:1px solid #765a49;
-  border-radius:0;
-  color:#f0e3d2;
-}
-#setupScreen .setup-form input[type=range]{accent-color:#a77c5b}
-#setupScreen .game-range-line{
-  margin-bottom:9px;
-  color:#e4d3c1;
-  font:18px Georgia,serif;
-}
-#setupScreen .game-role-custom{
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  max-height:230px;
-  gap:8px;
-}
-#setupScreen .game-role-custom .game-hint{
-  padding:10px 12px;
-  background:rgba(25,20,21,.94);
-  border:1px solid #594238;
-  border-left:2px solid #987052;
-  color:#dfcdb9;
-  font:13px/1.4 Georgia,serif;
-}
-#setupScreen .game-primary{
-  background:linear-gradient(90deg,#48262d,#6a3b40,#48262d);
-  border:1px solid #b28b6b;
-  color:#f4e6d5;
-}
-#setupScreen .game-secondary{
-  background:#17171b;
-  border:1px solid #715747;
-  color:#d7c3ae;
-}
+.dream-note small{color:#6a4c38;font:12px var(--sans);letter-spacing:.12em;text-transform:uppercase}
+.dream-note p{color:#30231e;font:clamp(18px,2.5vw,23px)/1.55 var(--serif)}
+.end-scene{display:grid;place-items:center;padding:25px;background:linear-gradient(rgba(5,6,9,.8),rgba(5,6,9,.94)),url('/images/mansion-hall.svg') center/cover}
+.game-result{width:min(800px,100%);padding:clamp(24px,4vw,50px);text-align:center;background:rgba(16,15,19,.94);border:1px solid #94765c;outline:1px solid rgba(188,151,112,.45);outline-offset:5px;box-shadow:0 20px 70px #000c}
+.end-ornament{margin:12px;color:#b99570;font-size:24px}.game-result h2{margin:0;color:#eee0cf;font:500 44px var(--serif)}.game-result p{color:#c4b3a1;font:16px/1.6 var(--serif)}
+.game-result .game-roster{max-height:45vh;overflow:auto}
 @media(max-width:760px){
-  #setupScreen{padding:14px 10px;background-position:42% center}
-  #setupScreen .page-composition{padding:20px 14px!important}
-  #setupScreen .setup-layout{grid-template-columns:1fr;gap:16px}
-  #setupScreen .door-illustration{min-height:170px;background-position:center 54%}
-  #setupScreen .setup-form{padding:15px 12px}
-  #setupScreen .setup-form .game-form-grid{grid-template-columns:1fr}
-  #setupScreen .game-role-custom{grid-template-columns:1fr}
+ .menu-composition{margin:0 auto;width:min(410px,calc(100% - 42px));padding:25px 22px}
+ .menu-title h1{font-size:46px}.scene-button{min-height:52px}.scene-button strong{font-size:20px}
+ .app-page{align-items:flex-start;padding:17px 12px}
+ .page-wrap{max-height:none;width:100%;padding:22px 15px}
+ .page-heading{margin-bottom:20px}
+ .setup-layout{grid-template-columns:1fr;gap:18px}
+ .theme-column{max-width:500px;width:100%;margin:auto}
+ .setup-form{padding:16px 12px}
+ .game-form-grid{grid-template-columns:1fr}
+ .game-role-custom{grid-template-columns:1fr 1fr;max-height:180px}
+ .hall-gallery{grid-template-columns:1fr;max-width:470px;margin:auto}
+ .hall-frame{min-height:170px}
+ .bedroom-interior{grid-template-columns:1fr 1fr;gap:10px;padding:15px 4px 5px}
+ .bedroom-bed{grid-column:1/-1;height:145px}
+ .bedroom-dresser,.bedroom-portrait{height:160px;min-height:160px}
+ .bedroom-portrait>span{width:55px;height:75px}
+ .room-collection-wrap{padding:14px 10px}
+ .room-collection{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .settings-ledger{padding:6px 12px}
+ .setting-row{grid-template-columns:35px 1fr auto;gap:8px;padding:16px 0}
+ .setting-row strong{font-size:19px}
+ .game-topline{font-size:10px}
+ .game-roster{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+ .game-person{min-height:150px;padding:9px 6px}
+ .portrait-art{height:90px}
+ .door-roster .game-person{min-height:160px}
+ .door-roster .portrait-art{height:100px}
+ .dream-note{padding:30px 25px;min-height:170px}
+ .game-chat{flex-direction:column}
 }
 @media(orientation:landscape) and (min-width:761px){
-  #setupScreen{min-height:100svh}
-  #setupScreen .page-composition{max-height:94svh;overflow:auto}
+ .app-page{align-items:center}
+ .page-wrap{max-height:calc(100svh - 42px)}
+ .setup-wrap{max-width:1120px}
 }
