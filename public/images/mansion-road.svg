@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900">
+<defs>
+ <linearGradient id="sky" x2="0" y2="1"><stop stop-color="#080b14"/><stop offset=".58" stop-color="#202432"/><stop offset="1" stop-color="#11131a"/></linearGradient>
+ <radialGradient id="moon"><stop stop-color="#e0d9cf"/><stop offset=".72" stop-color="#a9a9ad"/><stop offset="1" stop-color="#777b88"/></radialGradient>
+ <linearGradient id="stone" x2="1" y2="1"><stop stop-color="#444653"/><stop offset=".45" stop-color="#242733"/><stop offset="1" stop-color="#10131b"/></linearGradient>
+ <linearGradient id="roof" x2="0" y2="1"><stop stop-color="#252936"/><stop offset="1" stop-color="#090d16"/></linearGradient>
+ <linearGradient id="window" x2="0" y2="1"><stop stop-color="#f4c58b"/><stop offset="1" stop-color="#8e4c31"/></linearGradient>
+ <linearGradient id="path" x2="0" y2="1"><stop stop-color="#34333a"/><stop offset="1" stop-color="#101116"/></linearGradient>
+ <filter id="glow"><feGaussianBlur stdDeviation="17"/></filter>
+ <filter id="mist"><feGaussianBlur stdDeviation="22"/></filter>
+</defs>
+<rect width="1600" height="900" fill="url(#sky)"/>
+<circle cx="310" cy="190" r="116" fill="#d7d1c7" opacity=".16" filter="url(#glow)"/><circle cx="310" cy="190" r="88" fill="url(#moon)"/>
+<g fill="#f1e8db" opacity=".26"><circle cx="190" cy="78" r="2"/><circle cx="510" cy="115" r="2"/><circle cx="690" cy="85" r="1.5"/><circle cx="1180" cy="105" r="2"/><circle cx="1400" cy="185" r="1.5"/><circle cx="920" cy="55" r="1.5"/></g>
+<path d="M0 540 Q180 470 360 520T730 510T1100 520T1600 480V900H0Z" fill="#11151d"/>
+<g opacity=".7" fill="none" stroke="#090c12" stroke-width="20"><path d="M45 0Q110 160 80 310T15 600M65 170Q170 150 240 80M68 270Q190 270 270 220M1540 0Q1470 160 1510 310T1585 620M1530 160Q1410 130 1360 55M1530 275Q1410 265 1330 205"/></g>
+<!-- mansion body -->
+<g stroke="#090c13" stroke-width="12" stroke-linejoin="round">
+ <path fill="url(#stone)" d="M660 370L660 260 760 260 760 205 850 205 850 300 940 300 940 215 1030 215 1030 270 1140 270 1140 390 1330 390 1330 680 600 680 600 430Z"/>
+ <path fill="url(#roof)" d="M625 390L625 315 760 220 815 315 870 315 870 250 950 160 1035 275 1080 275 1140 195 1220 305 1360 390Z"/>
+ <path fill="url(#stone)" d="M850 315L850 185 930 85 1010 185 1010 315Z"/>
+ <path fill="url(#roof)" d="M820 190L930 55 1040 190 1005 190 930 112 855 190Z"/>
+ <path fill="url(#stone)" d="M1120 395L1120 295 1205 230 1290 295 1290 395Z"/>
+ <path fill="url(#roof)" d="M1095 300L1205 210 1315 300Z"/>
+ <path fill="url(#stone)" d="M540 460L540 350 610 290 680 350 680 460Z"/>
+ <path fill="url(#roof)" d="M515 355L610 270 705 355Z"/>
+</g>
+<!-- masonry lines -->
+<g stroke="#77717a" opacity=".22" stroke-width="3" fill="none"><path d="M630 455H1340M630 555H1340M630 630H1340M760 390V675M920 320V680M1080 340V680M1230 410V680"/></g>
+<!-- windows -->
+<g fill="url(#window)" stroke="#090b12" stroke-width="10">
+ <path d="M700 430V365Q740 300 780 365V430Z"/><path d="M860 300V225Q900 170 940 225V300Z"/><path d="M1080 385V315Q1120 255 1160 315V385Z"/><path d="M1210 475V390Q1260 320 1310 390V475Z"/><path d="M770 560V485Q815 420 860 485V560Z"/><path d="M970 555V465Q1020 390 1070 465V555Z"/><path d="M1120 570V485Q1170 415 1220 485V570Z"/>
+</g>
+<g stroke="#29232a" stroke-width="6" opacity=".85"><path d="M740 315V430M700 370H780M900 190V300M860 230H940M1120 275V385M1080 320H1160M1260 340V475M1210 395H1310M815 435V560M770 490H860M1020 405V555M970 470H1070M1170 430V570M1120 490H1220"/></g>
+<!-- entrance -->
+<path d="M890 680V570Q970 450 1050 570V680Z" fill="#090b11" stroke="#0a0c13" stroke-width="14"/>
+<path d="M925 680V580Q970 510 1015 580V680Z" fill="#38252a" stroke="#97765c" stroke-width="7"/>
+<circle cx="1000" cy="625" r="6" fill="#d9b17b"/>
+<!-- forecourt -->
+<path d="M0 700Q350 650 620 710Q880 760 1100 690Q1370 620 1600 690V900H0Z" fill="#090c12"/>
+<path d="M640 900Q700 780 890 700Q1050 650 1190 700Q1040 780 1000 900Z" fill="url(#path)" stroke="#4b4650" stroke-width="5"/>
+<g stroke="#69616a" stroke-width="3" opacity=".38"><path d="M760 900L905 700M890 900L965 700M1020 900L1025 710M680 830L1080 830M720 775L1120 775M850 735L1140 735"/></g>
+<!-- gates -->
+<g fill="none" stroke="#090b11" stroke-width="12"><path d="M0 900V465Q120 385 240 465V900M1360 900V465Q1480 385 1600 465V900"/><path d="M0 560H240M0 660H240M1360 560H1600M1360 660H1600"/></g>
+<g stroke="#171b25" stroke-width="7"><path d="M30 470V900M75 445V900M120 430V900M165 445V900M210 470V900M1390 470V900M1435 445V900M1480 430V900M1525 445V900M1570 470V900"/></g>
+<g fill="#171b25"><path d="M20 475L30 440 40 475M65 455L75 420 85 455M110 440L120 405 130 440M155 455L165 420 175 455M200 475L210 440 220 475M1380 475L1390 440 1400 475M1425 455L1435 420 1445 455M1470 440L1480 405 1490 440M1515 455L1525 420 1535 455M1560 475L1570 440 1580 475"/></g>
+<!-- lanterns -->
+<g><path d="M150 560V610M1450 560V610" stroke="#080a10" stroke-width="9"/><path d="M125 610H175L168 680H132Z" fill="#171820" stroke="#090b11" stroke-width="8"/><path d="M1425 610H1475L1468 680H1432Z" fill="#171820" stroke="#090b11" stroke-width="8"/><path d="M137 620H163L160 667H140Z M1437 620H1463L1460 667H1440Z" fill="#f2b66d" opacity=".9"/><ellipse cx="150" cy="645" rx="36" ry="48" fill="#efaa62" opacity=".18" filter="url(#glow)"/><ellipse cx="1450" cy="645" rx="36" ry="48" fill="#efaa62" opacity=".18" filter="url(#glow)"/></g>
+<!-- roses and thorny shrubs -->
+<g fill="none" stroke="#090e12" stroke-width="9"><path d="M0 900Q90 790 120 700T250 630M0 850Q120 820 230 730M1600 900Q1490 800 1460 700T1340 630M1600 850Q1480 820 1370 730"/></g>
+<g fill="#32151f" stroke="#100d14" stroke-width="5"><circle cx="65" cy="780" r="35"/><circle cx="145" cy="730" r="28"/><circle cx="225" cy="820" r="39"/><circle cx="1520" cy="790" r="36"/><circle cx="1435" cy="720" r="30"/><circle cx="1350" cy="820" r="40"/><circle cx="310" cy="880" r="28"/><circle cx="1290" cy="885" r="30"/></g>
+<g fill="none" stroke="#8a3947" stroke-width="5"><path d="M40 780q25-45 50 0q-25 45-50 0M120 730q25-40 50 0q-25 40-50 0M190 820q35-50 70 0q-35 50-70 0M1485 790q35-50 70 0q-35 50-70 0M1405 720q30-45 60 0q-30 45-60 0M1320 820q35-50 70 0q-35 50-70 0"/></g>
+<g fill="#111820" opacity=".65"><path d="M0 680Q180 650 340 720L380 900H0ZM1220 730Q1420 640 1600 690V900H1190Z"/></g>
+<rect width="1600" height="900" fill="#05070c" opacity=".16"/>
+</svg>
